@@ -11,17 +11,15 @@ namespace GladiatorProject.Models
 
         public string Name { get; set; }
 
-        //public string Class { get; set; }
+        public string Class { get; set; }
 
         public int Health { get; set; }
 
+        public int Armor { get; set; }
+
+        public int Damage { get; set; }
+
         public int Speed { get; set; }
-
-        public int Dexterity { get; set; }
-
-        public int Strenght { get; set; }
-
-        public int Constituion { get; set; }
 
         public int Level { get; set; }
     }

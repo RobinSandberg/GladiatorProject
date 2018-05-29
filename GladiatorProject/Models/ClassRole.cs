@@ -5,24 +5,19 @@ using System.Web;
 
 namespace GladiatorProject.Models
 {
-    public class Player
+    public class ClassRole
     {
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        //public string Class { get; set; }
-
-        public int Health { get; set; }
-
-        public int Armor { get; set; }
+        public string Weapon { get; set; }
 
         public int Damage { get; set; }
 
-        public int Experiance { get; set; }
+        public int Armor { get; set; }
 
-        public int Level { get; set; }
-
+        public int Health { get; set; }
     }
 }
