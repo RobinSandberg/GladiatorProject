@@ -7,28 +7,34 @@
 <div class="row">
 
     <div class="col-md-3" id="player" style="height:400px ; text-align:center ; border:solid black">
-        <p>Player</p>
+        <h4>Player</h4>
         <br /><br /><br /><br /><br /><br /><br />
-        <button>Create Gladiator</button>
+    <button>
+             @Ajax.ActionLink("Create Gladiator", "PartCreateGladiator", new AjaxOptions
+             {
+             UpdateTargetId = "player",
+             InsertionMode = InsertionMode.Replace
+             })
+     </button>
     </div>
 
     <div class="col-md-6" id="battle"  style="height:400px ; text-align:center ; border:solid black">
-        <p>Battle</p>
+        <h4>Battle</h4>
     </div>
 
     <div class="col-md-3" id="opponent"  style="height:400px ; text-align:center ; border:solid black">
-        <p>Opponent</p>
+        <h4>Opponent</h4>
     </div>
 
 </div>
 
 <div class="row">
     <div class="col-md-6" id="Gear"  style="height:400px ; text-align:center ; border:solid black">
-        <p>Gear</p>
+        <h4>Gear</h4>
     </div>
 
     <div class="col-md-6" id="Menus"  style="height:400px ; text-align:center ; border:solid black">
-        <p>Menu and inventory</p>
+        <h4>Menu and inventory</h4>
     </div>
 
 </div>
