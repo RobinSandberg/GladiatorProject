@@ -1,4 +1,6 @@
-﻿@{
+﻿@using GladiatorProject.Models
+@model Player
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -6,34 +8,51 @@
 
 <div class="row">
 
-    <div class="col-md-3" id="player" style="height:400px ; text-align:center ; border:solid black">
+    <div class="col-md-3" style="height:400px ; text-align:center ; border:solid black">
         <h4>Player</h4>
-        <br /><br /><br /><br /><br /><br /><br />
-    <button>
-             @Ajax.ActionLink("Create Gladiator", "PartCreateGladiator", new AjaxOptions
-             {
-             UpdateTargetId = "player",
-             InsertionMode = InsertionMode.Replace
-             })
-     </button>
+        <div id="player">
+            <button>
+                @Ajax.ActionLink("Create Gladiator", "PartCreateGladiator", new AjaxOptions
+                {
+                UpdateTargetId = "player",
+                InsertionMode = InsertionMode.Replace
+                })
+            </button>
+            <button>
+                @Ajax.ActionLink("Select Gladiator", "SelectGladiator", new AjaxOptions
+                {
+                UpdateTargetId = "player",
+                InsertionMode = InsertionMode.Replace
+                })
+            </button>
+        </div>
     </div>
 
-    <div class="col-md-6" id="battle"  style="height:400px ; text-align:center ; border:solid black">
+    <div class="col-md-6" id="battle" style="height:400px ; text-align:center ; border:solid black">
         <h4>Battle</h4>
     </div>
 
-    <div class="col-md-3" id="opponent"  style="height:400px ; text-align:center ; border:solid black">
+    <div class="col-md-3" id="opponent" style="height:400px ; text-align:center ; border:solid black">
         <h4>Opponent</h4>
     </div>
 
 </div>
 
 <div class="row">
-    <div class="col-md-6" id="Gear"  style="height:400px ; text-align:center ; border:solid black">
-        <h4>Gear</h4>
+    <div class="col-md-6" style="height:400px ; text-align:center ; border:solid black">
+        <h4>Stats</h4>
+        @*<div id="stat">
+            @Ajax.ActionLink("Show your stats", "DisplayStats", new { id = Model.Id },
+         new AjaxOptions
+         {
+             UpdateTargetId = "stat",
+             InsertionMode = InsertionMode.Replace
+         })
+        </div>*@
+
     </div>
 
-    <div class="col-md-6" id="Menus"  style="height:400px ; text-align:center ; border:solid black">
+    <div class="col-md-6" id="Menus" style="height:400px ; text-align:center ; border:solid black">
         <h4>Menu and inventory</h4>
     </div>
 

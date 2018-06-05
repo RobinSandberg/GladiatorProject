@@ -1,12 +1,13 @@
-﻿@model GladiatorProject.Models.Player
+﻿@using GladiatorProject.Models
+@model Player
 
 
 
-@using (Ajax.BeginForm("CreatePerson",
+@using (Ajax.BeginForm("PartCreateGladiator",
    new AjaxOptions
    {
        InsertionMode = InsertionMode.Replace,
-       UpdateTargetId = "Player"
+       UpdateTargetId = "player"
    }
    ))
 {
@@ -27,40 +28,69 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-control", placeholder = "Add dropdown here" } })
-            @Html.ValidationMessageFor(model => model.Class, "", new { @class = "text-danger" })
+            @*@Html.DropDownListFor(Model => Model.Class, new SelectList(Enum.GetValues(typeof(Fighter))))*@
+            <select required class="form-control" id="Class" name="Class">
+                <option value="">Select Class</option>
+                <option value="Murmillo">Murmillo</option>
+                <option value="Retiarius">Retiarius</option>
+                <option value="Dimachaerus">Dimachaerus</option>
+                <option value="Cestus">Cestus</option>
+            </select>
         </div>
     </div>
-    @*Make changes to the adding of stats to own view model.*@
-    <div class="form-group">
-        @Html.LabelFor(model => model.Health, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Health, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting health" } })
-            @Html.ValidationMessageFor(model => model.Health, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Armor, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Armor, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting armor" } })
-            @Html.ValidationMessageFor(model => model.Armor, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Damage, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Damage, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting damage" } })
-            @Html.ValidationMessageFor(model => model.Damage, "", new { @class = "text-danger" })
-
-        </div>
-    </div>
-
+    @*<select required class="form-control" id="Class" name="Class">
+        <option value="">Select Class</option>
+        <option value="Murmillo">Murmillo</option>
+        <option value="Retiarius">Retiarius</option>
+        <option value="Dimachaerus">Dimachaerus</option>
+        <option value="Cestus">Cestus</option>
+    </select>*@
     <div>
-        @Html.LabelFor(Model => Model.SkillPoints) :
-        @Model.SkillPoints
+        <p>Murmillo high armor/health, lower damage</p>
+
+        <p>Retiarius medium high health/damage, medium low armor</p>
+
+        <p>Dimachaerus medium high armor/damage, lower health</p>
+
+        <p>Cestus high damage/health, low armor</p>
     </div>
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-control", placeholder = "Add dropdown here" } })
+                @Html.ValidationMessageFor(model => model.Class, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    @*Make changes to the adding of stats to own view model.*@
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Health, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Health, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting health" } })
+                @Html.ValidationMessageFor(model => model.Health, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Armor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Armor, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting armor" } })
+                @Html.ValidationMessageFor(model => model.Armor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Damage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Damage, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting damage" } })
+                @Html.ValidationMessageFor(model => model.Damage, "", new { @class = "text-danger" })
+
+            </div>
+        </div>*@
+
+    @*<div>
+            @Html.LabelFor(Model => Model.SkillPoints) :
+            @Model.SkillPoints
+        </div>*@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

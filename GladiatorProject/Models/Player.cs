@@ -14,23 +14,33 @@ namespace GladiatorProject.Models
         [Required]
         [MaxLength(25)]
         public string Name { get; set; }
-        [Required]
-        public string Class { get; set; }
+        //[Required]
+        //public string Class { get; set; }
 
-        public int Health { get; set; }
+        //public int Health { get; set; }
 
-        public int Armor { get; set; }
+        //public int Armor { get; set; }
 
-        public int Damage { get; set; }
+        //public int Damage { get; set; }
 
-        public int SkillPoints = 5;
+        //public int SkillPoints = 5;
 
         public int Experiance { get; set; }
 
         public int Level { get; set; }
 
         //[Required]
-        //public List<ClassRole> Class { get; set; }
+        public ClassRole Class { get; set; }
+
+    //    public Fighter Gladiatorclass { get; set; }
+
 
     }
+    //public enum Fighter
+    //{
+    //    Murmillo,
+    //    Retiarius,
+    //    Dimachaerus,
+    //    Cestus
+    //}
 }

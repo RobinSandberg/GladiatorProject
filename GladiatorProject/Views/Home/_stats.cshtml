@@ -1,0 +1,26 @@
+﻿@model GladiatorProject.Models.ClassRole
+
+<div class="row">
+    <div class="col-md-2">
+        @Model.Health
+    </div>
+    <div class="col-md-2">
+        @Model.Armor
+    </div>
+    <div class="col-md-2">
+        @Model.Damage
+    </div>
+    <div class="col-md-2">
+        @Model.Weapon
+    </div>
+
+    <div class="col-md-2">
+        @Ajax.ActionLink("Hide your stats", "HideStats", new { id = Model.Id},
+       new AjaxOptions
+       {
+           UpdateTargetId = "stat",
+           InsertionMode = InsertionMode.Replace
+       })
+    </div>
+
+</div>

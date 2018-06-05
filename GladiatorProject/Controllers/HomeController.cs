@@ -13,6 +13,7 @@ namespace GladiatorProject.Controllers
         
         public ActionResult Index()
         {
+            //db.Gladiators.Include("Classes");
             return View();
         }
 
@@ -22,40 +23,66 @@ namespace GladiatorProject.Controllers
             return PartialView("_partCreateGladiator", player);
         }
         [HttpPost]
-        public ActionResult PartCreateGladiator(Player gladiator)
+        public ActionResult PartCreateGladiator(Player gladiator, string Class)
         {
             // Make changes to the adding of stats to own view model.
-            int check = gladiator.SkillPoints;
-            gladiator.SkillPoints = check - (gladiator.Armor + gladiator.Damage + gladiator.Health);
-
-            if (ModelState.IsValid)
+            //int check = gladiator.SkillPoints;
+            //gladiator.SkillPoints = check - (gladiator.Armor + gladiator.Damage + gladiator.Health);
+            ClassRole role = new ClassRole();
+            if (ModelState.IsValid == false)
             {
-                if(gladiator.SkillPoints >= 0)
+                switch (Class)
                 {
-                    db.Gladiators.Add(gladiator);
-                    return PartialView("_gladiator", gladiator);
+                    case "Murmillo":
+                        gladiator.Class = db.ClassRoles.First();
+                        break;
+
+                    case "Retiarius":
+                        gladiator.Class = db.ClassRoles.First();
+                        break;
+                    case "Dimachaerus":
+                        gladiator.Class = db.ClassRoles.First();
+                        break;
+                    case "Cestus":
+                        gladiator.Class = db.ClassRoles.First();
+                        break;
                 }
-                else
-                {
-                    gladiator.SkillPoints = 5;
-                    return PartialView("_partCreateGladiator", gladiator);
-                } 
+
+                //if (Class == "Murmillo")
+                //{
+                //    gladiator.Class = db.Classes.First();
+
+                //}
+
+                db.Players.Add(gladiator);
+                db.SaveChanges();
+                return PartialView("_gladiator", gladiator);
+
+                //if (gladiator.SkillPoints >= 0)
+                //{
+                //    db.Gladiators.Add(gladiator);
+                //    return PartialView("_gladiator", gladiator);
+                //}
+                //else
+                //{
+                //    gladiator.SkillPoints = 5;
+                //    return PartialView("_partCreateGladiator", gladiator);
+                //} 
             }
-            return new HttpStatusCodeResult(400);
+            return new HttpStatusCodeResult(404);
         }
 
-        public ActionResult About()
+        public ActionResult DisplayStats(int id)
         {
-            ViewBag.Message = "Your application description page.";
+            ClassRole role = db.ClassRoles.SingleOrDefault(i => i.Id == id);
 
-            return View();
+            return PartialView("_stats", role );
         }
 
-        public ActionResult Contact()
+        public ActionResult HideStats(int id)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            ClassRole role = db.ClassRoles.SingleOrDefault(i => i.Id == id);
+            return Content("");
         }
     }
 }
