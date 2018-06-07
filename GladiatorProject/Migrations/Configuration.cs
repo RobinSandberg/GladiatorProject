@@ -20,25 +20,20 @@ namespace GladiatorProject.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            context.ClassRoles.AddOrUpdate(
-                c => c.Name,
-                new ClassRole { Name = "Murmillo", Weapon = "Sword and Heavy Shield", Armor = 5 + Dice.D6(), Damage = 5 + Dice.D6(), Health = 20 + Dice.D12() },
-                new ClassRole { Name = "Retiarius", Weapon = "Trident and Net", Armor = 2 + Dice.D4(), Damage = 9 + Dice.D8(), Health = 20 + Dice.D8() },
-                new ClassRole { Name = "Dimachaerus", Weapon = "Sword and Sword", Armor = 3 + Dice.D6(), Damage = 7 + Dice.D10(), Health = 20 + Dice.D6() },
-                new ClassRole { Name = "Cestus", Weapon = "knuckleduster", Armor = 1 + Dice.D6(), Damage = 10 + Dice.D12(), Health = 20 + Dice.D10() }
-                );
+            //context.ClassRoles.AddOrUpdate(
+            //    c => c.Name,
+            //    new ClassRole { Name = "Murmillo", Weapon = "Sword and Heavy Shield", Armor = 5, Damage = 5, Health = 20 },
+            //    new ClassRole { Name = "Retiarius", Weapon = "Trident and Net", Armor = 2, Damage = 9, Health = 20 },
+            //    new ClassRole { Name = "Dimachaerus", Weapon = "Sword and Sword", Armor = 3, Damage = 7, Health = 20 },
+            //    new ClassRole { Name = "Cestus", Weapon = "knuckleduster", Armor = 1, Damage = 10, Health = 20 }
+            //    );
 
             context.Opponents.AddOrUpdate(
                 o => o.Name,
-                new Opponent { Name = "Male Murmillo", Class = "Murmillo", Health = 20 + Dice.D12(), Armor = 5 + Dice.D6(), Damage = 5 + Dice.D6(), Level = 1 },
-                new Opponent { Name = "Male Retiarius", Class = "Retiarius", Health = 20 + Dice.D8(), Armor = 1 + Dice.D4(), Damage = 9 + Dice.D8(), Level = 1 },
-                new Opponent { Name = "Male Dimachaerus", Class = "Dimachaerus", Health = 20 + Dice.D6(), Armor = 3 + Dice.D6(), Damage = 7 + Dice.D10(), Level = 1 },
-                new Opponent { Name = "Male Cestus", Class = "Cestus", Health = 20 + Dice.D10(), Armor = 1 + Dice.D6(), Damage = 10 + Dice.D12(), Level = 1 },
-
-                new Opponent { Name = "Female Murmillo", Class = "Murmillo", Health = 20 + Dice.D12(), Armor = 5 + Dice.D6(), Damage = 5 + Dice.D6(), Level = 1 },
-                new Opponent { Name = "Female Retiarius", Class = "Retiarius", Health = 20 + Dice.D8(), Armor = 1 + Dice.D4(), Damage = 9 + Dice.D8(), Level = 1 },
-                new Opponent { Name = "Female Dimachaerus", Class = "Dimachaerus", Health = 20 + Dice.D6(), Armor = 3 + Dice.D6(), Damage = 7 + Dice.D10(), Level = 1 },
-                new Opponent { Name = "Female Cestus", Class = "Cestus", Health = 20 + Dice.D10(), Armor = 1 + Dice.D6(), Damage = 10 + Dice.D12(), Level = 1 }
+                new Opponent { Name = "Murmillo", Health = 10 + Dice.D12(), Armor = 2 + Dice.D8(), Damage = 1 + Dice.D6(), Level = 1 },
+                new Opponent { Name = "Retiarius", Health = 10 + Dice.D12(), Armor = 2 + Dice.D8(), Damage = 1 + Dice.D6(), Level = 1 },
+                new Opponent { Name = "Dimachaerus", Health = 10 + Dice.D12(), Armor = 2 + Dice.D8(), Damage = 1 + Dice.D6(), Level = 1 },
+                new Opponent { Name = "Cestus", Health = 10 + Dice.D12(), Armor = 2 + Dice.D8(), Damage = 1 + Dice.D6(), Level = 1 }
                 );
 
             context.SaveChanges();

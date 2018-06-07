@@ -11,7 +11,7 @@ namespace GladiatorProject.Models
 
         public string Name { get; set; }
 
-        public string Class { get; set; }
+        //public string Class { get; set; }
 
         public int Health { get; set; }
 
@@ -19,7 +19,7 @@ namespace GladiatorProject.Models
 
         public int Damage { get; set; }
 
-        public int Speed { get; set; }
+        //public int Speed { get; set; }
 
         public int Level { get; set; }
     }

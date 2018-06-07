@@ -282,6 +282,7 @@
     <Content Include="Views\Home\_partCreateGladiator.cshtml" />
     <Content Include="Views\Home\_gladiator.cshtml" />
     <Content Include="Views\Home\_stats.cshtml" />
+    <Content Include="Views\Home\_classDropdown.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

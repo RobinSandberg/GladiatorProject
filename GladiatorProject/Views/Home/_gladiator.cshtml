@@ -1,37 +1,96 @@
 ﻿@using GladiatorProject.Models
 @model Player
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Class)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Experiance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Level)
-        </th>
-        <th></th>
-    </tr>
 
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => Model.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.Class.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.Experiance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.Level)
-        </td>
-    </tr>
+<div class="row">
+    <dl>
+        <dt>Name</dt>
+        <dd>@Model.Name</dd>
+        <dt>Level</dt>
+        <dd>@Model.Level</dd>
+        <dt>Experiance</dt>
+        <dd>@Model.Experiance</dd>
+        <dt>Health</dt>
+        <dd id="health">
+            @Model.Health <br /> @if (Model.SkillPoints >= 1)
+            {
+                <button>
+                    @Ajax.ActionLink("Increase health", "AddHealth",
+                    new AjaxOptions
+                    {
+                    UpdateTargetId = "health",
+                    InsertionMode = InsertionMode.Replace
+                    })
+                </button>
+            }
+        </dd>
+
+        <dt>Armor</dt>
+        <dd id="armor">
+            @Model.Armor <br />@if (Model.SkillPoints >= 1)
+            {
+                <button>
+                    @Ajax.ActionLink("Increase armor", "AddArmor",
+                    new AjaxOptions
+                    {
+                    UpdateTargetId = "armor",
+                    InsertionMode = InsertionMode.Replace
+                    })
+                </button>
+            }
+        </dd>
+
+        <dt>Damage</dt>
+        <dd id="damage">
+            @Model.Damage <br />@if (Model.SkillPoints >= 1)
+            {
+                <button>
+                    @Ajax.ActionLink("Increase damage", "AddDamage",
+                    new AjaxOptions
+                    {
+                    UpdateTargetId = "damage",
+                    InsertionMode = InsertionMode.Replace
+                    })
+                </button>
+            }
+        </dd>
+
+        <dt>Skill points</dt>
+        <dd>@Model.SkillPoints</dd>
+    </dl>
+</div>
+
+    @*<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Health)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Experiance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Level)
+                </th>
+                <th></th>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Class.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Experiance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Level)
+                </td>
+            </tr>
 
 
-</table>
+        </table>*@

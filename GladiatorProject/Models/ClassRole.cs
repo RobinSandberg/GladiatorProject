@@ -19,5 +19,12 @@ namespace GladiatorProject.Models
         public int Armor { get; set; }
 
         public int Health { get; set; }
+
+        public int SkillPoints = 1;
+
+        public ClassRole()
+        {
+
+        }
     }
 }

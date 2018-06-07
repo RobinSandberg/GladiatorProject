@@ -14,7 +14,6 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Player</h4>
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -25,26 +24,40 @@
         </div>
     </div>
 
-    <div class="form-group">
+
+
+    @*<div class="form-group">
         @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @*@Html.DropDownListFor(Model => Model.Class, new SelectList(Enum.GetValues(typeof(Fighter))))*@
-            <select required class="form-control" id="Class" name="Class">
-                <option value="">Select Class</option>
-                <option value="Murmillo">Murmillo</option>
-                <option value="Retiarius">Retiarius</option>
-                <option value="Dimachaerus">Dimachaerus</option>
-                <option value="Cestus">Cestus</option>
+            @Html.DropDownListFor(Model => Model.Class, new SelectList(Enum.GetValues(typeof(Fighter))))
+            <select required class="form-control" id="Class" name="Classid">
+                partial view here for classroles
+                @Html.Partial("_classDropdown", Session["SelectClass"])
+
+               @foreach (var item in (List<ClassRole>)Session["SelectClass"])
+                {
+                    <option value="@item.Id">@item.Name</option>
+
+                }
+               
+
+
+                            <option value="">Select Class</option>
+                            <option value="@Model.Class.Id">@Model.Class.Name</option>
+                            <option value="Retiarius">Retiarius</option>
+                            <option value="Dimachaerus">Dimachaerus</option>
+                            <option value="Cestus">Cestus</option>
             </select>
+            
         </div>
     </div>
-    @*<select required class="form-control" id="Class" name="Class">
+    <select required class="form-control" id="Class" name="Class">
         <option value="">Select Class</option>
         <option value="Murmillo">Murmillo</option>
         <option value="Retiarius">Retiarius</option>
         <option value="Dimachaerus">Dimachaerus</option>
         <option value="Cestus">Cestus</option>
-    </select>*@
+    </select>
     <div>
         <p>Murmillo high armor/health, lower damage</p>
 
@@ -53,7 +66,8 @@
         <p>Dimachaerus medium high armor/damage, lower health</p>
 
         <p>Cestus high damage/health, low armor</p>
-    </div>
+    </div>*@
+
     @*<div class="form-group">
             @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

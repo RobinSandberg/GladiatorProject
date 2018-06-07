@@ -38,7 +38,7 @@ namespace GladiatorProject.Models
 
         //public DbSet<ClassRole> Classes { get; set; }
 
-        public DbSet<ClassRole> ClassRoles { get; set; }
+        //public DbSet<ClassRole> ClassRoles { get; set; }
 
     }
 }

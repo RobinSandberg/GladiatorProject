@@ -1,26 +1,88 @@
-﻿@model GladiatorProject.Models.ClassRole
+﻿@using GladiatorProject.Models
+@model ClassRole
 
 <div class="row">
-    <div class="col-md-2">
+    <dl>
+        <dt>Health</dt>
+        <dd id="health">
+            @Model.Health <br /> @if (Model.SkillPoints >= 1)
+                {
+                    <button>
+                        @Ajax.ActionLink("Increase health", "AddHealth",
+                        new AjaxOptions
+                        {
+                        UpdateTargetId = "health",
+                        InsertionMode = InsertionMode.Replace
+                        })
+                    </button>
+                }
+        </dd>
+
+        <dt>Armor</dt>
+        <dd id="armor">
+            @Model.Armor <br />@if (Model.SkillPoints >= 1)
+                {
+                    <button>
+                        @Ajax.ActionLink("Increase armor", "AddArmor",
+                        new AjaxOptions
+                        {
+                        UpdateTargetId = "armor",
+                        InsertionMode = InsertionMode.Replace
+                        })
+                    </button>
+                }
+        </dd>
+
+        <dt>Damage</dt>
+        <dd id="damage">
+            @Model.Damage <br />@if (Model.SkillPoints >= 1)
+                {
+                    <button>
+                        @Ajax.ActionLink("Increase damage", "AddDamage",
+                        new AjaxOptions
+                        {
+                        UpdateTargetId = "damage",
+                        InsertionMode = InsertionMode.Replace
+                        })
+                    </button>
+                }
+        </dd>
+
+        <dt>Weapon</dt>
+        <dd>@Model.Weapon</dd>
+
+        <dt>Skill points</dt>
+        <dd>@Model.SkillPoints</dd>
+    </dl>
+    @*<div class="col-md-3">
+        @Html.LabelFor(Model => Model.Health) :
         @Model.Health
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
+        @Html.LabelFor(Model => Model.Armor) :
         @Model.Armor
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
+        @Html.LabelFor(Model => Model.Damage) :
         @Model.Damage
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
+        @Html.LabelFor(Model => Model.Weapon) :
         @Model.Weapon
-    </div>
+    </div>*@
 
-    <div class="col-md-2">
+    @*<div class="col-md-2">
+        @Html.LabelFor(Model => Model.SkillPoints) :
+        @Model.SkillPoints
+    </div>*@
+
+    @*<div class="col-md-2">
         @Ajax.ActionLink("Hide your stats", "HideStats", new { id = Model.Id},
        new AjaxOptions
        {
            UpdateTargetId = "stat",
            InsertionMode = InsertionMode.Replace
        })
-    </div>
+    </div>*@
 
 </div>

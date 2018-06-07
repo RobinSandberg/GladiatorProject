@@ -20,40 +20,54 @@ namespace GladiatorProject.Controllers
         public ActionResult PartCreateGladiator()
         {
             Player player = new Player();
+            //List<ClassRole> classes;
+            //classes = db.ClassRoles.ToList();
+            //if (Session["SelectClass"] != null)
+            //{
+            //    classes = (List<ClassRole>)Session["SelectClass"];
+            //}
+            //Session["SelectClass"] = classes;
             return PartialView("_partCreateGladiator", player);
         }
         [HttpPost]
-        public ActionResult PartCreateGladiator(Player gladiator, string Class)
+        public ActionResult PartCreateGladiator(Player gladiator)
         {
             // Make changes to the adding of stats to own view model.
             //int check = gladiator.SkillPoints;
-            //gladiator.SkillPoints = check - (gladiator.Armor + gladiator.Damage + gladiator.Health);
-            ClassRole role = new ClassRole();
-            if (ModelState.IsValid == false)
+            //gladiator.SkillPoints =  ClassRole role;
+            if (ModelState.IsValid)
             {
-                switch (Class)
-                {
-                    case "Murmillo":
-                        gladiator.Class = db.ClassRoles.First();
-                        break;
+                //switch (Classid)
+                //{
+                //    case 1:
+                //        gladiator.Class.Health += Dice.D12();
+                //        gladiator.Class.Armor += Dice.D6();
+                //        gladiator.Class.Damage += Dice.D6();
+                //        break;
 
-                    case "Retiarius":
-                        gladiator.Class = db.ClassRoles.First();
-                        break;
-                    case "Dimachaerus":
-                        gladiator.Class = db.ClassRoles.First();
-                        break;
-                    case "Cestus":
-                        gladiator.Class = db.ClassRoles.First();
-                        break;
-                }
+                //    case 2:
+                //        gladiator.Class.Health += Dice.D8();
+                //        gladiator.Class.Armor += Dice.D4();
+                //        gladiator.Class.Damage += Dice.D8();
+                //        break;
+                //    case 3:
+                //        gladiator.Class.Health += Dice.D6();
+                //        gladiator.Class.Armor += Dice.D6();
+                //        gladiator.Class.Damage += Dice.D10();
+                //        break;
+                //    case 4:
+                //        gladiator.Class.Health += Dice.D10();
+                //        gladiator.Class.Armor += Dice.D6();
+                //        gladiator.Class.Damage += Dice.D12();
+                //        break;
+                //}
 
                 //if (Class == "Murmillo")
                 //{
                 //    gladiator.Class = db.Classes.First();
 
                 //}
-
+                //Session["Gladiator"] = gladiator.Class;
                 db.Players.Add(gladiator);
                 db.SaveChanges();
                 return PartialView("_gladiator", gladiator);
@@ -72,17 +86,12 @@ namespace GladiatorProject.Controllers
             return new HttpStatusCodeResult(404);
         }
 
-        public ActionResult DisplayStats(int id)
-        {
-            ClassRole role = db.ClassRoles.SingleOrDefault(i => i.Id == id);
+        //public ActionResult DisplayStats()
+        //{
+            
+        //    return PartialView("_stats", Session["Gladiator"]);
+        //}
 
-            return PartialView("_stats", role );
-        }
-
-        public ActionResult HideStats(int id)
-        {
-            ClassRole role = db.ClassRoles.SingleOrDefault(i => i.Id == id);
-            return Content("");
-        }
+        
     }
 }
