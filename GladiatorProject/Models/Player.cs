@@ -17,22 +17,22 @@ namespace GladiatorProject.Models
         //[Required]
         //public string Class { get; set; }
 
-        public int Health = 10 + Dice.D12();
+        public int Health { get; set; }
 
-        public int Armor = 2 + Dice.D8();
+        public int Armor { get; set; }
 
-        public int Damage = 1 + Dice.D6();
+        public int Damage { get; set; }
 
-        public int SkillPoints = 0;
+        public int SkillPoints { get; set; }
 
-        public int Experiance = 0;
+        public int Experiance { get; set; }
 
-        public int Level = 1;
+        public int Level { get; set; }
 
         //[Required]
         //public ClassRole Class { get; set; }
 
-    //    public Fighter Gladiatorclass { get; set; }
+        //    public Fighter Gladiatorclass { get; set; }
 
 
     }

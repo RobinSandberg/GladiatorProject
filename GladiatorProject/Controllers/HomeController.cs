@@ -37,37 +37,43 @@ namespace GladiatorProject.Controllers
             //gladiator.SkillPoints =  ClassRole role;
             if (ModelState.IsValid)
             {
-                //switch (Classid)
-                //{
-                //    case 1:
-                //        gladiator.Class.Health += Dice.D12();
-                //        gladiator.Class.Armor += Dice.D6();
-                //        gladiator.Class.Damage += Dice.D6();
-                //        break;
+                gladiator.Health = 10 + Dice.D12();
+                gladiator.Armor = 2 + Dice.D8();
+                gladiator.Damage = 1 + Dice.D6();
+                gladiator.Experiance = 0;
+                gladiator.Level = 1;
+                gladiator.SkillPoints = 0;
+        //switch (Classid)
+        //{
+        //    case 1:
+        //        gladiator.Class.Health += Dice.D12();
+        //        gladiator.Class.Armor += Dice.D6();
+        //        gladiator.Class.Damage += Dice.D6();
+        //        break;
 
-                //    case 2:
-                //        gladiator.Class.Health += Dice.D8();
-                //        gladiator.Class.Armor += Dice.D4();
-                //        gladiator.Class.Damage += Dice.D8();
-                //        break;
-                //    case 3:
-                //        gladiator.Class.Health += Dice.D6();
-                //        gladiator.Class.Armor += Dice.D6();
-                //        gladiator.Class.Damage += Dice.D10();
-                //        break;
-                //    case 4:
-                //        gladiator.Class.Health += Dice.D10();
-                //        gladiator.Class.Armor += Dice.D6();
-                //        gladiator.Class.Damage += Dice.D12();
-                //        break;
-                //}
+        //    case 2:
+        //        gladiator.Class.Health += Dice.D8();
+        //        gladiator.Class.Armor += Dice.D4();
+        //        gladiator.Class.Damage += Dice.D8();
+        //        break;
+        //    case 3:
+        //        gladiator.Class.Health += Dice.D6();
+        //        gladiator.Class.Armor += Dice.D6();
+        //        gladiator.Class.Damage += Dice.D10();
+        //        break;
+        //    case 4:
+        //        gladiator.Class.Health += Dice.D10();
+        //        gladiator.Class.Armor += Dice.D6();
+        //        gladiator.Class.Damage += Dice.D12();
+        //        break;
+        //}
 
-                //if (Class == "Murmillo")
-                //{
-                //    gladiator.Class = db.Classes.First();
+        //if (Class == "Murmillo")
+        //{
+        //    gladiator.Class = db.Classes.First();
 
-                //}
-                //Session["Gladiator"] = gladiator.Class;
+        //}
+        //Session["Gladiator"] = gladiator.Class;
                 db.Players.Add(gladiator);
                 db.SaveChanges();
                 return PartialView("_gladiator", gladiator);
