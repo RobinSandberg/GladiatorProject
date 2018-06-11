@@ -1,0 +1,45 @@
+﻿@using GladiatorProject.Models
+@model List<Opponent>
+
+    @*<div class="row">
+        <div class="col-md-5">
+            @Html.DisplayName("Name")
+        </div>
+        <div class="col-md-5">
+            @Html.DisplayName("Level")
+        </div>
+    </div>*@
+    @foreach (var item in Model)
+    {
+     <dl>
+         <dt>Name</dt>
+         <dd>@item.Name</dd>
+         <dt>Level</dt>
+         <dd>@item.Level</dd>
+         <dd><button>
+             @Ajax.ActionLink("Fight", "SelectedOpponent", new { id = item.Id},
+         new AjaxOptions
+         {
+         UpdateTargetId = "opponent",
+         InsertionMode = InsertionMode.Replace
+         })
+         </button></dd>
+     </dl>
+    @*<div class="row">
+        <div class="col-md-5">
+            @Html.DisplayFor(modelItem => item.Name)
+        </div>
+        <div class="col-md-5">
+            @Html.DisplayFor(modelItem => item.Level)
+        </div>
+        <div class="col-md-2">
+            @Ajax.ActionLink("Select", "PartFindOpponent", new { level = item.Level},
+           new AjaxOptions
+           {
+               UpdateTargetId = "opponent",
+               InsertionMode = InsertionMode.Replace
+           })
+        </div>
+    </div>*@
+    }
+    

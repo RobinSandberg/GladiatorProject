@@ -33,9 +33,18 @@ namespace GladiatorProject.Models
         //public ClassRole Class { get; set; }
 
         //    public Fighter Gladiatorclass { get; set; }
-
+        public Player()
+        {
+            Health = 10 + Dice.D12();
+            Armor = 2 + Dice.D8();
+            Damage = 1 + Dice.D6();
+            Experiance = 0;
+            Level = 1;
+            SkillPoints = 0;
+        }
 
     }
+    
     //public enum Fighter
     //{
     //    Murmillo,

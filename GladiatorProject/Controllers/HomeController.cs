@@ -10,13 +10,15 @@ namespace GladiatorProject.Controllers
     public class HomeController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        
+
+        [Authorize]
         public ActionResult Index()
         {
             //db.Gladiators.Include("Classes");
             return View();
         }
 
+        [Authorize(Roles = "Player Overlord")]
         public ActionResult PartCreateGladiator()
         {
             Player player = new Player();
@@ -29,6 +31,7 @@ namespace GladiatorProject.Controllers
             //Session["SelectClass"] = classes;
             return PartialView("_partCreateGladiator", player);
         }
+        [Authorize(Roles = "Player Overlord")]
         [HttpPost]
         public ActionResult PartCreateGladiator(Player gladiator)
         {
@@ -37,12 +40,14 @@ namespace GladiatorProject.Controllers
             //gladiator.SkillPoints =  ClassRole role;
             if (ModelState.IsValid)
             {
-                gladiator.Health = 10 + Dice.D12();
-                gladiator.Armor = 2 + Dice.D8();
-                gladiator.Damage = 1 + Dice.D6();
-                gladiator.Experiance = 0;
-                gladiator.Level = 1;
-                gladiator.SkillPoints = 0;
+                //gladiator.Health = 10 + Dice.D12();
+                //gladiator.Armor = 2 + Dice.D8();
+                //gladiator.Damage = 1 + Dice.D6();
+                //gladiator.Experiance = 0;
+                //gladiator.Level = 1;
+                //gladiator.SkillPoints = 0;
+
+              
         //switch (Classid)
         //{
         //    case 1:
@@ -92,12 +97,26 @@ namespace GladiatorProject.Controllers
             return new HttpStatusCodeResult(404);
         }
 
+        [Authorize(Roles = "Player Overlord")]
+        public ActionResult PartFindOpponent()
+        {
+           
+            return PartialView("_Enemies", db.Opponents.ToList());
+        }
+        [Authorize(Roles = "Player Overlord")]
+        public ActionResult SelectedOpponent(Opponent enemy , int id)
+        {
+            enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
+            Opponent.EnemyStats(enemy);
+            return PartialView("_Opponent", enemy);
+        }
+
         //public ActionResult DisplayStats()
         //{
-            
+
         //    return PartialView("_stats", Session["Gladiator"]);
         //}
 
-        
+
     }
 }

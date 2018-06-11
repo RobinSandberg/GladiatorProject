@@ -32,8 +32,19 @@
         <h4>Battle</h4>
     </div>
 
-    <div class="col-md-3" id="opponent" style="height:400px ; text-align:center ; border:solid black">
-        <h4>Opponent</h4>
+    <div class="col-md-3" style="height:400px;overflow:auto ; text-align:center ; border:solid black">
+        <h4>Enemy</h4>
+        <div id="opponent">
+
+            <button>
+                @Ajax.ActionLink("Find Opponent", "PartFindOpponent", new AjaxOptions
+                    {
+                    UpdateTargetId = "opponent",
+                    InsertionMode = InsertionMode.Replace
+                    })
+            </button>
+        </div>
+
     </div>
 
 </div>
