@@ -16,25 +16,14 @@ namespace GladiatorProject.Models
             
         public string Name { get; set; }
 
-        //public string Class { get; set; }
-
         public int Health { get; set; }
 
         public int Armor { get; set; }
 
         public int Damage { get; set; }
 
-        //public int Speed { get; set; }
-
         public int Level { get; set; }
 
-        //InfoGenerator names = new InfoGenerator(DateTime.Now.Millisecond);
-        //Gender gender = Gender.Any;
-
-        //public Opponent()
-        //{
-          
-        //}
         public static void EnemyStats(Opponent enemy)
         {
             switch (enemy.Level)

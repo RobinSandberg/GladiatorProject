@@ -7,22 +7,24 @@ using System.Web.Mvc;
 
 namespace GladiatorProject.Controllers
 {
-    public class HomeController : Controller
+    public class GameController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-       
+        // GET: Game
         public ActionResult Index()
         {
-            
             return View();
         }
-
+        public ActionResult SelectGladiator(Gladiator gladiator ,int id)
+        {
+            gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            return View("_gladiator", gladiator);
+        }
         //[Authorize(Roles = "Player Overlord")]
         //public ActionResult PartCreateGladiator()
         //{
         //    Gladiator gladiator = new Gladiator();
-           
+
         //    return PartialView("_partCreateGladiator", gladiator);
         //}
 
@@ -30,7 +32,7 @@ namespace GladiatorProject.Controllers
         //[HttpPost]
         //public ActionResult PartCreateGladiator(Gladiator gladiator)
         //{
-           
+
         //    if (ModelState.IsValid)
         //    {
         //        db.Gladiators.Add(gladiator);
@@ -39,20 +41,5 @@ namespace GladiatorProject.Controllers
         //    }
         //    return new HttpStatusCodeResult(404);
         //}
-
-        //[Authorize(Roles = "Player Overlord")]
-        //public ActionResult PartFindOpponent()
-        //{
-           
-        //    return PartialView("_Enemies", db.Opponents.ToList());
-        //}
-        //[Authorize(Roles = "Player Overlord")]
-        //public ActionResult SelectedOpponent(Opponent enemy , int id)
-        //{
-        //    enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
-        //    Opponent.EnemyStats(enemy);
-        //    return PartialView("_Opponent", enemy);
-        //}
-
     }
 }

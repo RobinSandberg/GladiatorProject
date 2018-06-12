@@ -7,9 +7,9 @@ namespace GladiatorProject.Models
 {
     public class Dice
     {
-        static Random _roll = new Random(); // Random rolled dice from 1 to 20.
+        static Random _roll = new Random();
 
-        public static int D20()
+        public static int D20()  // Random rolled dice from 1 to 20.
         {
             int n = _roll.Next(1, 21);
             return n;

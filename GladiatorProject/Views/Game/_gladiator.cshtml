@@ -1,6 +1,9 @@
 ﻿@using GladiatorProject.Models
-@model Player
+@model Gladiator
 
+@{
+    ViewBag.Title = "_gladiator";
+}
 
 <div class="row">
     <dl>
@@ -58,39 +61,7 @@
         <dt>Skill points</dt>
         <dd>@Model.SkillPoints</dd>
     </dl>
+    <div>
+        @Html.ActionLink("Back to gladiators", "Index", "Gladiators")
+    </div>
 </div>
-
-    @*<table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Health)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Experiance)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Level)
-                </th>
-                <th></th>
-            </tr>
-
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Class.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Experiance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Level)
-                </td>
-            </tr>
-
-
-        </table>*@

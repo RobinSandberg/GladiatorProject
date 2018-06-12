@@ -199,6 +199,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\GladiatorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -208,6 +210,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ClassRole.cs" />
     <Compile Include="Models\Dice.cs" />
+    <Compile Include="Models\Gladiator.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Opponent.cs" />
@@ -282,14 +285,21 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\_partCreateGladiator.cshtml" />
-    <Content Include="Views\Home\_gladiator.cshtml" />
+    <Content Include="Views\Game\_gladiator.cshtml" />
     <Content Include="Views\Home\_stats.cshtml" />
     <Content Include="Views\Home\_classDropdown.cshtml" />
     <Content Include="Views\Home\_Opponent.cshtml" />
     <Content Include="Views\Home\_Enemies.cshtml" />
+    <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\Gladiators\Create.cshtml" />
+    <Content Include="Views\Gladiators\Delete.cshtml" />
+    <Content Include="Views\Gladiators\Details.cshtml" />
+    <Content Include="Views\Gladiators\Edit.cshtml" />
+    <Content Include="Views\Gladiators\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

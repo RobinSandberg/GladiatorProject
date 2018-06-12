@@ -1,0 +1,17 @@
+﻿@model GladiatorProject.Models.Gladiator
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+
+    <div style="text-align:center">
+        <h2>Welcome to Gladiator sports</h2>
+        <div>
+            <button>
+                @Html.ActionLink("Your gladiators", "Index", "Gladiators")
+            </button>
+        </div>
+    </div>
+</div>
