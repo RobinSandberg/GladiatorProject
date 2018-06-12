@@ -1,0 +1,60 @@
+Two gladiators roll a D20 dice trying to beat the opponents armor.
+If they role higher or equal to the armor they hit.
+If both role hit the weapons will damage the armor both lose 1 armor.
+If both role a miss they regain 5 health.
+
+Max 5 gladiators per player to keep the database load down.
+Able to delete and add new if they want.
+
+5 Battle history saved per Gladiator.
+
+Max armor allowed 18 if strenght stat impamented if not then 15.
+
+Stats:
+Health, Armor, Damage , (strenght), Level for both player and opponent.
+
+Healh , Armor and damage got small base amount then you roll a a set dice size to add to your starting stats.
+If Strenght impamented thinking a gain with few levels between.
+
+Opponent selected from a list seeing the name and level of the opponent.
+After selecting you get the opponents stats.
+Opponents will get "skill points" based on the level and rolled out random to their stats.
+If they should have same gain as player or little higher im not sure yet
+Defeated opponents removed and new opponents added to the list.
+Defeated saved on a defeated list.
+
+Exp , skillpoints , gold, score for player.
+
+Player get 2 skill points per level to place out.
+
+Exp
+If the player and opponent same level roll a D20 for exp.
+If the opponent lower lvl then player roll a D10 for exp.
+If the opponent higher level then player roll D20+D10 for exp.
+
+Levels
+Reach level 2 at 100 exp
+Reach level 3 at 250 exp
+Reach level 4 at 450 exp
+Reach level 5 at 700 exp
+Reach level 6 at 1000 exp
+Reach level 7 at 1350 exp
+Reach level 8 at 1750 exp
+Reach level 9 at 2200 exp
+Reach level 10 at 2700 exp
+Reach level 11 at 3250 exp
+Reach level 12 at 3850 exp
+Reach level 13 at 4500 exp
+Reach level 14 at 5200 exp
+Reach level 15 at 5950 exp
+Reach level 16 at 6750 exp
+Reach level 17 at 7600 exp
+Reach level 18 at 8500 exp
+Reach level 19 at 9450 exp
+Reach level 20 at 10450 exp
+Max Level 20 ?
+
+Gold a 2xD6 dices rolled to see how much gold earned after battle.
+Gold used to restore the health of a gladiator.
+
+Score 82 points per win.

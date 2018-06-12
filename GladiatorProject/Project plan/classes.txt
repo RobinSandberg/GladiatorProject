@@ -1,0 +1,13 @@
+Admin
+Player
+Gladiator
+Opponent
+Dice
+Battle
+Rounds
+Battle Log?
+
+
+AccountViewModels
+IdentityModels
+ManageViewModels

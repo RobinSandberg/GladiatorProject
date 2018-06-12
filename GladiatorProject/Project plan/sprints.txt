@@ -1,0 +1,21 @@
+Sprint 1
+Roles - login
+player and admin roles
+Gladiator  creation bound to player
+Opponent randomizer
+
+
+
+Sprint 2
+
+
+
+
+
+sprint 3
+
+
+
+
+
+sprint 4

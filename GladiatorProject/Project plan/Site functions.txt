@@ -1,0 +1,24 @@
+Login as Admin or player.
+
+Front page shown to all visitors.
+
+Front window
+Will contain the infomation on what type of game and site it is and the game rules/functions.
+
+Game page Shown to players logged in so they can play.
+
+Game window
+Will let the player create a new gladiator or selected on of thier allready made gladiators.
+After they happy they will have to find an opponent before they able to enter battle.
+In the battle view they will be able to progress the battle and see what happens.
+There will be a battle log where they see who they beat or lost to and the highscore list.
+Highscore list will count scores until you lose then save the score before reseting to 0.
+
+Admin have a Player tab where they can remove gladiators from players or remove players (Edit them to).
+
+Admin window
+A list of all the players and a list of thier gladiators able to edit names and stats.
+Remove players or gladiators that violate the site.
+Able to add more and edit opponents.
+Able to edit the highscore list incase it wrong.
+
