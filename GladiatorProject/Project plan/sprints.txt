@@ -8,14 +8,16 @@ Opponent randomizer
 
 Sprint 2
 
-
-
+Battle setup
+rounds
 
 
 sprint 3
 
-
-
+Gladiator leveling
+gladiator healing
 
 
 sprint 4
+
+Highscore lists

@@ -11,6 +11,7 @@ namespace GladiatorProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Game
+        [Authorize]
         public ActionResult Index()
         {
             return View();

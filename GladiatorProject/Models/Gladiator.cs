@@ -27,7 +27,6 @@ namespace GladiatorProject.Models
 
         public int Level { get; set; }
 
-        
         public Gladiator()
         {
             Health = 10 + Dice.D12();

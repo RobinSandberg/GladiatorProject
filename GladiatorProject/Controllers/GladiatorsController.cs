@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GladiatorProject.Models;
+using Microsoft.AspNet.Identity;
 
 namespace GladiatorProject.Controllers
 {
@@ -15,9 +16,13 @@ namespace GladiatorProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Gladiators
+        [Authorize]
         public ActionResult Index()
-        {
-            return View(db.Gladiators.ToList());
+        { 
+
+            var PlayerUser = db.Users.SingleOrDefault(u => u.Id == User.Identity.GetUserId()); // fix this get id above then use it.
+                
+            return View();
         }
 
         // GET: Gladiators/Details/5

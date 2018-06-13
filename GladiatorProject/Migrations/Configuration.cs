@@ -45,7 +45,7 @@ namespace GladiatorProject.Migrations
                     Email = "Overlord@Admin.se",
                     UserName = "Overlord@Admin.se"
                 };
-                userManager.Create(Overlord, "Qwe!23");
+                userManager.Create(Overlord, "As!1234");
                 userManager.AddToRole(userManager.FindByEmail("Overlord@Admin.se").Id, "Overlord");
             }
 
@@ -56,7 +56,7 @@ namespace GladiatorProject.Migrations
                     Email = "Player@Normal.se",
                     UserName = "Player@Normal.se"
                 };
-                userManager.Create(Player, "Qwe!23");
+                userManager.Create(Player, "As!1234");
                 userManager.AddToRole(userManager.FindByEmail("Player@Normal.se").Id, "Player");
             }
 

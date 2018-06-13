@@ -35,7 +35,7 @@ namespace GladiatorProject.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<Player> Players { get; set; }
+        //public DbSet<Player> Players { get; set; }
 
         public DbSet<Gladiator> Gladiators { get; set; }
 
