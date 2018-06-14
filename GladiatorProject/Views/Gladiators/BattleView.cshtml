@@ -1,0 +1,85 @@
+﻿@model IEnumerable<GladiatorProject.Models.BattleStart>
+
+@{
+    ViewBag.Title = "BattleView";
+}
+
+<div class="row">
+
+    <div style="text-align:center">
+        <h2>Welcome to Gladiator games</h2>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4" style="height:400px ; text-align:center ; border:solid black">
+                <h4>Player</h4>
+
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <dl>
+                            <dt>Name</dt>
+                            <dd>@item.Gladiator.Name</dd>
+                            <dt>Level</dt>
+                            <dd>@item.Gladiator.Level</dd>
+                            <dt>Experiance</dt>
+                            <dd>@item.Gladiator.Experiance</dd>
+                            <dt>Health</dt>
+                            <dd>
+                                @item.Gladiator.Health
+                            </dd>
+
+                            <dt>Armor</dt>
+                            <dd>
+                                @item.Gladiator.Armor
+                            </dd>
+
+                            <dt>Damage</dt>
+                            <dd>
+                                @item.Gladiator.Damage
+                            </dd>
+
+                            <dt>Skill points</dt>
+                            <dd>@item.Gladiator.SkillPoints</dd>
+                        </dl>
+                    }
+                    <div>
+                        @Html.ActionLink("Back to Opponents", "SelectGladiator", "Gladiators")
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="height:400px;overflow:auto ; text-align:center ; border:solid black">
+                <h4>Enemy</h4>
+                <div id="opponent">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <dl>
+                                <dt>Name</dt>
+                                <dd>@item.Opponent.Name</dd>
+                                <dt>Level</dt>
+                                <dd>@item.Opponent.Level</dd>
+                                <dt>Health</dt>
+                                <dd>
+                                    @item.Opponent.Health
+                                </dd>
+
+                                <dt>Armor</dt>
+                                <dd>
+                                    @item.Opponent.Armor
+                                </dd>
+
+                                <dt>Damage</dt>
+                                <dd>
+                                    @item.Opponent.Damage
+                                </dd>
+                            </dl>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <button>Fight</button>
+    </div>
+</div>

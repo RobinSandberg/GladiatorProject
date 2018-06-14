@@ -1,13 +1,17 @@
 ﻿@model IEnumerable<GladiatorProject.Models.Gladiator>
 
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2 style="text-align:center">Your Gladiator stable</h2>
-<p style="text-align:center">
+@if (Model.Count() <= 4)
+{
+<button style="margin-left:45%; margin-bottom:25px ">
     @Html.ActionLink("Create New", "Create")
-</p>
+</button>
+}
 <table class="table">
     <tr>
         <th>
@@ -59,7 +63,13 @@
                 @Html.DisplayFor(modelItem => item.Level)
             </td>
             <td>
-                @Html.ActionLink("Select", "SelectGladiator", "Game", new { id = item.Id },null) |
+                @Html.ActionLink("Select", "SelectGladiator", new { id = item.Id }, null) |
+                @*@Ajax.ActionLink("Select", "SelectGladiator", "Game",  new {id = item.Id },
+                 new AjaxOptions
+                 {
+                     UpdateTargetId = "player",
+                     InsertionMode = InsertionMode.Replace
+                 }) |*@
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })

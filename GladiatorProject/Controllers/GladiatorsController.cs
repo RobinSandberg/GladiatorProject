@@ -18,11 +18,42 @@ namespace GladiatorProject.Controllers
         // GET: Gladiators
         [Authorize]
         public ActionResult Index()
-        { 
-
-            var PlayerUser = db.Users.SingleOrDefault(u => u.Id == User.Identity.GetUserId()); // fix this get id above then use it.
+        {
+            var PlayerId = User.Identity.GetUserId();
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
                 
-            return View();
+            return View(PlayerUser.Gladiators);
+        }
+
+        public ActionResult SelectGladiator(BattleStart battleStart, int id)
+        {
+            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            battleStart.Gladiator = gladiator;
+            db.SaveChanges();
+            return View("FindOpponent", gladiator);
+        }
+
+        public ActionResult PartFindOpponent()
+        {
+
+            return PartialView("_Enemies", db.Opponents.ToList());
+        }
+        //[Authorize(Roles = "Player Overlord")]
+        public ActionResult SelectedOpponent(int id)
+        {
+            var enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
+            Opponent.EnemyStats(enemy);
+            return PartialView("_Opponent", enemy);
+        }
+
+        public ActionResult PreBattle(BattleStart battleStart, int id)
+        {
+            // not working
+            var enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
+            Opponent.EnemyStats(enemy);
+            battleStart.Opponent = enemy;
+            db.SaveChanges();
+            return View("BattleView", db.BattleStarts);
         }
 
         // GET: Gladiators/Details/5
@@ -53,13 +84,17 @@ namespace GladiatorProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Health,Armor,Damage,SkillPoints,Experiance,Level")] Gladiator gladiator)
         {
-            if (ModelState.IsValid)
+            if (gladiator.Name.Count() <= 4) // not working
             {
-                db.Gladiators.Add(gladiator);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    var PlayerId = User.Identity.GetUserId();
+                    var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
+                    PlayerUser.Gladiators.Add(gladiator);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
             return View(gladiator);
         }
 

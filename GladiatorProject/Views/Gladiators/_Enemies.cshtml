@@ -1,0 +1,26 @@
+﻿@using GladiatorProject.Models
+@model List<Opponent>
+
+    @foreach (var item in Model)
+    {
+        <dl>
+          <dt>Name</dt>
+          <dd>@item.Name</dd>
+          <dt>Level</dt>
+          <dd>@item.Level</dd>
+    @*<dd>
+        <button>
+        @Html.ActionLink("Select", "PreBattle", new {id = item.Id })
+        </button>
+    </dd>*@
+         <dd><button>
+            @Ajax.ActionLink("Select", "SelectedOpponent", new { id = item.Id },
+          new AjaxOptions
+          {
+              UpdateTargetId = "opponent",
+              InsertionMode = InsertionMode.Replace
+          })
+        </button></dd>
+       </dl>
+    }
+    

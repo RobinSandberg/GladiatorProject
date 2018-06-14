@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -9,10 +10,9 @@ namespace GladiatorProject.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        // Adding first and last name need to be added in all locations it used.
-        //public string FirstName { get; set; }
+        // Adding  need to be added in all locations it used.
+        public List<Gladiator> Gladiators { get; set; }
 
-        //public string LastName { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -41,5 +41,8 @@ namespace GladiatorProject.Models
 
         public DbSet<Opponent> Opponents { get; set; }
 
+        public DbSet<BattleStart> BattleStarts { get; set; }
+
+        //public System.Data.Entity.DbSet<GladiatorProject.Models.BattleStart> BattleStarts { get; set; }
     }
 }

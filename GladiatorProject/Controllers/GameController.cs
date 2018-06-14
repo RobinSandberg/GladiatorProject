@@ -14,12 +14,13 @@ namespace GladiatorProject.Controllers
         [Authorize]
         public ActionResult Index()
         {
+           
             return View();
         }
-        public ActionResult SelectGladiator(Gladiator gladiator ,int id)
+        public ActionResult SelectGladiator(int id)
         {
-            gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
-            return View("_gladiator", gladiator);
+            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            return PartialView("_gladiator", gladiator);
         }
         //[Authorize(Roles = "Player Overlord")]
         //public ActionResult PartCreateGladiator()
