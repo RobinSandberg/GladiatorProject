@@ -22,5 +22,16 @@
         <dd>
             @Model.Damage
         </dd>
+        <dd>
+            <button>
+                @Ajax.ActionLink("Fight", "PreBattle",
+    new AjaxOptions
+    {
+        UpdateTargetId = "Battle",
+        InsertionMode = InsertionMode.Replace,
+        OnSuccess = "some javascript"
+    })
+            </button>
+        </dd>
     </dl>
 </div>

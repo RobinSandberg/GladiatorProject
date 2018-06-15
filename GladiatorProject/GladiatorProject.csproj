@@ -299,6 +299,7 @@
     <Content Include="Views\Gladiators\Index.cshtml" />
     <Content Include="Views\Gladiators\FindOpponent.cshtml" />
     <Content Include="Views\Gladiators\BattleView.cshtml" />
+    <Content Include="Views\Gladiators\FullList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

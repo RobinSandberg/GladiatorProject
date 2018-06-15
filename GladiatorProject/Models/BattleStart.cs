@@ -10,7 +10,7 @@ namespace GladiatorProject.Models
     {
         [Key]
         public int Id { get; set; }
-
+       
         public Gladiator Gladiator { get; set; }
 
         public Opponent Opponent { get; set; }

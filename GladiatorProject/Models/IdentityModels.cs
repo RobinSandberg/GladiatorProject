@@ -41,8 +41,6 @@ namespace GladiatorProject.Models
 
         public DbSet<Opponent> Opponents { get; set; }
 
-        public DbSet<BattleStart> BattleStarts { get; set; }
-
         //public System.Data.Entity.DbSet<GladiatorProject.Models.BattleStart> BattleStarts { get; set; }
     }
 }
