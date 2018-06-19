@@ -1,4 +1,4 @@
-﻿@model GladiatorProject.Models.Gladiator
+﻿@model GladiatorProject.Models.BattleStart
 
 @{
     ViewBag.Title = "FindOpponent";
@@ -16,14 +16,14 @@
                     <div class="row">
                         <dl>
                             <dt>Name</dt>
-                            <dd>@Model.Name</dd>
+                            <dd>@Model.Gladiator.Name</dd>
                             <dt>Level</dt>
-                            <dd>@Model.Level</dd>
+                            <dd>@Model.Gladiator.Level</dd>
                             <dt>Experiance</dt>
-                            <dd>@Model.Experiance</dd>
+                            <dd>@Model.Gladiator.Experiance</dd>
                             <dt>Health</dt>
                             <dd id="health">
-                                @Model.Health <br /> @if (Model.SkillPoints >= 1)
+                                @Model.Gladiator.Health / @Model.Gladiator.FullHealth <br /> @if (Model.Gladiator.SkillPoints >= 1)
                                 {
                                     <button>
                                         @Ajax.ActionLink("Increase health", "AddHealth",
@@ -38,7 +38,7 @@
 
                             <dt>Armor</dt>
                             <dd id="armor">
-                                @Model.Armor <br />@if (Model.SkillPoints >= 1)
+                                @Model.Gladiator.Armor <br />@if (Model.Gladiator.SkillPoints >= 1)
                                 {
                                     <button>
                                         @Ajax.ActionLink("Increase armor", "AddArmor",
@@ -53,7 +53,7 @@
 
                             <dt>Damage</dt>
                             <dd id="damage">
-                                @Model.Damage <br />@if (Model.SkillPoints >= 1)
+                                @Model.Gladiator.Damage <br />@if (Model.Gladiator.SkillPoints >= 1)
                                 {
                                     <button>
                                         @Ajax.ActionLink("Increase damage", "AddDamage",
@@ -67,7 +67,7 @@
                             </dd>
 
                             <dt>Skill points</dt>
-                            <dd>@Model.SkillPoints</dd>
+                            <dd>@Model.Gladiator.SkillPoints</dd>
                         </dl>
                         <div>
                             @Html.ActionLink("Back to gladiators", "Index", "Gladiators")
@@ -79,12 +79,12 @@
                 <h4>Enemy</h4>
                 <div id="opponent">
                     <button>
-                        @Ajax.ActionLink("Search Opponent", "PartFindOpponent", new AjaxOptions
-                            {
-                            UpdateTargetId = "opponent",
-                            InsertionMode = InsertionMode.Replace,
-                            OnSuccess = "some javascript"
-                            })
+                        @Ajax.ActionLink("Search Opponent", "PartFindOpponent",new {id =Model.Id }, new AjaxOptions
+                   {
+                       UpdateTargetId = "opponent",
+                       InsertionMode = InsertionMode.Replace,
+                       OnSuccess = "some javascript"
+                   })
                     </button>
                 </div>
             </div>

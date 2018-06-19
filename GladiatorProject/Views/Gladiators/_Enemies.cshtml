@@ -1,7 +1,7 @@
 ﻿@using GladiatorProject.Models
-@model List<Opponent>
+@model BattleStart
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Opponents)
     {
         <dl>
           <dt>Name</dt>
@@ -14,7 +14,7 @@
         </button>
     </dd>*@
          <dd><button>
-            @Ajax.ActionLink("Select", "SelectedOpponent", new { id = item.Id },
+            @Ajax.ActionLink("Select", "SelectedOpponent", new { id = item.Id, battleId = Model.Id},
           new AjaxOptions
           {
               UpdateTargetId = "opponent",

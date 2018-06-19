@@ -18,6 +18,8 @@ namespace GladiatorProject.Models
 
         public int Health { get; set; }
 
+        public int FullHealth { get; set; }
+
         public int Armor { get; set; }
 
         public int Damage { get; set; }
@@ -31,7 +33,8 @@ namespace GladiatorProject.Models
         public Gladiator()
         {
             Health = 10 + Dice.D12();
-            Armor = 2 + Dice.D8();
+            FullHealth = Health;
+            Armor = 10 + Dice.D4();
             Damage = 1 + Dice.D6();
             Experiance = 0;
             Level = 1;

@@ -1,36 +1,44 @@
 ﻿@using GladiatorProject.Models
-@model Opponent
+@model BattleStart
 
 
 <div class="row">
     <dl>
         <dt>Name</dt>
-        <dd>@Model.Name</dd>
+        <dd>@Model.Opponent.Name</dd>
         <dt>Level</dt>
-        <dd>@Model.Level</dd>
+        <dd>@Model.Opponent.Level</dd>
         <dt>Health</dt>
         <dd>
-            @Model.Health
+            @Model.Opponent.Health
         </dd>
 
         <dt>Armor</dt>
         <dd>
-            @Model.Armor
+            @Model.Opponent.Armor
         </dd>
 
         <dt>Damage</dt>
         <dd>
-            @Model.Damage
+            @Model.Opponent.Damage
         </dd>
         <dd>
             <button>
-                @Ajax.ActionLink("Fight", "PreBattle",
+                @Ajax.ActionLink("Search Opponent", "PartFindOpponent",new {id =Model.Id }, new AjaxOptions
+                  {
+                      UpdateTargetId = "opponent",
+                      InsertionMode = InsertionMode.Replace,
+                      OnSuccess = "some javascript"
+                  })
+            </button>
+            <button>
+                @Html.ActionLink("Go to battle", "PreBattle", new {id = Model.Id})@*,
     new AjaxOptions
     {
         UpdateTargetId = "Battle",
         InsertionMode = InsertionMode.Replace,
         OnSuccess = "some javascript"
-    })
+    })*@
             </button>
         </dd>
     </dl>

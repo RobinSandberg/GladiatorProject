@@ -25,47 +25,40 @@ namespace GladiatorProject.Controllers
             return View(PlayerUser.Gladiators);
         }
 
-        public ActionResult SelectGladiator(BattleStart battleStart, int id)
+        public ActionResult SelectGladiator(int id)
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
-            //Session["Gladiator"] = gladiator;
-            //battleStart.Gladiator = gladiator;
-            //battleStart.Gladiator.Name = gladiator.Name;
-            //battleStart.Gladiator.Level = gladiator.Level;
-            //battleStart.Gladiator.Experiance = gladiator.Experiance;
-            //battleStart.Gladiator.Health = gladiator.Health;
-            //battleStart.Gladiator.Armor = gladiator.Armor;
-            //battleStart.Gladiator.Damage = gladiator.Damage;
-            //battleStart.Gladiator.SkillPoints = gladiator.SkillPoints;
-            return View("FindOpponent", gladiator);
+            BattleStart battleStart = new BattleStart();
+            battleStart.Gladiator = gladiator;
+            db.Battles.Add(battleStart);
+            db.SaveChanges();
+            return View("FindOpponent", battleStart);
         }
 
-        public ActionResult PartFindOpponent()
+        public ActionResult PartFindOpponent(BattleStart battleStart)
         {
-
-            return PartialView("_Enemies", db.Opponents.ToList());
+            battleStart.Opponents = db.Opponents.ToList();
+            return PartialView("_Enemies", battleStart);
         }
         //[Authorize(Roles = "Player Overlord")]
-        public ActionResult SelectedOpponent(BattleStart battleStart , int id)
+        public ActionResult SelectedOpponent(int id, int battleId)
         {
             var enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
-            Opponent.EnemyStats(enemy);
+            if (enemy.Health <= 0)
+            {
+                Opponent.EnemyStats(enemy);
+            }
+            var battle = db.Battles.Include("Gladiator").SingleOrDefault(u => u.Id == battleId);
+            battle.Opponent = enemy;
             db.SaveChanges();
-            //Session["Enemy"] = enemy;
-            //battleStart.Opponent = enemy;
-            //battleStart.Opponent.Name = enemy.Name;
-            //battleStart.Opponent.Level = enemy.Level;
-            //battleStart.Opponent.Health = enemy.Health;
-            //battleStart.Opponent.Armor = enemy.Armor;
-            //battleStart.Opponent.Damage = enemy.Damage;
-
-            return PartialView("_Opponent", enemy);
+            
+            return PartialView("_Opponent", battle);
         }
 
-        public ActionResult PreBattle(BattleStart battleStart)
+        public ActionResult PreBattle(int id)
         {
-            
-            return PartialView("BattleView", battleStart);
+            var battleReady = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
+            return View("BattleView", battleReady);
         }
 
         // GET: Gladiators/Details/5

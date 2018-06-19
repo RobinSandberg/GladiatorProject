@@ -40,8 +40,6 @@ namespace GladiatorProject.Models
             int n = _roll.Next(1, 5);
             return n;
         }
-       
-
 
     }
 }
