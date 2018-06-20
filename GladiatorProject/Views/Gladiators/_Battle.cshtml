@@ -1,0 +1,9 @@
+﻿@using GladiatorProject.Models
+@model BattleRound
+
+@foreach (var item in Model.Rounds)
+{
+    <p>@item.ToString()</p>
+}
+
+<button>@Html.ActionLink("After Math", "AfterBattle", new { id = Model.Id })</button>

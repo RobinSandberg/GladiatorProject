@@ -18,6 +18,8 @@ namespace GladiatorProject.Models
 
         public int Health { get; set; }
 
+        public int FullHealth { get; set; }
+
         public int Armor { get; set; }
 
         public int Damage { get; set; }
@@ -129,7 +131,9 @@ namespace GladiatorProject.Models
                     enemy.Armor = 15 + Dice.D4();
                     enemy.Damage = 20 + Dice.D6();
                     break;
+                    
             }
+            enemy.FullHealth = enemy.Health;
         }
     }
 }

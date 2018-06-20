@@ -1,64 +1,25 @@
-﻿@*@using GladiatorProject.Models
-@model Gladiator*@
+﻿
 @{
     ViewBag.Title = "Home Page";
 }
 
 <br /><br />
-<h2>Welcome</h2>
-@*<div class="row">
-
-    <div class="col-md-3" style="height:400px ; text-align:center ; border:solid black">
-        <h4>Player</h4>
-        <div id="player">
-            <button>
-                @Ajax.ActionLink("Create Gladiator", "PartCreateGladiator", new AjaxOptions
-                {
-                UpdateTargetId = "player",
-                InsertionMode = InsertionMode.Replace
-                })
-            </button>
-            <button>
-                @Ajax.ActionLink("Select Gladiator", "SelectGladiator", new AjaxOptions
-                {
-                UpdateTargetId = "player",
-                InsertionMode = InsertionMode.Replace
-                })
-            </button>
-        </div>
-    </div>
-
-    <div class="col-md-6" id="battle" style="height:400px ; text-align:center ; border:solid black">
-        <h4>Battle</h4>
-    </div>
-
-    <div class="col-md-3" style="height:400px;overflow:auto ; text-align:center ; border:solid black">
-        <h4>Enemy</h4>
-        <div id="opponent">
-
-            <button>
-                @Ajax.ActionLink("Find Opponent", "PartFindOpponent", new AjaxOptions
-                    {
-                    UpdateTargetId = "opponent",
-                    InsertionMode = InsertionMode.Replace
-                    })
-            </button>
-        </div>
-
-    </div>
-
-</div>
-
 <div class="row">
-    <div class="col-md-6" style="height:400px ; text-align:center ; border:solid black">
-        <h4>Battle Log</h4>
-        
-            
 
+    <div style="text-align:center">
+        <h2>Welcome to Gladiator games</h2>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4" style="height:400px ; text-align:center ; border:solid black">
+                <h4>Game info</h4>
+
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4" style="height:400px;overflow:auto ; text-align:center ; border:solid black">
+                <h4>Game rules</h4>
+
+            </div>
+            <div class="col-md-1"></div>
+        </div>
     </div>
-
-    <div class="col-md-6" id="Menus" style="height:400px ; text-align:center ; border:solid black">
-        <h4>Highscore List</h4>
-    </div>
-
-</div>*@
+</div>

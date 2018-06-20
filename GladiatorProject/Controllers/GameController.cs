@@ -22,26 +22,6 @@ namespace GladiatorProject.Controllers
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
             return PartialView("_gladiator", gladiator);
         }
-        //[Authorize(Roles = "Player Overlord")]
-        //public ActionResult PartCreateGladiator()
-        //{
-        //    Gladiator gladiator = new Gladiator();
-
-        //    return PartialView("_partCreateGladiator", gladiator);
-        //}
-
-        //[Authorize(Roles = "Player Overlord")]
-        //[HttpPost]
-        //public ActionResult PartCreateGladiator(Gladiator gladiator)
-        //{
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Gladiators.Add(gladiator);
-        //        db.SaveChanges();
-        //        return PartialView("_gladiator", gladiator);
-        //    }
-        //    return new HttpStatusCodeResult(404);
-        //}
+       
     }
 }

@@ -49,7 +49,7 @@ namespace GladiatorProject.Controllers
                 Opponent.EnemyStats(enemy);
             }
             var battle = db.Battles.Include("Gladiator").SingleOrDefault(u => u.Id == battleId);
-            battle.Opponent = enemy;
+            battle.Opponent = enemy; 
             db.SaveChanges();
             
             return PartialView("_Opponent", battle);
@@ -59,6 +59,24 @@ namespace GladiatorProject.Controllers
         {
             var battleReady = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
             return View("BattleView", battleReady);
+        }
+
+        public ActionResult BattleStart(int id)
+        {
+            BattleRound round = new BattleRound();
+            var Fighters = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
+            round.Round(Fighters);
+            db.SaveChanges();
+            return PartialView("_Battle", round);
+
+        }
+
+        public ActionResult AfterBattle(int id)
+        {
+            var AfterMath = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
+            //db.SaveChanges();
+
+            return View("BattleView" , AfterMath);
         }
 
         // GET: Gladiators/Details/5

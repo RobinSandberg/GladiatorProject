@@ -10,7 +10,7 @@
         <dd>@Model.Opponent.Level</dd>
         <dt>Health</dt>
         <dd>
-            @Model.Opponent.Health
+            @Model.Opponent.Health / @Model.Opponent.FullHealth
         </dd>
 
         <dt>Armor</dt>
@@ -32,13 +32,7 @@
                   })
             </button>
             <button>
-                @Html.ActionLink("Go to battle", "PreBattle", new {id = Model.Id})@*,
-    new AjaxOptions
-    {
-        UpdateTargetId = "Battle",
-        InsertionMode = InsertionMode.Replace,
-        OnSuccess = "some javascript"
-    })*@
+                @Html.ActionLink("Go to battle", "PreBattle", new {id = Model.Id})
             </button>
         </dd>
     </dl>

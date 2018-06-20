@@ -20,7 +20,7 @@
                 <dd>@Model.Gladiator.Experiance</dd>
                 <dt>Health</dt>
                 <dd>
-                    @Model.Gladiator.Health
+                    @Model.Gladiator.Health / @Model.Gladiator.FullHealth
                 </dd>
 
                 <dt>Armor</dt>
@@ -39,9 +39,19 @@
         </div>
     </div>
 
-    <div class="col-md-6" id="battle" style="height:400px ; text-align:center ; border:solid black">
+    <div class="col-md-6" id="battle" style="height:400px;overflow:auto ; text-align:center ; border:solid black">
         <h4>Battle</h4>
-        <button>Start Battle</button>
+        <div id="Battle">
+            <button>
+                @Ajax.ActionLink("Start Battle", "BattleStart", new { id = Model.Id },
+           new AjaxOptions
+           {
+               UpdateTargetId = "Battle",
+               InsertionMode = InsertionMode.Replace,
+
+           })
+            </button>
+        </div>
 
     </div>
 
@@ -55,7 +65,7 @@
                 <dd>@Model.Opponent.Level</dd>
                 <dt>Health</dt>
                 <dd>
-                    @Model.Opponent.Health
+                    @Model.Opponent.Health / @Model.Opponent.FullHealth
                 </dd>
 
                 <dt>Armor</dt>
@@ -73,77 +83,3 @@
     </div>
 
 </div>
-
-    @*<div class="row">
-
-        <div style="text-align:center">
-            <h2>Welcome to Gladiator games</h2>
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-4" style="height:400px ; text-align:center ; border:solid black">
-                    <h4>Player</h4>
-
-                    <div class="row">
-                        <dl>
-                            <dt>Name</dt>
-                            <dd>@Model.Gladiator.Name</dd>
-                            <dt>Level</dt>
-                            <dd>@Model.Gladiator.Level</dd>
-                            <dt>Experiance</dt>
-                            <dd>@Model.Gladiator.Experiance</dd>
-                            <dt>Health</dt>
-                            <dd>
-                                @Model.Gladiator.Health
-                            </dd>
-
-                            <dt>Armor</dt>
-                            <dd>
-                                @Model.Gladiator.Armor
-                            </dd>
-
-                            <dt>Damage</dt>
-                            <dd>
-                                @Model.Gladiator.Damage
-                            </dd>
-
-                            <dt>Skill points</dt>
-                            <dd>@Model.Gladiator.SkillPoints</dd>
-                        </dl>
-
-                    </div>
-                </div>
-
-                 <div class="col-md-2"></div>
-                     </div>
-                        <button>Fight</button>
-                    </div>
-                 </div>
-
-    <div class="col-md-4" style="height:400px;overflow:auto ; text-align:center ; border:solid black">
-        <h4>Enemy</h4>
-        <div id="opponent">
-            <div class="row">
-                <dl>
-                    <dt>Name</dt>
-                    <dd>@Model.Opponent.Name</dd>
-                    <dt>Level</dt>
-                    <dd>@Model.Opponent.Level</dd>
-                    <dt>Health</dt>
-                    <dd>
-                        @Model.Opponent.Health
-                    </dd>
-
-                    <dt>Armor</dt>
-                    <dd>
-                        @Model.Opponent.Armor
-                    </dd>
-
-                    <dt>Damage</dt>
-                    <dd>
-                        @Model.Opponent.Damage
-                    </dd>
-                </dl>
-
-            </div>
-        </div>
-    </div>*@
