@@ -96,11 +96,21 @@ namespace GladiatorProject.Models
                 Rounds.Add(Status.ToString());
 
             }
-            if (OHealth <= 0)
+            if (GHealth <= 0 & OHealth <= 0)
             {
-                var Win = ($"{fighter.Gladiator.Name} won the battle.");
+                var Draw = ($"{fighter.Gladiator.Name} and {fighter.Opponent.Name} both succumbed to wounds making it a draw.");
                 fighter.Gladiator.Health = GHealth;
                 fighter.Opponent.Health = OHealth;
+                fighter.Gladiator.Battles += 1;
+                Rounds.Add(Draw.ToString());
+            }
+            else if (OHealth <= 0)
+            {
+                var Win = ($"{fighter.Gladiator.Name} won the battle over {fighter.Opponent.Name}.");
+                fighter.Gladiator.Health = GHealth;
+                fighter.Opponent.Health = OHealth;
+                fighter.Gladiator.Battles += 1;
+                fighter.Gladiator.BattlesWon += 1;
                 if (fighter.Gladiator.Level == fighter.Opponent.Level)
                 {
                     fighter.Gladiator.Experiance += 10 + Dice.D20();
@@ -116,14 +126,15 @@ namespace GladiatorProject.Models
                 Rounds.Add(Win.ToString());
                 
             }
-            if (GHealth <= 0)
+            else if (GHealth <= 0)
             {
-                var Lost = ($"{fighter.Opponent.Name} won the battle.");
+                var Lost = ($"{fighter.Gladiator.Name} lost the battle to {fighter.Opponent.Name}.");
                 fighter.Gladiator.Health = GHealth;
                 fighter.Opponent.Health = OHealth;
+                fighter.Gladiator.Battles += 1;
+                fighter.Gladiator.BattlesLost += 1;
                 Rounds.Add(Lost.ToString());
             }
-
         }
       
     }

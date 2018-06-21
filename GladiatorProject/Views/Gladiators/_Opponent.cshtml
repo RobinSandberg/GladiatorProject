@@ -1,26 +1,26 @@
 ﻿@using GladiatorProject.Models
-@model BattleStart
+@model Opponent
 
 
 <div class="row">
     <dl>
         <dt>Name</dt>
-        <dd>@Model.Opponent.Name</dd>
+        <dd>@Model.Name</dd>
         <dt>Level</dt>
-        <dd>@Model.Opponent.Level</dd>
+        <dd>@Model.Level</dd>
         <dt>Health</dt>
         <dd>
-            @Model.Opponent.Health / @Model.Opponent.FullHealth
+            @Model.Health / @Model.FullHealth
         </dd>
 
         <dt>Armor</dt>
         <dd>
-            @Model.Opponent.Armor
+            @Model.Armor
         </dd>
 
         <dt>Damage</dt>
         <dd>
-            @Model.Opponent.Damage
+            @Model.Damage
         </dd>
         <dd>
             <button>
@@ -32,7 +32,7 @@
                   })
             </button>
             <button>
-                @Html.ActionLink("Go to battle", "PreBattle", new {id = Model.Id})
+                @Html.ActionLink("Go to battle", "PreBattle")
             </button>
         </dd>
     </dl>

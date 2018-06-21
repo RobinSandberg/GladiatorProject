@@ -30,6 +30,12 @@ namespace GladiatorProject.Models
 
         public int Level { get; set; }
 
+        public int Battles { get; set; }
+
+        public int BattlesWon { get; set; }
+
+        public int BattlesLost { get; set; }
+
         public Gladiator()
         {
             Health = 10 + Dice.D12();
@@ -39,6 +45,9 @@ namespace GladiatorProject.Models
             Experiance = 0;
             Level = 1;
             SkillPoints = 0;
+            Battles = 0;
+            BattlesWon = 0;
+            BattlesLost = 0;
         }
 
     }
