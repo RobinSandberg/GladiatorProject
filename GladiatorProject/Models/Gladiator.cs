@@ -36,6 +36,8 @@ namespace GladiatorProject.Models
 
         public int BattlesLost { get; set; }
 
+        //public Opponent Opponent { get; set; }
+
         public Gladiator()
         {
             Health = 10 + Dice.D12();

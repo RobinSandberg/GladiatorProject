@@ -27,26 +27,60 @@ namespace GladiatorProject.Controllers
         public ActionResult SelectGladiator(int id)
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            if(gladiator.Health <= 0)  // temporary healing during testing.
+            {
+                gladiator.Health = gladiator.FullHealth;
+                db.SaveChanges();
+            }
             Session["gladiator"] = gladiator; 
             return View("FindOpponent", gladiator);
         }
 
-        public ActionResult PartFindOpponent()
+        public ActionResult PartFindOpponent(int id)
         {
-            return PartialView("_Enemies", db.Opponents.ToList());
+            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+
+            Opponent opponent = new Opponent();
+
+            opponent.Levels.Add(gladiator.Level);
+
+            if(gladiator.Level <= 19)
+            {
+                opponent.Levels.Add(gladiator.Level + 1);
+            }
+           
+            if(gladiator.Level >= 2)
+            {
+                opponent.Levels.Add(gladiator.Level - 1);
+            }
+           
+
+
+            return PartialView("_Enemies", opponent /*db.Opponents.ToList()*/);
         }
         //[Authorize(Roles = "Player Overlord")]
-        public ActionResult SelectedOpponent(int id)
+        public ActionResult SelectedOpponent(Opponent opponent,int level)
         {
-            var enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
-            if (enemy.Health <= 0)
+            //var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            //if (gladiator.Opponent.Id <= 0)
+            //{
+
+            //    gladiator.Opponent.Level = level;
+            //    db.Opponents.Add(gladiator.Opponent);
+            //}
+            //Opponent opponent = new Opponent();
+            opponent.Level = level;
+            db.Opponents.Add(opponent);
+            //var enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
+            if (opponent.Health <= 0)
             {
-                Opponent.EnemyStats(enemy);
+               
+                Opponent.EnemyStats(opponent);
                 db.SaveChanges();
             }
-            Session["enemy"] = enemy;
+            Session["enemy"] = opponent;
 
-            return PartialView("_Opponent", enemy);
+            return PartialView("_Opponent", opponent);
         }
 
         public ActionResult PreBattle()
@@ -77,6 +111,33 @@ namespace GladiatorProject.Controllers
         public ActionResult AfterBattle(int id)
         {
             var AfterMath = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
+           switch(AfterMath.Gladiator.Level)
+            {
+                case 1:
+                    if(AfterMath.Gladiator.Experiance >= 100)
+                    {
+                        AfterMath.Gladiator.Level += 1;
+                        AfterMath.Gladiator.SkillPoints += 2;
+                        db.SaveChanges();
+                    }
+                    break;
+                case 2:
+                    if(AfterMath.Gladiator.Experiance >= 200)
+                    {
+                        AfterMath.Gladiator.Level += 1;
+                        AfterMath.Gladiator.SkillPoints += 2;
+                        db.SaveChanges();
+                    } 
+                    break;
+                case 3:
+                    if(AfterMath.Gladiator.Experiance >= 300)
+                    {
+                        AfterMath.Gladiator.Level += 1;
+                        AfterMath.Gladiator.SkillPoints += 2;
+                        db.SaveChanges();
+                    }
+                    break;
+            }
 
             return View("BattleView" , AfterMath);
         }

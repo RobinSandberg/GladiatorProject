@@ -69,35 +69,6 @@ namespace GladiatorProject.Migrations
             //    );
 
 
-            context.Opponents.AddOrUpdate(
-                o => o.Name,
-                //new Opponent { Name = "Murmillo", Health = 10 + Dice.D12(), Armor = 2 + Dice.D8(), Damage = 1 + Dice.D6(), Level = 1 },
-                //new Opponent { Name = "Retiarius", Health = 11 + Dice.D12(), Armor = 3 + Dice.D8(), Damage = 2 + Dice.D6(), Level = 2 },
-                //new Opponent { Name = "Dimachaerus", Health = 12 + Dice.D12(), Armor = 3 + Dice.D8(), Damage = 3 + Dice.D6(), Level = 3 },
-                //new Opponent { Name = "Cestus", Health = 13 + Dice.D12(), Armor = 4 + Dice.D8(), Damage = 4 + Dice.D6(), Level = 4 }
-                new Opponent { Name = "Torin Demot", Level = 1 },
-                new Opponent { Name = "Ista Torro", Level = 2 },
-                new Opponent { Name = "Eor verin", Level = 3 },
-                new Opponent { Name = "Orix nidu", Level = 4 },
-                new Opponent { Name = "Vix Hursy", Level = 5 },
-                new Opponent { Name = "Zerti Jorg", Level = 6 },
-                new Opponent { Name = "Aino Dimi", Level = 7 },
-                new Opponent { Name = "Serno ajol", Level = 8 },
-                new Opponent { Name = "Cora Lorin", Level = 9 },
-                new Opponent { Name = "Rigon fezin", Level = 10},
-                new Opponent { Name = "Niryn Urz", Level = 11},
-                new Opponent { Name = "Kasti Gort", Level = 12},
-                new Opponent { Name = "Bintiz Yvor", Level = 13},
-                new Opponent { Name = "Pixnos Aluria", Level = 14},
-                new Opponent { Name = "Mogor Hidus", Level = 15},
-                new Opponent { Name = "Vetro Egonos", Level = 16},
-                new Opponent { Name = "Lezin Denom", Level = 17},
-                new Opponent { Name = "Cipo Sindol", Level = 18},
-                new Opponent { Name = "Gono uztila", Level = 19},
-                new Opponent { Name = "Robin Sandberg", Level = 20 }
-
-                );
-
             context.SaveChanges();
            
         }

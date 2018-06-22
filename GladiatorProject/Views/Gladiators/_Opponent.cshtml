@@ -1,5 +1,6 @@
 ﻿@using GladiatorProject.Models
 @model Opponent
+@*@model Gladiator*@
 
 
 <div class="row">
@@ -23,14 +24,14 @@
             @Model.Damage
         </dd>
         <dd>
-            <button>
-                @Ajax.ActionLink("Search Opponent", "PartFindOpponent",new {id =Model.Id }, new AjaxOptions
+            @*<button>
+                @Ajax.ActionLink("Search Opponent", "PartFindOpponent",new {id = Model.Id }, new AjaxOptions
                   {
                       UpdateTargetId = "opponent",
                       InsertionMode = InsertionMode.Replace,
                       OnSuccess = "some javascript"
                   })
-            </button>
+            </button>*@
             <button>
                 @Html.ActionLink("Go to battle", "PreBattle")
             </button>

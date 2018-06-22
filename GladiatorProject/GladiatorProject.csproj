@@ -47,7 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="InfoGenerator">
-      <HintPath>..\..\..\..\Downloads\arenafighterassignment\InfoGenerator.dll</HintPath>
+      <HintPath>D:\school and stuff\arena fighter 3\arenafighterassignment\InfoGenerator.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
