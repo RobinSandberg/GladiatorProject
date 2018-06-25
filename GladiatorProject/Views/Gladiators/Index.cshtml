@@ -27,6 +27,9 @@
             @Html.DisplayNameFor(model => model.Damage)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Gold)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.SkillPoints)
         </th>
         <th>
@@ -40,35 +43,38 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Health) / @Html.DisplayFor(ModelItem => item.FullHealth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Armor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Damage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SkillPoints)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Experiance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Level)
-            </td>
-            <td>
-                @Html.ActionLink("Select", "SelectGladiator", new { id = item.Id }, null) |
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Battle Log", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Health) / @Html.DisplayFor(ModelItem => item.FullHealth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Armor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Damage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkillPoints)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Experiance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td>
+            @Html.ActionLink("Select", "SelectGladiator", new { id = item.Id }, null) |
+            @Html.ActionLink("Battle Log", "Details", new { id = item.Id }) |
+            @*@Html.ActionLink("Name Change", "Edit", new { id = item.Id }) |*@ 
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
     }
 
 </table>

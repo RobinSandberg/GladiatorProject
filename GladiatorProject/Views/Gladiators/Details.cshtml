@@ -35,6 +35,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.BattlesDraw)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BattlesDraw)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.BattlesLost)
         </dt>
 
@@ -44,7 +52,28 @@
 
     </dl>
 </div>
+
+    @foreach (var item in Model.DefeatedOpponent)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Health) / @Html.DisplayFor(ModelItem => item.FullHealth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Armor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Damage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+        </tr>
+    }
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Gladiators", "Index")
 </p>

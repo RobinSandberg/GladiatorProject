@@ -27,11 +27,11 @@ namespace GladiatorProject.Controllers
         public ActionResult SelectGladiator(int id)
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
-            if(gladiator.Health <= 0)  // temporary healing during testing.
-            {
-                gladiator.Health = gladiator.FullHealth;
-                db.SaveChanges();
-            }
+            //if(gladiator.Health <= 0)  // temporary healing during testing.
+            //{
+            //    gladiator.Health = gladiator.FullHealth;
+            //    db.SaveChanges();
+            //}
             Session["gladiator"] = gladiator; 
             return View("FindOpponent", gladiator);
         }
@@ -42,19 +42,17 @@ namespace GladiatorProject.Controllers
 
             Opponent opponent = new Opponent();
 
+            if (gladiator.Level >= 2)
+            {
+                opponent.Levels.Add(gladiator.Level - 1);
+            }
+
             opponent.Levels.Add(gladiator.Level);
 
             if(gladiator.Level <= 19)
             {
                 opponent.Levels.Add(gladiator.Level + 1);
             }
-           
-            if(gladiator.Level >= 2)
-            {
-                opponent.Levels.Add(gladiator.Level - 1);
-            }
-           
-
 
             return PartialView("_Enemies", opponent /*db.Opponents.ToList()*/);
         }
@@ -74,7 +72,6 @@ namespace GladiatorProject.Controllers
             //var enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
             if (opponent.Health <= 0)
             {
-               
                 Opponent.EnemyStats(opponent);
                 db.SaveChanges();
             }
@@ -105,56 +102,49 @@ namespace GladiatorProject.Controllers
             round.Round(Fighters);
             db.SaveChanges();
             return PartialView("_Battle", round);
-
         }
 
         public ActionResult AfterBattle(int id)
         {
             var AfterMath = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
-           switch(AfterMath.Gladiator.Level)
-            {
-                case 1:
-                    if(AfterMath.Gladiator.Experiance >= 100)
-                    {
-                        AfterMath.Gladiator.Level += 1;
-                        AfterMath.Gladiator.SkillPoints += 2;
-                        db.SaveChanges();
-                    }
-                    break;
-                case 2:
-                    if(AfterMath.Gladiator.Experiance >= 200)
-                    {
-                        AfterMath.Gladiator.Level += 1;
-                        AfterMath.Gladiator.SkillPoints += 2;
-                        db.SaveChanges();
-                    } 
-                    break;
-                case 3:
-                    if(AfterMath.Gladiator.Experiance >= 300)
-                    {
-                        AfterMath.Gladiator.Level += 1;
-                        AfterMath.Gladiator.SkillPoints += 2;
-                        db.SaveChanges();
-                    }
-                    break;
-            }
+            Gladiator.Leveling(AfterMath.Gladiator);
+            //db.Opponents.Remove(AfterMath.Opponent);
+            db.SaveChanges();
 
-            return View("BattleView" , AfterMath);
+            return View("FindOpponent", AfterMath.Gladiator);
+        }
+
+        public ActionResult Healing(int id)
+        {
+            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            Gladiator.Healing(gladiator);
+            db.SaveChanges();
+            return View("FindOpponent", gladiator);
+        }
+
+        public ActionResult AddStats(int id, string stat)
+        {
+            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            Gladiator.AddingStats(gladiator, stat);
+            db.SaveChanges();
+            return View("FindOpponent", gladiator);
         }
 
         // GET: Gladiators/Details/5
         public ActionResult Details(int? id)
         {
+            var PlayerId = User.Identity.GetUserId();
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Gladiator gladiator = db.Gladiators.Find(id);
+            Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(i => i.Id == id);  // Try to fix so list of defeated enemies follow.
             if (gladiator == null)
             {
                 return HttpNotFound();
             }
-            return View(gladiator);
+            return View(gladiator.);
         }
 
         // GET: Gladiators/Create
@@ -195,11 +185,14 @@ namespace GladiatorProject.Controllers
         // GET: Gladiators/Edit/5
         public ActionResult Edit(int? id)
         {
+            var PlayerId = User.Identity.GetUserId();
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Gladiator gladiator = db.Gladiators.Find(id);
+            Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
+            //Gladiator gladiator = db.Gladiators.Find(id);
             if (gladiator == null)
             {
                 return HttpNotFound();
@@ -212,11 +205,13 @@ namespace GladiatorProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Health,Armor,Damage,SkillPoints,Experiance,Level")] Gladiator gladiator)
+        public ActionResult Edit([Bind(Include = "Id,Name,Health,Armor,Damage,SkillPoints,Experiance,Level,Gold,Battles,BattlesWon,BattlesLost,BattlesDraw")]Gladiator gladiator)
         {
+            //var PlayerId = User.Identity.GetUserId();
+            //var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
             if (ModelState.IsValid)
-            {
-                db.Entry(gladiator).State = EntityState.Modified;
+            { 
+                db.Entry(gladiator.Name).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -232,7 +227,8 @@ namespace GladiatorProject.Controllers
             }
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
-            Gladiator gladiator = db.Gladiators.Find(id);
+            Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
+            //Gladiator gladiator = db.Gladiators.Find(id);
             if (gladiator == null)
             {
                 return HttpNotFound();
@@ -245,8 +241,10 @@ namespace GladiatorProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Gladiator gladiator = db.Gladiators.Find(id);
-            db.Gladiators.Remove(gladiator);
+            var PlayerId = User.Identity.GetUserId();
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
+            Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
+            PlayerUser.Gladiators.Remove(gladiator);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
