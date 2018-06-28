@@ -41,5 +41,11 @@ namespace GladiatorProject.Models
             return n;
         }
 
+        public static int D5()
+        {
+            int n = _roll.Next(1, 6);
+            return n;
+        }
+
     }
 }

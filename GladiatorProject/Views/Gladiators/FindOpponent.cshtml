@@ -17,62 +17,66 @@
                         <dl>
                             <dt>Name</dt>
                             <dd>@Model.Name</dd>
+
                             <dt>Level</dt>
                             <dd>@Model.Level</dd>
+
                             <dt>Experiance</dt>
                             <dd>@Model.Experiance</dd>
+
                             <dt>Gold</dt>
                             <dd>@Model.Gold</dd>
+
+                            <dt>Winning Streak</dt>
+                            <dd>@Model.CurrentWinningStreak</dd>
+
                             <dt>Health</dt>
-                            <dd id="health">
-                                @Model.Health / @Model.FullHealth <br /> @if (Model.SkillPoints >= 1)
-                                {
-                                    <button>
-                                        @Html.ActionLink("Increase health", "AddStats", new { id = Model.Id, stat = "Health" })
-                                        @*@Ajax.ActionLink("Increase health", "AddStats", new { id = Model.Id, stat = "Health" },
-                                        new AjaxOptions
-                                        {
-                                            UpdateTargetId = "health",
-                                            InsertionMode = InsertionMode.Replace
-                                        })*@
-                                    </button>
-                                }
+                            <dd>
+                                @Model.Health / @Model.FullHealth
                             </dd>
+
+                            <dt>Damage</dt>
+                            <dd>@Model.Damage</dd>
+
+                            <dt>Damage Dice</dt>
+                            <dd>@Model.DamageDice</dd>
 
                             <dt>Armor</dt>
                             <dd id="armor">
                                 @Model.Armor <br />@if (Model.SkillPoints >= 1)
                                 {
-                                    if(Model.Armor <= 18)
+                                    if (Model.Armor <= 18)
                                     {
                                         <button>
-                                           @Html.ActionLink("Increase armor", "AddStats", new { id = Model.Id, stat = "Armor" })
-                                            @*@Ajax.ActionLink("Increase armor", "AddStats", new { id = Model.Id, stat = "Armor" },
-                                            new AjaxOptions
-                                           {
-                                              UpdateTargetId = "armor",
-                                              InsertionMode = InsertionMode.Replace
-                                           })*@
+                                            @Html.ActionLink("Increase armor", "AddStats", new { id = Model.Id, stat = "Armor" })
                                         </button>
-                                    } 
+                                    }
                                 }
                             </dd>
 
-                            <dt>Damage</dt>
-                            <dd id="damage">
-                                @Model.Damage <br />@if (Model.SkillPoints >= 1)
+                            <dt>Strenght</dt>
+                            <dd id="strenght">
+                                @Model.Strenght <br />@if (Model.SkillPoints >= 1)
                                 {
                                     <button>
-                                        @Html.ActionLink("Increase damage", "AddStats", new { id = Model.Id, stat = "Damage" })
-                                        @*@Ajax.ActionLink("Increase damage", "AddStats", new { id = Model.Id, stat = "Damage" },
-                                        new AjaxOptions
-                                        {
-                                            UpdateTargetId = "damage",
-                                            InsertionMode = InsertionMode.Replace
-                                        })*@
+                                        @Html.ActionLink("Increase Strenght", "AddStats", new { id = Model.Id, stat = "Strenght" })
                                     </button>
                                 }
                             </dd>
+                            <dt>Strenght Modifyer</dt>
+                            <dd>@Model.StrenghtModifyer</dd>
+
+                            <dt>Constitution</dt>
+                            <dd id="constitution">
+                                @Model.Constitution <br /> @if (Model.SkillPoints >= 1)
+                                {
+                                    <button>
+                                        @Html.ActionLink("Increase Constitution", "AddStats", new { id = Model.Id, stat = "Constitution" })
+                                    </button>
+                                }
+                            </dd>
+                            <dt>Constitution Modifyer</dt>
+                            <dd>@Model.ConstitutionModifyer</dd>
 
                             <dt>Skill points</dt>
                             <dd>@Model.SkillPoints</dd>

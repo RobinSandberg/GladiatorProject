@@ -21,10 +21,25 @@
             @Html.DisplayNameFor(model => model.Health)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Damage)
+        </th>
+        <th>
+            @Html.DisplayName("Dice")
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Armor)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Damage)
+            @Html.DisplayNameFor(model => model.Strenght)
+        </th>
+        <th>
+            @Html.DisplayName("Modifyer")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Constitution)
+        </th>
+        <th>
+            @Html.DisplayName("Modifyer")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Gold)
@@ -51,10 +66,25 @@
             @Html.DisplayFor(modelItem => item.Health) / @Html.DisplayFor(ModelItem => item.FullHealth)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Damage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DamageDice)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Armor)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Damage)
+            @Html.DisplayFor(modelItem => item.Strenght)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StrenghtModifyer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Constitution)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConstitutionModifyer)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Gold)
@@ -71,7 +101,7 @@
         <td>
             @Html.ActionLink("Select", "SelectGladiator", new { id = item.Id }, null) |
             @Html.ActionLink("Battle Log", "Details", new { id = item.Id }) |
-            @*@Html.ActionLink("Name Change", "Edit", new { id = item.Id }) |*@ 
+            @*@Html.ActionLink("Name Change", "Edit", new { id = item.Id }) |*@
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>

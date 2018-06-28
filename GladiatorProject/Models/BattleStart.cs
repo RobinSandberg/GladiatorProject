@@ -16,7 +16,7 @@ namespace GladiatorProject.Models
         public Gladiator Gladiator { get; set; }
 
         public Opponent Opponent { get; set; }
-
+ 
         //public List<Gladiator> Gladiators { get; set; }
 
         //public List<Opponent> Opponents { get; set; }

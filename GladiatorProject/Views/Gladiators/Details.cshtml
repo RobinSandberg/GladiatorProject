@@ -1,4 +1,5 @@
-﻿@model GladiatorProject.Models.Gladiator
+﻿@using GladiatorProject.Models
+@model Gladiator
 
 @{
     ViewBag.Title = "Details";
@@ -27,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BattlesWon)
+            @Html.DisplayName("Battles won")
         </dt>
 
         <dd>
@@ -35,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BattlesDraw)
+            @Html.DisplayName("Battles draw")
         </dt>
 
         <dd>
@@ -43,36 +44,39 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BattlesLost)
+            @Html.DisplayName("Battles lost")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.BattlesLost)
         </dd>
 
+        <dt>
+            @Html.DisplayName("Current winning streak")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentWinningStreak)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Best winning streak")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BestWinningStreak)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Last Battle fought")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastBattle)
+        </dd>
+
     </dl>
 </div>
-
-    @foreach (var item in Model.DefeatedOpponent)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Health) / @Html.DisplayFor(ModelItem => item.FullHealth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Armor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Damage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Level)
-            </td>
-        </tr>
-    }
 
 <p>
     @Html.ActionLink("Back to Gladiators", "Index")

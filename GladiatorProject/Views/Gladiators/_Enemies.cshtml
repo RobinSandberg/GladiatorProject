@@ -4,11 +4,13 @@
     @foreach (var item in Model.Levels)
     {
         <dl>
+          <dt>Name</dt>
+          <dd>@item.Name</dd>
           <dt>Level</dt>
-          <dd>@item</dd>
+          <dd>@item.Level</dd>
    
          <dd><button>
-            @Ajax.ActionLink("Select", "SelectedOpponent", new { level = item},
+            @Ajax.ActionLink("Select", "SelectedOpponent", new { id = item.Id},
           new AjaxOptions
           {
               UpdateTargetId = "opponent",

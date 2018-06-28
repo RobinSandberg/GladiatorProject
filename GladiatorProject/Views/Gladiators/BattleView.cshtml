@@ -8,7 +8,7 @@
 
 <div class="row">
     <h2 style="text-align:center">Ready to do Battle</h2>
-    <div class="col-md-3" style="height:400px ; text-align:center ; border:solid black">
+    <div class="col-md-3" style="height:400px;overflow:auto ; text-align:center ; border:solid black">
         <h4>Player</h4>
         <div id="player">
             <dl>
@@ -20,19 +20,39 @@
                 <dd>@Model.Gladiator.Experiance</dd>
                 <dt>Gold</dt>
                 <dd>@Model.Gladiator.Gold</dd>
+                <dt>Winning Streak</dt>
+                <dd>@Model.Gladiator.CurrentWinningStreak</dd>
                 <dt>Health</dt>
                 <dd>
                     @Model.Gladiator.Health / @Model.Gladiator.FullHealth
                 </dd>
-
+                <dt>Damage</dt>
+                <dd>
+                    @Model.Gladiator.Damage
+                </dd>
+                <dt>Damage Dice</dt>
+                <dd>
+                    @Model.Gladiator.DamageDice
+                </dd>
                 <dt>Armor</dt>
                 <dd>
                     @Model.Gladiator.Armor
                 </dd>
-
-                <dt>Damage</dt>
+                <dt>Strenght</dt>
                 <dd>
-                    @Model.Gladiator.Damage
+                    @Model.Gladiator.Strenght
+                </dd>
+                <dt>Strenght Modifyer</dt>
+                <dd>
+                    @Model.Gladiator.StrenghtModifyer
+                </dd>
+                <dt>Constitution</dt>
+                <dd>
+                    @Model.Gladiator.Constitution
+                </dd>
+                <dt>Constitution Modifyer</dt>
+                <dd>
+                    @Model.Gladiator.ConstitutionModifyer
                 </dd>
 
                 <dt>Skill points</dt>
@@ -69,15 +89,30 @@
                 <dd>
                     @Model.Opponent.Health / @Model.Opponent.FullHealth
                 </dd>
-
+                <dt>Damage</dt>
+                <dd>
+                    @Model.Opponent.Damage
+                </dd>
                 <dt>Armor</dt>
                 <dd>
                     @Model.Opponent.Armor
                 </dd>
 
-                <dt>Damage</dt>
+                <dt>Strenght</dt>
                 <dd>
-                    @Model.Opponent.Damage
+                    @Model.Opponent.Strenght
+                </dd>
+                <dt>Strenght Modifyer</dt>
+                <dd>
+                    @Model.Opponent.StrenghtModifyer
+                </dd>
+                <dt>Constitution</dt>
+                <dd>
+                    @Model.Opponent.Constitution
+                </dd>
+                <dt>Constitution Modifyer</dt>
+                <dd>
+                    @Model.Opponent.ConstitutionModifyer
                 </dd>
             </dl>
         </div>

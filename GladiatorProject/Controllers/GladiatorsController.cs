@@ -11,12 +11,13 @@ using Microsoft.AspNet.Identity;
 
 namespace GladiatorProject.Controllers
 {
+    [Authorize(Roles = "Player , Overlord")]
     public class GladiatorsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Gladiators
-        [Authorize]
+        
         public ActionResult Index()
         {
             var PlayerId = User.Identity.GetUserId();
@@ -27,37 +28,58 @@ namespace GladiatorProject.Controllers
         public ActionResult SelectGladiator(int id)
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
-            //if(gladiator.Health <= 0)  // temporary healing during testing.
-            //{
-            //    gladiator.Health = gladiator.FullHealth;
-            //    db.SaveChanges();
-            //}
             Session["gladiator"] = gladiator; 
             return View("FindOpponent", gladiator);
         }
 
-        public ActionResult PartFindOpponent(int id)
+        public ActionResult PartFindOpponent(Opponent opponent ,int id)
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
 
-            Opponent opponent = new Opponent();
+            //Opponent opponent = new Opponent();
 
+            //levels.Add(db.Opponents.Find(opponent.Level = gladiator.Level));
+            var Enemies = opponent.Levels;
             if (gladiator.Level >= 2)
             {
-                opponent.Levels.Add(gladiator.Level - 1);
+               Enemies = (from a in db.Opponents
+                               where a.Level == gladiator.Level - 1
+                               select a).ToList();
+
+                opponent.Levels.AddRange(Enemies);
+                //var enemy = from a in db.Opponents
+                //            where a.Level == gladiator.Level select a;
+
+                //opponent.Levels.Add(gladiator.Level - 1);
             }
+            Enemies = (from a in db.Opponents
+                                where a.Level == gladiator.Level
+                                select a).ToList();
 
-            opponent.Levels.Add(gladiator.Level);
+            opponent.Levels.AddRange(Enemies);
+            //var enemy = (from a in db.Opponents
+            //             select a.Level == gladiator.Level).First();
+                               
+            //levels.Add(db.Opponents.Find(opponent.Level, gladiator.Level));
+            //enemy = db.Opponents.Where(i => i.Level == gladiator.Level);
+            //opponent.Levels.Add(gladiator.Level);
 
-            if(gladiator.Level <= 19)
+            if (gladiator.Level <= 19)
             {
-                opponent.Levels.Add(gladiator.Level + 1);
+                Enemies = (from a in db.Opponents
+                           where a.Level == gladiator.Level + 1
+                           select a).ToList();
+
+                opponent.Levels.AddRange(Enemies);
+                //levels.Add(db.Opponents.Find(opponent.Level, gladiator.Level + 1));
+                //enemy = db.Opponents.Where(i => i.Level == gladiator.Level + 1);
+                //opponent.Levels.Add(gladiator.Level + 1);
             }
 
-            return PartialView("_Enemies", opponent /*db.Opponents.ToList()*/);
+            return PartialView("_Enemies", opponent/*db.Opponents.ToList()*/);
         }
         //[Authorize(Roles = "Player Overlord")]
-        public ActionResult SelectedOpponent(Opponent opponent,int level)
+        public ActionResult SelectedOpponent(int id)
         {
             //var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
             //if (gladiator.Opponent.Id <= 0)
@@ -67,17 +89,19 @@ namespace GladiatorProject.Controllers
             //    db.Opponents.Add(gladiator.Opponent);
             //}
             //Opponent opponent = new Opponent();
-            opponent.Level = level;
-            db.Opponents.Add(opponent);
-            //var enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
-            if (opponent.Health <= 0)
+            //db.Opponents.Add(opponent);
+            
+           
+            var enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
+
+            if (enemy.Health <= 0)
             {
-                Opponent.EnemyStats(opponent);
+                Opponent.EnemyStats(enemy);
                 db.SaveChanges();
             }
-            Session["enemy"] = opponent;
+            Session["enemy"] = enemy;
 
-            return PartialView("_Opponent", opponent);
+            return PartialView("_Opponent", enemy);
         }
 
         public ActionResult PreBattle()
@@ -139,12 +163,12 @@ namespace GladiatorProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(i => i.Id == id);  // Try to fix so list of defeated enemies follow.
+            Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(i => i.Id == id);
             if (gladiator == null)
             {
                 return HttpNotFound();
             }
-            return View(gladiator.);
+            return View(gladiator);
         }
 
         // GET: Gladiators/Create
@@ -160,7 +184,7 @@ namespace GladiatorProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Health,Armor,Damage,SkillPoints,Experiance,Level")] Gladiator gladiator)
+        public ActionResult Create([Bind(Include = "Name,Health,Armor,Damage,SkillPoints,Experiance,Level")] Gladiator gladiator)
         {
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
@@ -168,7 +192,7 @@ namespace GladiatorProject.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    
+                    Gladiator.StartingGladiator(gladiator);
                     PlayerUser.Gladiators.Add(gladiator);
                     db.SaveChanges();
                     return RedirectToAction("Index");
