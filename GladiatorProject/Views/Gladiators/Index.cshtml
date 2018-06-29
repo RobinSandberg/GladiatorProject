@@ -21,10 +21,7 @@
             @Html.DisplayNameFor(model => model.Health)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Damage)
-        </th>
-        <th>
-            @Html.DisplayName("Dice")
+            @Html.DisplayName("Damage")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Armor)
@@ -64,9 +61,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Health) / @Html.DisplayFor(ModelItem => item.FullHealth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Damage)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DamageDice)

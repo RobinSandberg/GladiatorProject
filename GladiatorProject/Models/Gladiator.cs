@@ -22,9 +22,7 @@ namespace GladiatorProject.Models
 
         public int Armor { get; set; }
 
-        public int MaxArmor { get; set; }
-
-        public int Damage { get; set; }
+        public int MaxArmor { get; set; } // Might change this based on the new stat system.
 
         public string DamageDice { get; set; }
 
@@ -57,33 +55,12 @@ namespace GladiatorProject.Models
         public int BestWinningStreak { get; set; }
 
         public string LastBattle { get; set; }
-        //public Opponent Opponent { get; set; }
 
-        //public Gladiator()
-        //{
-        //   Health = Dice.D10();
-        //   FullHealth = Health;
-        //   Armor = Dice.D6() + Dice.D6() + Dice.D6();
-        //   MaxArmor = 18;
-        //   Strenght = 0;
-        //   StrenghtModifyer = (Strenght - 10) / 2;
-        //   Constitution = 0;
-        //   ConstitutionModifyer = (Constitution - 10) / 2;
-        //   Damage = StrenghtModifyer;
-        //   Experiance = 0;
-        //   Level = 1;
-        //   SkillPoints = 20;
-        //   Gold = 20;
-        //   Battles = 0;
-        //   BattlesWon = 0;
-        //   BattlesDraw = 0;
-        //   BattlesLost = 0;
-        //   CurrentWinningStreak = 0;
-        //   BestWinningStreak = 0;
-        //   LastBattle = "";   
-        //}
+        public int GladiatorScore { get; set; }
 
-        public static void StartingGladiator(Gladiator start)
+        public int GladiatorHighScore { get; set; }
+       
+        public static void StartingGladiator(Gladiator start)  // the metod for adding stats for new made gladiators.
         {
             start.Health = Dice.D10();
             start.FullHealth = start.Health;
@@ -93,7 +70,6 @@ namespace GladiatorProject.Models
             start.StrenghtModifyer = (start.Strenght - 10) / 2;
             start.Constitution = Dice.D6() + Dice.D6();
             start.ConstitutionModifyer = (start.Constitution - 10) / 2;
-            start.Damage = start.StrenghtModifyer;
             start.DamageDice = "2xD8";
             start.Experiance = 0;
             start.Level = 1;
@@ -108,17 +84,17 @@ namespace GladiatorProject.Models
             start.LastBattle = "";
         }
 
-        public static void Leveling(Gladiator RankUp)
+        public static void Leveling(Gladiator RankUp)  // function for when you level up.
         {
-            int HealthAdd = Dice.D6() + RankUp.ConstitutionModifyer;
+            int HealthAdd = Dice.D6() + RankUp.ConstitutionModifyer; // the amount of health added each level.
             switch (RankUp.Level)
             {
                 case 1:
-                    if (RankUp.Experiance >= 100)
+                    if (RankUp.Experiance >= 100) //checking if you level 1 and reached 100 exp.
                     {
                         RankUp.FullHealth += HealthAdd;
-                        RankUp.Level += 1;
-                        RankUp.SkillPoints += 2;
+                        RankUp.Level += 1; // 1 level added
+                        RankUp.SkillPoints += 2; // 2 skill points added 
                     }
                     break;
                 case 2:
@@ -286,15 +262,15 @@ namespace GladiatorProject.Models
             
         }
 
-        public static void AddingStats(Gladiator Stats , string stat)
+        public static void AddingStats(Gladiator Stats , string stat)  // taking in a string and add stats based on the string.
         {
             switch (stat)
             {
                 case "Constitution":
                     Stats.Constitution += 1;
-                    Stats.ConstitutionModifyer = (Stats.Constitution - 10) / 2;
+                    Stats.ConstitutionModifyer = (Stats.Constitution - 10) / 2; // updating the modifyer based on the new Constitution.
                     Stats.FullHealth += 1;
-                    Stats.SkillPoints -= 1;
+                    Stats.SkillPoints -= 1;   // remove 1 skill point.
                         break;
                 case "Armor":
                     if(Stats.Armor < Stats.MaxArmor)
@@ -306,13 +282,12 @@ namespace GladiatorProject.Models
                 case "Strenght":
                     Stats.Strenght += 1;
                     Stats.StrenghtModifyer = (Stats.Strenght - 10) / 2;
-                    Stats.Damage = Stats.StrenghtModifyer;
                     Stats.SkillPoints -= 1;
                     break;
             }
         }
 
-        public static int DamageRoll()
+        public static int DamageRoll()  // the damage you roll when you attack 2 to 16 damage.
         {
             int r = Dice.D8() + Dice.D8();
             return r;

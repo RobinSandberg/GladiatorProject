@@ -13,6 +13,9 @@ namespace GladiatorProject.Models
         // Adding  need to be added in all locations it used.
         public List<Gladiator> Gladiators { get; set; }
 
+        public int AccountScore { get; set; } // will become the score for the account and the high score for players.
+
+        public int AccountHighScore { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -37,11 +40,11 @@ namespace GladiatorProject.Models
 
         //public DbSet<Player> Players { get; set; }
 
-        public DbSet<Gladiator> Gladiators { get; set; }
+        public DbSet<Gladiator> Gladiators { get; set; } // the database for gladiators 
 
-        public DbSet<Opponent> Opponents { get; set; }
+        public DbSet<Opponent> Opponents { get; set; } // database for opponents
 
-        public DbSet<BattleStart> Battles { get; set; }
+        public DbSet<BattleStart> Battles { get; set; } // database for each battle.
 
         //public System.Data.Entity.DbSet<GladiatorProject.Models.BattleStart> BattleStarts { get; set; }
     }

@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Game", "Index", "Gladiators")</li>
-                    @if (User.IsInRole("Overlord"))
+                    @if (User.IsInRole("Overlord")) // checking to make sure user logged in as admin to view the admin tab.
                     {
                         <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
                     }

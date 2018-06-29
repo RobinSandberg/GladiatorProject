@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace GladiatorProject.Controllers
 {
-    [Authorize(Roles = "Player , Overlord")]
+    [Authorize(Roles = "Player , Overlord")] // Players and admin required to access any of the actions in gladiator controller.
     public class GladiatorsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -20,98 +20,71 @@ namespace GladiatorProject.Controllers
         
         public ActionResult Index()
         {
-            var PlayerId = User.Identity.GetUserId();
-            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
-            return View(PlayerUser.Gladiators);
+            var PlayerId = User.Identity.GetUserId();  // picking up the users Id.
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId); //Finding the user and his gladiators.
+            return View(PlayerUser.Gladiators);  // Sending the list of gladiators to the user.
         }
 
         public ActionResult SelectGladiator(int id)
         {
-            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
-            Session["gladiator"] = gladiator; 
+            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id); // picking out the gladiator by the Id.
+            Session["gladiator"] = gladiator; // saving the gladiator info into a session.
             return View("FindOpponent", gladiator);
         }
 
         public ActionResult PartFindOpponent(Opponent opponent ,int id)
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
-
-            //Opponent opponent = new Opponent();
-
-            //levels.Add(db.Opponents.Find(opponent.Level = gladiator.Level));
+            // Making a temporary list of opponent based on gladiator level 1 lvl lower to 1 lvl higher.
             var Enemies = opponent.Levels;
-            if (gladiator.Level >= 2)
+            if (gladiator.Level >= 2) // Making sure the gladiator is lvl 2 or higher before adding lower lvl opponent.
             {
                Enemies = (from a in db.Opponents
                                where a.Level == gladiator.Level - 1
                                select a).ToList();
 
-                opponent.Levels.AddRange(Enemies);
-                //var enemy = from a in db.Opponents
-                //            where a.Level == gladiator.Level select a;
-
-                //opponent.Levels.Add(gladiator.Level - 1);
+                opponent.Levels.AddRange(Enemies);     // AddRange to add multible objects to list instead of Add that just add one item.
             }
             Enemies = (from a in db.Opponents
                                 where a.Level == gladiator.Level
                                 select a).ToList();
 
             opponent.Levels.AddRange(Enemies);
-            //var enemy = (from a in db.Opponents
-            //             select a.Level == gladiator.Level).First();
-                               
-            //levels.Add(db.Opponents.Find(opponent.Level, gladiator.Level));
-            //enemy = db.Opponents.Where(i => i.Level == gladiator.Level);
-            //opponent.Levels.Add(gladiator.Level);
-
-            if (gladiator.Level <= 19)
+           
+            if (gladiator.Level <= 19)  // Making sure gladiator is lvl 19 or lower before adding a higher lvl opponent.
             {
                 Enemies = (from a in db.Opponents
                            where a.Level == gladiator.Level + 1
                            select a).ToList();
 
-                opponent.Levels.AddRange(Enemies);
-                //levels.Add(db.Opponents.Find(opponent.Level, gladiator.Level + 1));
-                //enemy = db.Opponents.Where(i => i.Level == gladiator.Level + 1);
-                //opponent.Levels.Add(gladiator.Level + 1);
+                opponent.Levels.AddRange(Enemies); 
             }
 
-            return PartialView("_Enemies", opponent/*db.Opponents.ToList()*/);
+            return PartialView("_Enemies", opponent);
         }
-        //[Authorize(Roles = "Player Overlord")]
+       
         public ActionResult SelectedOpponent(int id)
         {
-            //var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
-            //if (gladiator.Opponent.Id <= 0)
-            //{
+            var enemy = db.Opponents.SingleOrDefault(i => i.Id == id);  // Picking out the opponent based on its Id.
 
-            //    gladiator.Opponent.Level = level;
-            //    db.Opponents.Add(gladiator.Opponent);
-            //}
-            //Opponent opponent = new Opponent();
-            //db.Opponents.Add(opponent);
-            
-           
-            var enemy = db.Opponents.SingleOrDefault(i => i.Id == id);
-
-            if (enemy.Health <= 0)
+            if (enemy.Health <= 0)  // If the opponent got 0 or lower health it will run metod to add stats.
             {
                 Opponent.EnemyStats(enemy);
                 db.SaveChanges();
             }
-            Session["enemy"] = enemy;
+            Session["enemy"] = enemy;  // Saving opponnet to session.
 
             return PartialView("_Opponent", enemy);
         }
 
         public ActionResult PreBattle()
         {
-            int gId = (Session["gladiator"] as Gladiator).Id;
+            int gId = (Session["gladiator"] as Gladiator).Id;  // taking out the gladiator id from the session.
             int oId = (Session["enemy"] as Opponent).Id;
-            Gladiator gladiator = db.Gladiators.SingleOrDefault(i => i.Id == gId);
+            Gladiator gladiator = db.Gladiators.SingleOrDefault(i => i.Id == gId); // picking up the gladiator based on the Id.
             Opponent opponent = db.Opponents.SingleOrDefault(i => i.Id == oId);
-            BattleStart battleStart = new BattleStart();
-            battleStart.Gladiator = gladiator;
+            BattleStart battleStart = new BattleStart();   // Setting up a new battle 
+            battleStart.Gladiator = gladiator;   // Saving the gladiator into the BattleStart class.
             battleStart.Opponent = opponent;
             db.Battles.Add(battleStart);
             db.SaveChanges();
@@ -121,9 +94,9 @@ namespace GladiatorProject.Controllers
 
         public ActionResult BattleStart(int id)
         {
-            BattleRound round = new BattleRound();
+            BattleRound round = new BattleRound(); // Starting a Battle round
             var Fighters = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
-            round.Round(Fighters);
+            round.Round(Fighters);  // Running the Battle metod with the gladiator and opponent info.
             db.SaveChanges();
             return PartialView("_Battle", round);
         }
@@ -131,8 +104,7 @@ namespace GladiatorProject.Controllers
         public ActionResult AfterBattle(int id)
         {
             var AfterMath = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
-            Gladiator.Leveling(AfterMath.Gladiator);
-            //db.Opponents.Remove(AfterMath.Opponent);
+            Gladiator.Leveling(AfterMath.Gladiator); // Checking the gladiators exp and level him up if he got enough.
             db.SaveChanges();
 
             return View("FindOpponent", AfterMath.Gladiator);
@@ -141,7 +113,7 @@ namespace GladiatorProject.Controllers
         public ActionResult Healing(int id)
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
-            Gladiator.Healing(gladiator);
+            Gladiator.Healing(gladiator);  // Heal the gladiator if he miss health.
             db.SaveChanges();
             return View("FindOpponent", gladiator);
         }
@@ -149,9 +121,9 @@ namespace GladiatorProject.Controllers
         public ActionResult AddStats(int id, string stat)
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
-            Gladiator.AddingStats(gladiator, stat);
+            Gladiator.AddingStats(gladiator, stat);   // Adding stats from the skill points you gain for leveling up.
             db.SaveChanges();
-            return View("FindOpponent", gladiator);
+            return PartialView("_addStats", gladiator);
         }
 
         // GET: Gladiators/Details/5
@@ -184,16 +156,16 @@ namespace GladiatorProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,Health,Armor,Damage,SkillPoints,Experiance,Level")] Gladiator gladiator)
+        public ActionResult Create([Bind(Include = "Name")] Gladiator gladiator)
         {
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
-            if (PlayerUser.Gladiators.Count() <= 4)
+            if (PlayerUser.Gladiators.Count() <= 4) // Checking if the player have less 5 or less gladiators. Setting a max of 5 gladiators per player.
             {
                 if (ModelState.IsValid)
                 {
-                    Gladiator.StartingGladiator(gladiator);
-                    PlayerUser.Gladiators.Add(gladiator);
+                    Gladiator.StartingGladiator(gladiator);  // Functions to roll starting stats for the gladiator.
+                    PlayerUser.Gladiators.Add(gladiator);  // Add the gldiator to the players gladiator list.
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -207,7 +179,7 @@ namespace GladiatorProject.Controllers
         }
 
         // GET: Gladiators/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id)  //Rework planned for this functiion disabled atm.
         {
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
@@ -229,7 +201,7 @@ namespace GladiatorProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Health,Armor,Damage,SkillPoints,Experiance,Level,Gold,Battles,BattlesWon,BattlesLost,BattlesDraw")]Gladiator gladiator)
+        public ActionResult Edit([Bind(Include = "Name")]Gladiator gladiator) //Rework planned for this functiion disabled atm.
         {
             //var PlayerId = User.Identity.GetUserId();
             //var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
@@ -250,9 +222,9 @@ namespace GladiatorProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var PlayerId = User.Identity.GetUserId();
-            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
-            Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
-            //Gladiator gladiator = db.Gladiators.Find(id);
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId); //Gathering the players gladiators.
+            Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id); // picking out the 1 gladiator you wanna delete.
+ 
             if (gladiator == null)
             {
                 return HttpNotFound();
@@ -268,7 +240,7 @@ namespace GladiatorProject.Controllers
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
             Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
-            PlayerUser.Gladiators.Remove(gladiator);
+            PlayerUser.Gladiators.Remove(gladiator); // Remove the gladiator from the player gladiator list but saving it in gladiator database.
             db.SaveChanges();
             return RedirectToAction("Index");
         }

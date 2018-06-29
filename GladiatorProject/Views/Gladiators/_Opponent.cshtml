@@ -39,14 +39,6 @@
             @Model.ConstitutionModifyer
         </dd>
         <dd>
-            @*<button>
-                @Ajax.ActionLink("Search Opponent", "PartFindOpponent",new {id = Model.Id }, new AjaxOptions
-                  {
-                      UpdateTargetId = "opponent",
-                      InsertionMode = InsertionMode.Replace,
-                      OnSuccess = "some javascript"
-                  })
-            </button>*@
             <button>
                 @Html.ActionLink("Go to battle", "PreBattle")
             </button>

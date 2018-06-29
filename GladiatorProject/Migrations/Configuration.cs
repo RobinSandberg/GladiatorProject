@@ -28,12 +28,12 @@ namespace GladiatorProject.Migrations
 
             if (!roleManager.RoleExists("Overlord"))
             {
-                roleManager.Create(new IdentityRole("Overlord"));
+                roleManager.Create(new IdentityRole("Overlord")); //Creating the admin role if it don't exist.
             }
 
             if (!roleManager.RoleExists("Player"))
             {
-                roleManager.Create(new IdentityRole("Player"));
+                roleManager.Create(new IdentityRole("Player"));  // Creating the player role if it don't exist.
             }
 
             var userStore = new UserStore<ApplicationUser>(context);
@@ -47,7 +47,7 @@ namespace GladiatorProject.Migrations
                     UserName = "Overlord"
                 };
                 userManager.Create(Overlord, "As!1234");
-                userManager.AddToRole(userManager.FindByEmail("Overlord@Admin.se").Id, "Overlord");
+                userManager.AddToRole(userManager.FindByEmail("Overlord@Admin.se").Id, "Overlord");  // Creating the admin name and password and adding him to the role.
             }
 
             if (userManager.FindByEmail("Player@Normal.se") == null)
@@ -58,7 +58,7 @@ namespace GladiatorProject.Migrations
                     UserName = "Player"
                 };
                 userManager.Create(Player, "As!1234");
-                userManager.AddToRole(userManager.FindByEmail("Player@Normal.se").Id, "Player");
+                userManager.AddToRole(userManager.FindByEmail("Player@Normal.se").Id, "Player"); // Creating a player name and password and adding him to the role.
             }
 
             //context.ClassRoles.AddOrUpdate(
@@ -71,7 +71,7 @@ namespace GladiatorProject.Migrations
 
             InfoGenerator names = new InfoGenerator(DateTime.Now.Millisecond);
             Gender gender = Gender.Any;
-
+            // Adding a list of 100 opponents from lvl 1 to 20 with random names to database.
             context.Opponents.AddOrUpdate(
                 i => i.Name,
                 new Opponent { Name = names.NextFullName(gender), Level = 1 },

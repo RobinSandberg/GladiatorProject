@@ -8,7 +8,7 @@ namespace GladiatorProject.Models
     public class Dice
     {
         static Random _roll = new Random();
-
+        // The dices for the game in the diffrent sizes.
         public static int D20()  // Random rolled dice from 1 to 20.
         {
             int n = _roll.Next(1, 21);

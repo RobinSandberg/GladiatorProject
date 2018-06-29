@@ -22,7 +22,7 @@ namespace GladiatorProject.Models
 
         public int Armor { get; set; }
 
-        public int Damage { get; set; }
+        public int Damage { get; set; } // will be removed.
 
         public string DamageDice { get; set; }
 
@@ -36,29 +36,11 @@ namespace GladiatorProject.Models
 
         public int Level { get; set; }
 
-        /*public List<int> Levels = new List<int>();*/  // Used when setting level range against gladiator.
-        public List<Opponent> Levels = new List<Opponent>();
+        public List<Opponent> Levels = new List<Opponent>();  // List of the opponents in range of gladiator level.
 
-        //public Opponent()
-        //{
-        //    Armor = 5 + Dice.D6() + Dice.D6();
-        //    Constitution = 5 + Dice.D6() + Dice.D6();
-        //    ConstitutionModifyer = (Constitution - 10) / 2;
-        //    Strenght = 5 + Dice.D6() + Dice.D6();
-        //    StrenghtModifyer = (Strenght - 10) / 2;
-        //    FullHealth = Dice.D10() + ConstitutionModifyer;
-        //    Health = FullHealth;
-        //    Damage = StrenghtModifyer;
-        //    DamageDice = "2xD8";
-
-        //}
-
-        public static void EnemyStats(Opponent enemy)
-        //public Opponent(Opponent enemy)
+        public static void EnemyStats(Opponent enemy) // the stats added to opponents that got 0 health based on their level.
         {
-            //InfoGenerator names = new InfoGenerator(DateTime.Now.Millisecond);
-            //Gender gender = Gender.Any;
-            //enemy.Name = names.NextFullName(gender);
+           
             switch (enemy.Level)
             {
                 case 1:

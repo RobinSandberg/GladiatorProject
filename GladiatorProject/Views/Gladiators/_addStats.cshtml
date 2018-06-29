@@ -1,0 +1,87 @@
+﻿@model GladiatorProject.Models.Gladiator
+
+<div class="row" id="stats">
+    <dl>
+        <dt>Name</dt>
+        <dd>@Model.Name</dd>
+
+        <dt>Level</dt>
+        <dd>@Model.Level</dd>
+
+        <dt>Experiance</dt>
+        <dd>@Model.Experiance</dd>
+
+        <dt>Gold</dt>
+        <dd>@Model.Gold</dd>
+
+        <dt>Winning Streak</dt>
+        <dd>@Model.CurrentWinningStreak</dd>
+
+        <dt>Health</dt>
+        <dd>
+            @Model.Health / @Model.FullHealth
+        </dd>
+
+        <dt>Damage Dice</dt>
+        <dd>@Model.DamageDice</dd>
+
+        <dt>Armor</dt>
+        <dd id="armor">
+            @Model.Armor <br />@if (Model.SkillPoints >= 1)
+            {
+                if (Model.Armor <= 18)
+                {
+                    <button>
+                        @Ajax.ActionLink("Increase armor", "AddStats", new { id = Model.Id, stat = "Armor" },
+                       new AjaxOptions
+                       {
+                           UpdateTargetId = "stats",
+                           InsertionMode = InsertionMode.Replace,
+                       })
+                    </button>
+                }
+            }
+        </dd>
+
+        <dt>Strenght</dt>
+        <dd id="strenght">
+            @Model.Strenght <br />@if (Model.SkillPoints >= 1)
+            {
+                <button>
+                    @Ajax.ActionLink("Increase Strenght", "AddStats", new { id = Model.Id, stat = "Strenght" },
+                  new AjaxOptions
+                  {
+                      UpdateTargetId = "stats",
+                      InsertionMode = InsertionMode.Replace,
+                  })
+                </button>
+            }
+        </dd>
+        <dt>Strenght Modifyer</dt>
+        <dd>@Model.StrenghtModifyer</dd>
+
+        <dt>Constitution</dt>
+        <dd id="constitution">
+            @Model.Constitution <br /> @if (Model.SkillPoints >= 1)
+            {
+                <button>
+                    @Ajax.ActionLink("Increase Constitution", "AddStats", new { id = Model.Id, stat = "Constitution" },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "stats",
+                       InsertionMode = InsertionMode.Replace,
+                   })
+                </button>
+            }
+        </dd>
+        <dt>Constitution Modifyer</dt>
+        <dd>@Model.ConstitutionModifyer</dd>
+
+        <dt>Skill points</dt>
+        <dd>@Model.SkillPoints</dd>
+
+    </dl>
+    <div>
+        @Html.ActionLink("Back to gladiators", "Index", "Gladiators")
+    </div>
+</div>

@@ -13,7 +13,7 @@ namespace GladiatorProject.Models
         public int Id { get; set; }
 
         //[ForeignKey("Gladiator")]
-        public Gladiator Gladiator { get; set; }
+        public Gladiator Gladiator { get; set; } // saving the gladiator and oppoenent selected to the class.
 
         public Opponent Opponent { get; set; }
  

@@ -53,8 +53,8 @@ namespace GladiatorProject.Models
         //[EmailAddress]
         //public string Email { get; set; }
 
-        [Required]
-        [Display(Name = "User Name")]
+        [Required]  
+        [Display(Name = "User Name")] // changed the login to username instead of emails.  Need to make a check so not 2 users will have same name.
         [MaxLength(25)]
         public string UserName { get; set; }
 

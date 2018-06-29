@@ -199,7 +199,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GladiatorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -213,10 +212,10 @@
     <Compile Include="Models\ClassRole.cs" />
     <Compile Include="Models\Dice.cs" />
     <Compile Include="Models\Gladiator.cs" />
+    <Compile Include="Models\Highscore.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Opponent.cs" />
-    <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -286,13 +285,9 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\_partCreateGladiator.cshtml" />
-    <Content Include="Views\Game\_gladiator.cshtml" />
-    <Content Include="Views\Home\_stats.cshtml" />
     <Content Include="Views\Home\_classDropdown.cshtml" />
     <Content Include="Views\Gladiators\_Opponent.cshtml" />
     <Content Include="Views\Gladiators\_Enemies.cshtml" />
-    <Content Include="Views\Game\Index.cshtml" />
     <Content Include="Views\Gladiators\Create.cshtml" />
     <Content Include="Views\Gladiators\Delete.cshtml" />
     <Content Include="Views\Gladiators\Details.cshtml" />
@@ -302,6 +297,7 @@
     <Content Include="Views\Gladiators\BattleView.cshtml" />
     <Content Include="Views\Gladiators\FullList.cshtml" />
     <Content Include="Views\Gladiators\_Battle.cshtml" />
+    <Content Include="Views\Gladiators\_addStats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
