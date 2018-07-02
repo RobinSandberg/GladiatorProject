@@ -46,6 +46,10 @@ namespace GladiatorProject.Models
 
         public DbSet<BattleStart> Battles { get; set; } // database for each battle.
 
+        public DbSet<Highscore> Highscores { get; set; }
+
+        //public System.Data.Entity.DbSet<GladiatorProject.Models.ApplicationUser> ApplicationUsers { get; set; }
+
         //public System.Data.Entity.DbSet<GladiatorProject.Models.BattleStart> BattleStarts { get; set; }
     }
 }

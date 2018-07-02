@@ -1,0 +1,11 @@
+﻿@model List<GladiatorProject.Models.Gladiator>
+
+@foreach (var item in Model.OrderBy(i => i.GladiatorHighScore))
+{
+    <dl class="dl-horizontal">
+        <dt>Name / Score</dt>
+        <dd>@item.Name / @item.GladiatorHighScore</dd>
+        @*<dt>Score</dt>
+        <dd>@item.GladiatorHighScore</dd>*@
+    </dl>
+}

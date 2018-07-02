@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using GladiatorProject.Models;
-using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 
 namespace GladiatorProject.Models
@@ -21,8 +20,6 @@ namespace GladiatorProject.Models
             Id = fighter.Id;   //Adding the same Id to battleround as the battleStart.
             int GHealth = fighter.Gladiator.Health;  // Variable for temporary health during the battle for gladiator.
             int OHealth = fighter.Opponent.Health;
-            //var PlayerId = User.Identity.GetUserId();
-            //var PlayerUser = db.Users.SingleOrDefault(u => u.Id == PlayerId);
 
             while (GHealth > 0 && OHealth > 0)   // A loop for the battle while both fighters got over 0 health.
             {

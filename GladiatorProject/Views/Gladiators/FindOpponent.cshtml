@@ -115,20 +115,31 @@
                         </button>
                     }
                     <br /><br />
-                        <div class="row">
-                            @if (Model.Health < Model.FullHealth)
+                    <div class="row">
+                        @if (Model.Health < Model.FullHealth)
+                        {
+                            if (Model.Gold >= 1)
                             {
-                                if (Model.Gold >= 1)
-                                {
-                                    <button>@Html.ActionLink("Heal yourself", "Healing", new { id = Model.Id })</button>
-                                }
-                                else if(Model.Gold == 0 && Model.Health <= 0)
-                                {
-                                    <button>@Html.ActionLink("Gladiator dead not enough gold to heal up", "Index" )</button>
-                                }
-                                
+                                <button>@Html.ActionLink("Heal yourself", "Healing", new { id = Model.Id })</button>
                             }
-                        </div> 
+                            else if (Model.Gold == 0 && Model.Health <= 0)
+                            {
+                                <button>@Html.ActionLink("Gladiator dead not enough gold to heal up", "Index")</button>
+                            }
+
+                        }
+                    </div>
+                    <br /><br />
+                    <div class="row">
+                        <button>
+                            @Ajax.ActionLink("Highscore", "GladiatorHighScore", new { id = Model.Id }, new AjaxOptions
+                            {
+                                 UpdateTargetId = "opponent",
+                                 InsertionMode = InsertionMode.Replace,
+                                 OnSuccess = "some javascript"
+                            })
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="col-md-2"></div>

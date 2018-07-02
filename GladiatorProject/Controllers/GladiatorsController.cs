@@ -29,7 +29,7 @@ namespace GladiatorProject.Controllers
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id); // picking out the gladiator by the Id.
             Session["gladiator"] = gladiator; // saving the gladiator info into a session.
-            return View("FindOpponent", gladiator);
+            return View("FindOpponent", gladiator); // This view should be renamed GladiatorMenu.
         }
 
         public ActionResult PartFindOpponent(Opponent opponent ,int id)
@@ -101,11 +101,19 @@ namespace GladiatorProject.Controllers
             return PartialView("_Battle", round);
         }
 
-        public ActionResult AfterBattle(int id)
+        public ActionResult AfterBattle(Highscore highscore, int id)
         {
             var AfterMath = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
+            var PlayerId = User.Identity.GetUserId();
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
             Gladiator.Leveling(AfterMath.Gladiator); // Checking the gladiators exp and level him up if he got enough.
+            PlayerUser.AccountScore = AfterMath.Gladiator.GladiatorHighScore;
+            if (PlayerUser.AccountScore > PlayerUser.AccountHighScore)
+            {
+                PlayerUser.AccountHighScore = PlayerUser.AccountScore;
+            }
             db.SaveChanges();
+            
 
             return View("FindOpponent", AfterMath.Gladiator);
         }
@@ -124,6 +132,21 @@ namespace GladiatorProject.Controllers
             Gladiator.AddingStats(gladiator, stat);   // Adding stats from the skill points you gain for leveling up.
             db.SaveChanges();
             return PartialView("_addStats", gladiator);
+        }
+
+        public ActionResult Highscore()
+        {
+            return View("HighScores");
+        }
+        public ActionResult PlayerHighScore()
+        {
+            return PartialView("_highscorePlayer" , db.Users.ToList());
+        }
+
+        public ActionResult GladiatorHighScore()
+        {
+
+            return PartialView("_highscoreGladiator", db.Gladiators.ToList());
         }
 
         // GET: Gladiators/Details/5

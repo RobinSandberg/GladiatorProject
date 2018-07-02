@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
@@ -59,6 +60,11 @@ namespace GladiatorProject.Models
         public int GladiatorScore { get; set; }
 
         public int GladiatorHighScore { get; set; }
+
+        //[ForeignKey("Highscores")]
+        //public int Highscore_Id { get; set; }
+
+        //public Highscore Highscores { get; set; }
        
         public static void StartingGladiator(Gladiator start)  // the metod for adding stats for new made gladiators.
         {
