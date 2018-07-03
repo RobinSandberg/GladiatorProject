@@ -43,7 +43,7 @@ namespace GladiatorProject.Controllers
                                where a.Level == gladiator.Level - 1
                                select a).ToList();
 
-                opponent.Levels.AddRange(Enemies);     // AddRange to add multible objects to list instead of Add that just add one item.
+                opponent.Levels.AddRange(Enemies);  // AddRange to add multible objects to list instead of Add that just add one item.
             }
             Enemies = (from a in db.Opponents
                                 where a.Level == gladiator.Level
@@ -57,7 +57,7 @@ namespace GladiatorProject.Controllers
                            where a.Level == gladiator.Level + 1
                            select a).ToList();
 
-                opponent.Levels.AddRange(Enemies); 
+                opponent.Levels.AddRange(Enemies);
             }
 
             return PartialView("_Enemies", opponent);
@@ -101,19 +101,18 @@ namespace GladiatorProject.Controllers
             return PartialView("_Battle", round);
         }
 
-        public ActionResult AfterBattle(Highscore highscore, int id)
+        public ActionResult AfterBattle(int id)
         {
             var AfterMath = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
             Gladiator.Leveling(AfterMath.Gladiator); // Checking the gladiators exp and level him up if he got enough.
-            PlayerUser.AccountScore = AfterMath.Gladiator.GladiatorHighScore;
-            if (PlayerUser.AccountScore > PlayerUser.AccountHighScore)
+            PlayerUser.AccountScore = AfterMath.Gladiator.GladiatorHighScore; // Adding the highscore from the gladiator to player score.
+            if (PlayerUser.AccountScore > PlayerUser.AccountHighScore)   // if the player score becomes bigger then the player highscore it saves as the new highscore.
             {
                 PlayerUser.AccountHighScore = PlayerUser.AccountScore;
             }
             db.SaveChanges();
-            
 
             return View("FindOpponent", AfterMath.Gladiator);
         }
@@ -132,21 +131,6 @@ namespace GladiatorProject.Controllers
             Gladiator.AddingStats(gladiator, stat);   // Adding stats from the skill points you gain for leveling up.
             db.SaveChanges();
             return PartialView("_addStats", gladiator);
-        }
-
-        public ActionResult Highscore()
-        {
-            return View("HighScores");
-        }
-        public ActionResult PlayerHighScore()
-        {
-            return PartialView("_highscorePlayer" , db.Users.ToList());
-        }
-
-        public ActionResult GladiatorHighScore()
-        {
-
-            return PartialView("_highscoreGladiator", db.Gladiators.ToList());
         }
 
         // GET: Gladiators/Details/5
@@ -169,9 +153,7 @@ namespace GladiatorProject.Controllers
         // GET: Gladiators/Create
         public ActionResult Create()
         {
-            
-                return View();
-          
+            return View();
         }
 
         // POST: Gladiators/Create
@@ -187,6 +169,7 @@ namespace GladiatorProject.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    
                     Gladiator.StartingGladiator(gladiator);  // Functions to roll starting stats for the gladiator.
                     PlayerUser.Gladiators.Add(gladiator);  // Add the gldiator to the players gladiator list.
                     db.SaveChanges();

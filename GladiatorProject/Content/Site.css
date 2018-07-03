@@ -22,3 +22,36 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#sidebar-wrapper {
+    z-index: 1;
+    position: absolute;
+    width: 0;
+    height: 100%;
+    overflow-y: hidden;
+    color: #ffffff;
+    background: #000000;
+    
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.menuDisplayed #sidebar-wrapper {
+    width: 90%;
+}
+
+#wrapper.menuDisplayed #page-content-wrapper {
+    padding-left: 90%;
+}
+
+#playerList {
+    padding: 25px;
+}
+
+#GladiatorList {
+    padding: 25px;
+}

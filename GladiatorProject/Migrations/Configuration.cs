@@ -79,115 +79,115 @@ namespace GladiatorProject.Migrations
                 new Opponent { Name = names.NextFullName(gender), Level = 1 },
                 new Opponent { Name = names.NextFullName(gender), Level = 1 },
                 new Opponent { Name = names.NextFullName(gender), Level = 1 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 2 },
                 new Opponent { Name = names.NextFullName(gender), Level = 2 },
                 new Opponent { Name = names.NextFullName(gender), Level = 2 },
                 new Opponent { Name = names.NextFullName(gender), Level = 2 },
                 new Opponent { Name = names.NextFullName(gender), Level = 2 },
-                                   
+
                 new Opponent { Name = names.NextFullName(gender), Level = 3 },
                 new Opponent { Name = names.NextFullName(gender), Level = 3 },
                 new Opponent { Name = names.NextFullName(gender), Level = 3 },
                 new Opponent { Name = names.NextFullName(gender), Level = 3 },
                 new Opponent { Name = names.NextFullName(gender), Level = 3 },
-                                  
+
                 new Opponent { Name = names.NextFullName(gender), Level = 4 },
                 new Opponent { Name = names.NextFullName(gender), Level = 4 },
                 new Opponent { Name = names.NextFullName(gender), Level = 4 },
                 new Opponent { Name = names.NextFullName(gender), Level = 4 },
                 new Opponent { Name = names.NextFullName(gender), Level = 4 },
-                                   
+
                 new Opponent { Name = names.NextFullName(gender), Level = 5 },
                 new Opponent { Name = names.NextFullName(gender), Level = 5 },
                 new Opponent { Name = names.NextFullName(gender), Level = 5 },
                 new Opponent { Name = names.NextFullName(gender), Level = 5 },
                 new Opponent { Name = names.NextFullName(gender), Level = 5 },
-                                   
+
                 new Opponent { Name = names.NextFullName(gender), Level = 6 },
                 new Opponent { Name = names.NextFullName(gender), Level = 6 },
                 new Opponent { Name = names.NextFullName(gender), Level = 6 },
                 new Opponent { Name = names.NextFullName(gender), Level = 6 },
                 new Opponent { Name = names.NextFullName(gender), Level = 6 },
-                                     
+
                 new Opponent { Name = names.NextFullName(gender), Level = 7 },
                 new Opponent { Name = names.NextFullName(gender), Level = 7 },
                 new Opponent { Name = names.NextFullName(gender), Level = 7 },
                 new Opponent { Name = names.NextFullName(gender), Level = 7 },
                 new Opponent { Name = names.NextFullName(gender), Level = 7 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 8 },
                 new Opponent { Name = names.NextFullName(gender), Level = 8 },
                 new Opponent { Name = names.NextFullName(gender), Level = 8 },
                 new Opponent { Name = names.NextFullName(gender), Level = 8 },
                 new Opponent { Name = names.NextFullName(gender), Level = 8 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 9 },
                 new Opponent { Name = names.NextFullName(gender), Level = 9 },
                 new Opponent { Name = names.NextFullName(gender), Level = 9 },
                 new Opponent { Name = names.NextFullName(gender), Level = 9 },
                 new Opponent { Name = names.NextFullName(gender), Level = 9 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 10 },
                 new Opponent { Name = names.NextFullName(gender), Level = 10 },
                 new Opponent { Name = names.NextFullName(gender), Level = 10 },
                 new Opponent { Name = names.NextFullName(gender), Level = 10 },
                 new Opponent { Name = names.NextFullName(gender), Level = 10 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 11 },
                 new Opponent { Name = names.NextFullName(gender), Level = 11 },
                 new Opponent { Name = names.NextFullName(gender), Level = 11 },
                 new Opponent { Name = names.NextFullName(gender), Level = 11 },
                 new Opponent { Name = names.NextFullName(gender), Level = 11 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 12 },
                 new Opponent { Name = names.NextFullName(gender), Level = 12 },
                 new Opponent { Name = names.NextFullName(gender), Level = 12 },
                 new Opponent { Name = names.NextFullName(gender), Level = 12 },
                 new Opponent { Name = names.NextFullName(gender), Level = 12 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 13 },
                 new Opponent { Name = names.NextFullName(gender), Level = 13 },
                 new Opponent { Name = names.NextFullName(gender), Level = 13 },
                 new Opponent { Name = names.NextFullName(gender), Level = 13 },
                 new Opponent { Name = names.NextFullName(gender), Level = 13 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 14 },
                 new Opponent { Name = names.NextFullName(gender), Level = 14 },
                 new Opponent { Name = names.NextFullName(gender), Level = 14 },
                 new Opponent { Name = names.NextFullName(gender), Level = 14 },
                 new Opponent { Name = names.NextFullName(gender), Level = 14 },
-                                   
+
                 new Opponent { Name = names.NextFullName(gender), Level = 15 },
                 new Opponent { Name = names.NextFullName(gender), Level = 15 },
                 new Opponent { Name = names.NextFullName(gender), Level = 15 },
                 new Opponent { Name = names.NextFullName(gender), Level = 15 },
                 new Opponent { Name = names.NextFullName(gender), Level = 15 },
-                                   
+
                 new Opponent { Name = names.NextFullName(gender), Level = 16 },
                 new Opponent { Name = names.NextFullName(gender), Level = 16 },
                 new Opponent { Name = names.NextFullName(gender), Level = 16 },
                 new Opponent { Name = names.NextFullName(gender), Level = 16 },
                 new Opponent { Name = names.NextFullName(gender), Level = 16 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 17 },
                 new Opponent { Name = names.NextFullName(gender), Level = 17 },
                 new Opponent { Name = names.NextFullName(gender), Level = 17 },
                 new Opponent { Name = names.NextFullName(gender), Level = 17 },
                 new Opponent { Name = names.NextFullName(gender), Level = 17 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 18 },
                 new Opponent { Name = names.NextFullName(gender), Level = 18 },
                 new Opponent { Name = names.NextFullName(gender), Level = 18 },
                 new Opponent { Name = names.NextFullName(gender), Level = 18 },
                 new Opponent { Name = names.NextFullName(gender), Level = 18 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 19 },
                 new Opponent { Name = names.NextFullName(gender), Level = 19 },
                 new Opponent { Name = names.NextFullName(gender), Level = 19 },
                 new Opponent { Name = names.NextFullName(gender), Level = 19 },
                 new Opponent { Name = names.NextFullName(gender), Level = 19 },
-                                    
+
                 new Opponent { Name = names.NextFullName(gender), Level = 20 },
                 new Opponent { Name = names.NextFullName(gender), Level = 20 },
                 new Opponent { Name = names.NextFullName(gender), Level = 20 },

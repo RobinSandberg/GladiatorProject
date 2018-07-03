@@ -212,7 +212,6 @@
     <Compile Include="Models\ClassRole.cs" />
     <Compile Include="Models\Dice.cs" />
     <Compile Include="Models\Gladiator.cs" />
-    <Compile Include="Models\Highscore.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Opponent.cs" />
@@ -298,9 +297,9 @@
     <Content Include="Views\Gladiators\FullList.cshtml" />
     <Content Include="Views\Gladiators\_Battle.cshtml" />
     <Content Include="Views\Gladiators\_addStats.cshtml" />
-    <Content Include="Views\Gladiators\_highscorePlayer.cshtml" />
-    <Content Include="Views\Gladiators\_highscoreGladiator.cshtml" />
-    <Content Include="Views\Gladiators\HighScores.cshtml" />
+    <Content Include="Views\Home\_highscorePlayers.cshtml" />
+    <Content Include="Views\Home\_highscoreLists.cshtml" />
+    <Content Include="Views\Home\_highscoreGladiators.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -61,11 +61,11 @@ namespace GladiatorProject.Models
 
         public int GladiatorHighScore { get; set; }
 
-        //[ForeignKey("Highscores")]
-        //public int Highscore_Id { get; set; }
+        [ForeignKey("User")]
+        public string ApllicationUser_ID { get; set; }
 
-        //public Highscore Highscores { get; set; }
-       
+        public ApplicationUser User { get; set; }
+
         public static void StartingGladiator(Gladiator start)  // the metod for adding stats for new made gladiators.
         {
             start.Health = Dice.D10();

@@ -38,18 +38,11 @@ namespace GladiatorProject.Models
             return new ApplicationDbContext();
         }
 
-        //public DbSet<Player> Players { get; set; }
-
         public DbSet<Gladiator> Gladiators { get; set; } // the database for gladiators 
 
         public DbSet<Opponent> Opponents { get; set; } // database for opponents
 
         public DbSet<BattleStart> Battles { get; set; } // database for each battle.
 
-        public DbSet<Highscore> Highscores { get; set; }
-
-        //public System.Data.Entity.DbSet<GladiatorProject.Models.ApplicationUser> ApplicationUsers { get; set; }
-
-        //public System.Data.Entity.DbSet<GladiatorProject.Models.BattleStart> BattleStarts { get; set; }
     }
 }

@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,7 +23,6 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Game", "Index", "Gladiators")</li>
-                    <li>@Html.ActionLink("Highscore", "Highscore", "Gladiators")</li>
                     @if (User.IsInRole("Overlord")) // checking to make sure user logged in as admin to view the admin tab.
                     {
                         <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
@@ -33,16 +32,32 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year -Robin Sandberg</p>
-        </footer>
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <div>
+               @{Html.RenderAction("HighScoreLists", "Home" , null);}  @*Render the partial view for where the 2 highscore lists is located.*@
+            </div>
+        </div>
+        <div id="page-content-wrapper">
+            <a href="#" class="btn breadcrumb" id="menu-toggle">Toggle Highscore</a>  @*button to pull out the highscore list side view*@
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year -Robin Sandberg</p>
+                </footer>
+            </div>
+        </div>
     </div>
-
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script>                                                    //script for the sidebar view
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("menuDisplayed");
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

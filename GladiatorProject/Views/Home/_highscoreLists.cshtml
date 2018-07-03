@@ -1,0 +1,12 @@
+﻿
+<div class="row" id="playerList">
+        <div>
+            @{Html.RenderAction("PlayerHighScore", "Home", null);}    @*Render the player highscores as partial view*@
+        </div>
+</div>
+
+<div class="row" id="GladiatorList">
+        <div>
+            @{Html.RenderAction("GladiatorHighScore", "Home", null);}    @*Render the gladiator highscores as partial view*@
+        </div>
+</div>
