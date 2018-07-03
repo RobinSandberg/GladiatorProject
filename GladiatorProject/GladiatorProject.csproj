@@ -292,7 +292,7 @@
     <Content Include="Views\Gladiators\Details.cshtml" />
     <Content Include="Views\Gladiators\Edit.cshtml" />
     <Content Include="Views\Gladiators\Index.cshtml" />
-    <Content Include="Views\Gladiators\FindOpponent.cshtml" />
+    <Content Include="Views\Gladiators\GladiatorMenu.cshtml" />
     <Content Include="Views\Gladiators\BattleView.cshtml" />
     <Content Include="Views\Gladiators\FullList.cshtml" />
     <Content Include="Views\Gladiators\_Battle.cshtml" />

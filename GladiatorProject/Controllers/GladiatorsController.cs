@@ -29,7 +29,7 @@ namespace GladiatorProject.Controllers
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id); // picking out the gladiator by the Id.
             Session["gladiator"] = gladiator; // saving the gladiator info into a session.
-            return View("FindOpponent", gladiator); // This view should be renamed GladiatorMenu.
+            return View("GladiatorMenu", gladiator); // This view should be renamed GladiatorMenu.
         }
 
         public ActionResult PartFindOpponent(Opponent opponent ,int id)
@@ -114,7 +114,7 @@ namespace GladiatorProject.Controllers
             }
             db.SaveChanges();
 
-            return View("FindOpponent", AfterMath.Gladiator);
+            return View("GladiatorMenu", AfterMath.Gladiator);
         }
 
         public ActionResult Healing(int id)
@@ -122,7 +122,7 @@ namespace GladiatorProject.Controllers
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
             Gladiator.Healing(gladiator);  // Heal the gladiator if he miss health.
             db.SaveChanges();
-            return View("FindOpponent", gladiator);
+            return View("GladiatorMenu", gladiator);
         }
 
         public ActionResult AddStats(int id, string stat)

@@ -184,7 +184,10 @@ namespace GladiatorProject.Models
                     GoldGain = 5 + Dice.D6() + Dice.D6(); // the gold earned 5 and then 2 random D6s to add 2 to 12 gold.
                     ScoreGain = 4 + Dice.D6();  // score 4 base with 1 to 6 added.
                     fighter.Gladiator.GladiatorScore += ScoreGain;
-                    fighter.Gladiator.GladiatorHighScore = fighter.Gladiator.GladiatorScore;
+                    if(fighter.Gladiator.GladiatorScore > fighter.Gladiator.GladiatorHighScore)
+                    {
+                        fighter.Gladiator.GladiatorHighScore = fighter.Gladiator.GladiatorScore;
+                    }
                     fighter.Gladiator.Experiance += ExpGain;
                     fighter.Gladiator.Gold += GoldGain;
                 }
@@ -194,7 +197,10 @@ namespace GladiatorProject.Models
                     GoldGain = 7 + Dice.D6() + Dice.D6() + Dice.D4();
                     ScoreGain = 6 + Dice.D8();
                     fighter.Gladiator.GladiatorScore += ScoreGain;
-                    fighter.Gladiator.GladiatorHighScore = fighter.Gladiator.GladiatorScore;
+                    if (fighter.Gladiator.GladiatorScore > fighter.Gladiator.GladiatorHighScore)
+                    {
+                        fighter.Gladiator.GladiatorHighScore = fighter.Gladiator.GladiatorScore;
+                    }
                     fighter.Gladiator.Experiance += ExpGain;
                     fighter.Gladiator.Gold += GoldGain;
                 }
@@ -204,11 +210,14 @@ namespace GladiatorProject.Models
                     GoldGain = 3 + Dice.D6();
                     ScoreGain = 2 + Dice.D4();
                     fighter.Gladiator.GladiatorScore += ScoreGain;
-                    fighter.Gladiator.GladiatorHighScore = fighter.Gladiator.GladiatorScore;
+                    if (fighter.Gladiator.GladiatorScore > fighter.Gladiator.GladiatorHighScore)
+                    {
+                        fighter.Gladiator.GladiatorHighScore = fighter.Gladiator.GladiatorScore;
+                    }
                     fighter.Gladiator.Experiance += ExpGain;
                     fighter.Gladiator.Gold += GoldGain;
                 }
-                var Earned = ($"{fighter.Gladiator.Name} gained {ExpGain} Experience and {GoldGain} Gold.");
+                var Earned = ($"{fighter.Gladiator.Name} gained {ExpGain} Experience , {GoldGain} Gold and {ScoreGain} Score.");
                 Rounds.Add(Win.ToString());
                 Rounds.Add(Earned.ToString());
                 fighter.Gladiator.LastBattle = Win.ToString();

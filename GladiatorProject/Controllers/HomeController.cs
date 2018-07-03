@@ -21,6 +21,7 @@ namespace GladiatorProject.Controllers
 
         public ActionResult HighScoreLists()
         {
+             // Open the base partial for the highscore lists.
             return PartialView("_highscoreLists");
         }
 
