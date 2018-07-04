@@ -1,0 +1,82 @@
+﻿@model List<GladiatorProject.Models.Gladiator>
+
+
+<h2 style="text-align:center">Top 10 Gladiators</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("HighScore")
+        </th>
+        <th>
+            @Html.DisplayName("Health")
+        </th>
+        <th>
+            @Html.DisplayName("Armor")
+        </th>
+        <th>
+            @Html.DisplayName("Strenght")
+        </th>
+        <th>
+            @Html.DisplayName("Constitution")
+        </th>
+        <th>
+            @Html.DisplayName("Gold")
+        </th>
+        <th>
+            @Html.DisplayName("Level")
+        </th>
+        <th>
+            @Html.DisplayName("Best Winning Streak")
+        </th>
+        <th>
+            @Html.DisplayName("Owner")
+        </th>
+        <th></th>
+    </tr>
+
+    
+ @foreach (var item in Model.OrderByDescending(u => u.GladiatorHighScore).Take(10))
+ {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GladiatorHighScore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Health) / @Html.DisplayFor(ModelItem => item.FullHealth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Armor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Strenght)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Constitution)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BestWinningStreak)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "GladiatorScoreEdit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "GladiatorScoreDelete", new { id = item.Id })
+        </td>
+
+    </tr>
+ }
+</table>

@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Admin Menus</h2>
+
+<button>
+    @Ajax.ActionLink("Players", "PlayerList", new AjaxOptions
+   {
+       UpdateTargetId = "View",
+       InsertionMode = InsertionMode.Replace
+
+   } )
+</button>
+
+<button>
+    @Ajax.ActionLink("Opponents", "OpponentList", new AjaxOptions
+{
+UpdateTargetId = "View",
+InsertionMode = InsertionMode.Replace
+
+} )
+</button>
+
+<button>
+    @Ajax.ActionLink("HighScores", "HighscoreList", new AjaxOptions
+{
+UpdateTargetId = "View",
+InsertionMode = InsertionMode.Replace
+
+} )
+</button>
+
+<div id="View">
+
+
+</div>

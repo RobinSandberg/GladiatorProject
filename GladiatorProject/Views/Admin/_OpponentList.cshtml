@@ -1,0 +1,35 @@
+﻿@model List<GladiatorProject.Models.Opponent>
+
+<h2 style="text-align:center">Opponents</h2>
+
+<button style="margin-left:45%; margin-bottom:20px ">
+    @Html.ActionLink("Create Opponent", "CreateOpponent")
+</button>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Level")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "OpponentEdit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "OpponentDetails", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "OpponentDelete", new { id = item.Id })
+        </td>
+    </tr>
+    }
+</table>

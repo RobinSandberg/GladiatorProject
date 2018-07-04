@@ -16,10 +16,6 @@ namespace GladiatorProject.Models
         public Gladiator Gladiator { get; set; } // saving the gladiator and oppoenent selected to the class.
 
         public Opponent Opponent { get; set; }
- 
-        //public List<Gladiator> Gladiators { get; set; }
-
-        //public List<Opponent> Opponents { get; set; }
 
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace GladiatorProject.Controllers
 {
-    [Authorize(Roles = "Player , Overlord")] // Players and admin required to access any of the actions in gladiator controller.
+    [Authorize(Roles = "Player")] // Players and admin required to access any of the actions in gladiator controller.
     public class GladiatorsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
