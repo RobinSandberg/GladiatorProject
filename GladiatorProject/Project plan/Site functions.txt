@@ -5,7 +5,9 @@ Front page shown to all visitors.
 Front window
 Will contain the infomation on what type of game and site it is and the game rules/functions.
 
-Game page Shown to players logged in so they can play.
+Game page require player login to access the game.
+
+Admin only shown if logged in as admin.
 
 Game window
 Will let the player create a new gladiator or selected on of thier allready made gladiators.

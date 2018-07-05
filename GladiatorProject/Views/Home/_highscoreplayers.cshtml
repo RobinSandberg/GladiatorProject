@@ -17,12 +17,13 @@
     </tr>
     @foreach (var item in Model.OrderByDescending(i => i.AccountHighScore).Take(10)) // Order them by the highest score at top and 10 players.
     {
+       
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AccountHighScore)
+                @Html.DisplayFor(modelItem => item.AccountHighScore) 
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Gladiators.Count)

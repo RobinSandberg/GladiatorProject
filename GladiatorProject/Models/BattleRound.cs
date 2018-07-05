@@ -13,8 +13,13 @@ namespace GladiatorProject.Models
         [Key]
         public int Id { get; set; }
 
+        //public List<string> Rounds { get; set; }
         public List<string> Rounds = new List<string>();  // List of the strings printed out for the player to see how the battle went.
 
+        //public BattleRound()
+        //{
+        //    Rounds = new List<string>();
+        //}
         public void Round(BattleStart fighter)
         {
             Id = fighter.Id;   //Adding the same Id to battleround as the battleStart.
@@ -28,7 +33,7 @@ namespace GladiatorProject.Models
                 int OpponentStrike = Dice.D20();
                 int Opponentattack = OpponentStrike + fighter.Opponent.StrenghtModifyer;
                 int GladiatorDamage = fighter.Gladiator.StrenghtModifyer + Gladiator.DamageRoll(); //Rolling the damage per strike for gladiator with strenght modifyer and the Damage dice set.
-                int OpponentDamage = fighter.Opponent.Damage + Gladiator.DamageRoll(); // using same damageroll as gladiator to save functions.
+                int OpponentDamage = fighter.Opponent.StrenghtModifyer + Gladiator.DamageRoll(); // using same damageroll as gladiator to save functions.
                 if (Gladiatorattack >= fighter.Opponent.Armor && Opponentattack >= fighter.Gladiator.Armor) // Both fighters hit eachothere.
                 {
                     if(GladiatorStrike == 20 && OpponentStrike == 20) // Both fighters crit eachother.
@@ -154,8 +159,9 @@ namespace GladiatorProject.Models
                 var Draw = ($"{fighter.Gladiator.Name} and {fighter.Opponent.Name} both succumbed to wounds making it a draw.");
                 fighter.Gladiator.Health = 0; // setting the health to 0 incase it go below 0 to help reduce the cost of healing back up agian.
                 fighter.Gladiator.Battles += 1;  // add 1 battle to the gladiator.
-                fighter.Gladiator.BattlesDraw += 1;  // add 1 draw to the gladiator.
-                if(fighter.Gladiator.CurrentWinningStreak > fighter.Gladiator.BestWinningStreak) // checking the win streak if the current is higher then the best it will be saved as the new best.
+                fighter.Gladiator.BattlesDraw += 1;// add 1 draw to the gladiator.
+                fighter.Gladiator.TempLost = 1;// add a temporary point to keep track of if you last fight was a draw or lost.
+                if (fighter.Gladiator.CurrentWinningStreak > fighter.Gladiator.BestWinningStreak) // checking the win streak if the current is higher then the best it will be saved as the new best.
                 {                                                                                // before resting the streak to 0.
                     fighter.Gladiator.BestWinningStreak = fighter.Gladiator.CurrentWinningStreak;
                     fighter.Gladiator.CurrentWinningStreak = 0;
@@ -230,6 +236,7 @@ namespace GladiatorProject.Models
                 fighter.Gladiator.Health = 0;
                 fighter.Gladiator.Battles += 1;
                 fighter.Gladiator.BattlesLost += 1;
+                fighter.Gladiator.TempLost = 1;
                 fighter.Gladiator.GladiatorScore = 0; // setting the score count to 0 again.  only reset on lost atm not draw.
                 if (fighter.Gladiator.CurrentWinningStreak > fighter.Gladiator.BestWinningStreak)  // checking the winstreak and save if needed then reset to 0 agian.
                 {

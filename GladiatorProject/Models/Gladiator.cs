@@ -49,6 +49,8 @@ namespace GladiatorProject.Models
 
         public int BattlesLost { get; set; }
 
+        public int TempLost { get; set; }
+
         public int BattlesDraw { get; set; }
 
         public int CurrentWinningStreak { get; set; }
@@ -68,14 +70,14 @@ namespace GladiatorProject.Models
 
         public static void StartingGladiator(Gladiator start)  // the metod for adding stats for new made gladiators.
         {
-            start.Health = Dice.D10();
-            start.FullHealth = start.Health;
             start.Armor = Dice.D6() + Dice.D6() + Dice.D6();
             start.MaxArmor = 18;
             start.Strenght = Dice.D6() + Dice.D6();
             start.StrenghtModifyer = (start.Strenght - 10) / 2;
             start.Constitution = Dice.D6() + Dice.D6();
             start.ConstitutionModifyer = (start.Constitution - 10) / 2;
+            start.FullHealth = 10 + (Dice.D10() + start.ConstitutionModifyer);
+            start.Health = start.FullHealth;
             start.DamageDice = "2xD8";
             start.Experiance = 0;
             start.Level = 1;

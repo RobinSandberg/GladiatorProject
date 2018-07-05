@@ -12,7 +12,7 @@ namespace GladiatorProject.Controllers
     public class AdminController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        // GET: Amin
+        // GET: Admin
         public ActionResult Index()
         {
             return View();

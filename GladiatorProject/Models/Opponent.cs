@@ -49,9 +49,8 @@ namespace GladiatorProject.Models
                     enemy.ConstitutionModifyer = (enemy.Constitution - 10) / 2;
                     enemy.Strenght = 5 + Dice.D6() + Dice.D6();
                     enemy.StrenghtModifyer = (enemy.Strenght - 10) / 2;
-                    enemy.FullHealth = Dice.D10() + enemy.ConstitutionModifyer;
+                    enemy.FullHealth = 10 + (Dice.D10() + enemy.ConstitutionModifyer);
                     enemy.Health = enemy.FullHealth;
-                    enemy.Damage = enemy.StrenghtModifyer;
                     enemy.DamageDice = "2xD8";
                     break;
                 case 2:
@@ -60,9 +59,8 @@ namespace GladiatorProject.Models
                     enemy.ConstitutionModifyer = (enemy.Constitution - 10) / 2;
                     enemy.Strenght = 6 + Dice.D6() + Dice.D6();
                     enemy.StrenghtModifyer = (enemy.Strenght - 10) / 2;
-                    enemy.FullHealth = Dice.D10() + Dice.D6() + enemy.ConstitutionModifyer;
+                    enemy.FullHealth = 12 + (Dice.D10() + Dice.D6() + enemy.ConstitutionModifyer);
                     enemy.Health = enemy.FullHealth;
-                    enemy.Damage = enemy.StrenghtModifyer;
                     enemy.DamageDice = "2xD8";
                     break;
                 case 3:
@@ -71,9 +69,8 @@ namespace GladiatorProject.Models
                     enemy.ConstitutionModifyer = (enemy.Constitution - 10) / 2;
                     enemy.Strenght = 7 + Dice.D6() + Dice.D6();
                     enemy.StrenghtModifyer = (enemy.Strenght - 10) / 2;
-                    enemy.FullHealth = Dice.D10() + Dice.D6() + Dice.D6() + enemy.ConstitutionModifyer;
+                    enemy.FullHealth = 14 + (Dice.D10() + Dice.D6() + Dice.D6() + enemy.ConstitutionModifyer);
                     enemy.Health = enemy.FullHealth;
-                    enemy.Damage = enemy.StrenghtModifyer;
                     enemy.DamageDice = "2xD8";
                     break;
                 case 4:
@@ -82,9 +79,8 @@ namespace GladiatorProject.Models
                     enemy.ConstitutionModifyer = (enemy.Constitution - 10) / 2;
                     enemy.Strenght = 8 + Dice.D6() + Dice.D6();
                     enemy.StrenghtModifyer = (enemy.Strenght - 10) / 2;
-                    enemy.FullHealth = Dice.D10() + Dice.D6() + Dice.D6() + Dice.D6() + enemy.ConstitutionModifyer;
+                    enemy.FullHealth =  16 + (Dice.D10() + Dice.D6() + Dice.D6() + Dice.D6() + enemy.ConstitutionModifyer);
                     enemy.Health = enemy.FullHealth;
-                    enemy.Damage = enemy.StrenghtModifyer;
                     enemy.DamageDice = "2xD8";
                     break;
                 case 5:
@@ -93,9 +89,8 @@ namespace GladiatorProject.Models
                     enemy.ConstitutionModifyer = (enemy.Constitution - 10) / 2;
                     enemy.Strenght = 9 + Dice.D6() + Dice.D6();
                     enemy.StrenghtModifyer = (enemy.Strenght - 10) / 2;
-                    enemy.FullHealth = Dice.D10() + Dice.D6() + Dice.D6() + Dice.D6() + Dice.D6() + enemy.ConstitutionModifyer;
-                    enemy.Health = enemy.FullHealth;
-                    enemy.Damage = enemy.StrenghtModifyer;
+                    enemy.FullHealth = 18 + (Dice.D10() + Dice.D6() + Dice.D6() + Dice.D6() + Dice.D6() + enemy.ConstitutionModifyer);
+                    enemy.Health = enemy.FullHealth; 
                     enemy.DamageDice = "2xD8";
                     break;
                 case 6:
@@ -104,9 +99,8 @@ namespace GladiatorProject.Models
                     enemy.ConstitutionModifyer = (enemy.Constitution - 10) / 2;
                     enemy.Strenght = 10 + Dice.D6() + Dice.D6();
                     enemy.StrenghtModifyer = (enemy.Strenght - 10) / 2;
-                    enemy.FullHealth = Dice.D10() + Dice.D6() + Dice.D6() + Dice.D6() + Dice.D6() + Dice.D6() + enemy.ConstitutionModifyer;
-                    enemy.Health = enemy.FullHealth;
-                    enemy.Damage = enemy.StrenghtModifyer;
+                    enemy.FullHealth = 20 + (Dice.D10() + Dice.D6() + Dice.D6() + Dice.D6() + Dice.D6() + Dice.D6() + enemy.ConstitutionModifyer);
+                    enemy.Health = enemy.FullHealth; 
                     enemy.DamageDice = "2xD8";
                     break;
                 case 7:

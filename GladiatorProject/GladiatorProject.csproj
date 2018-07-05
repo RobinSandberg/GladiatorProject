@@ -228,6 +228,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Project plan\Entity relationship diagram.jpg" />
     <Content Include="Project plan\Site layout chart.jpg" />
     <Content Include="Project plan\sprints.txt" />
     <Content Include="Project plan\Views layout.jpg" />

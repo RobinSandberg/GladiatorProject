@@ -107,10 +107,15 @@ namespace GladiatorProject.Controllers
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
             Gladiator.Leveling(AfterMath.Gladiator); // Checking the gladiators exp and level him up if he got enough.
-            PlayerUser.AccountScore = AfterMath.Gladiator.GladiatorHighScore; // Adding the highscore from the gladiator to player score.
+            PlayerUser.AccountScore += AfterMath.Gladiator.GladiatorScore; // Adding the highscore from the gladiator to player score.
             if (PlayerUser.AccountScore > PlayerUser.AccountHighScore)   // if the player score becomes bigger then the player highscore it saves as the new highscore.
             {
                 PlayerUser.AccountHighScore = PlayerUser.AccountScore;
+            }
+            if (AfterMath.Gladiator.TempLost == 1)  // A temporary stat that will check if you lost the last fight then reset your player score if you
+            {                                       //lost or draw. After that it reset the temp stat to 0 agian.
+                PlayerUser.AccountScore = 0;
+                AfterMath.Gladiator.TempLost = 0;
             }
             db.SaveChanges();
 

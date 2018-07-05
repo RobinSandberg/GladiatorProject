@@ -1,23 +1,29 @@
 Sprint 1
-Roles - login
-player and admin roles
-Gladiator  creation bound to player
-Opponent randomizer
+Roles - login					 <<< functional
+player and admin roles				 <<< semi functional, Admin functions yet been implamented beyond views.
+Gladiator  creation bound to player		 <<< functional
+Opponent randomizer			 <<< functional
 
 
 
 Sprint 2
 
-Battle setup
-rounds
+Battle setup			 <<< functional
+rounds					 <<< functional
 
 
 sprint 3
 
-Gladiator leveling
-gladiator healing
+Gladiator leveling		 <<< functional
+gladiator healing		 <<< functional
 
 
 sprint 4
 
-Highscore lists
+Highscore lists			 <<< functional
+
+Sprint 5
+
+info & rule windows
+remove admin from highscore and stuff.
+functons for admin opponent view.

@@ -50,15 +50,15 @@ namespace GladiatorProject.Migrations
                 userManager.AddToRole(userManager.FindByEmail("Overlord@Admin.se").Id, "Overlord");  // Creating the admin name and password and adding him to the role.
             }
 
-            if (userManager.FindByEmail("Player@Normal.se") == null)
+            if (userManager.FindByEmail("Robin@Normal.se") == null)
             {
                 ApplicationUser Player = new ApplicationUser()
                 {
-                    Email = "Player@Normal.se",
-                    UserName = "Player"
+                    Email = "Robin@Normal.se",
+                    UserName = "Robin"
                 };
                 userManager.Create(Player, "As!1234");
-                userManager.AddToRole(userManager.FindByEmail("Player@Normal.se").Id, "Player"); // Creating a player name and password and adding him to the role.
+                userManager.AddToRole(userManager.FindByEmail("Robin@Normal.se").Id, "Player"); // Creating a player name and password and adding him to the role.
             }
 
             //context.ClassRoles.AddOrUpdate(
