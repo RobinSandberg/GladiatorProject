@@ -199,7 +199,6 @@ namespace GladiatorProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
-            //Gladiator gladiator = db.Gladiators.Find(id);
             if (gladiator == null)
             {
                 return HttpNotFound();
@@ -212,7 +211,7 @@ namespace GladiatorProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(/*[Bind(Include = "Name")]*/Gladiator gladiator) 
+        public ActionResult Edit(Gladiator gladiator) 
         {
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);

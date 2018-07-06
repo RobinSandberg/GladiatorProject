@@ -81,7 +81,7 @@ namespace GladiatorProject.Controllers
        
         public ActionResult OpponentSave(Opponent opponent)
         {
-            Opponent oldopponent = db.Opponents.SingleOrDefault(i => i.Id == opponent.Id);
+            Opponent oldopponent = db.Opponents.SingleOrDefault(i => i.Id == opponent.Id);  //saving the opponet as a old version.
 
             if (oldopponent == null)
             {
@@ -89,7 +89,7 @@ namespace GladiatorProject.Controllers
             }
             else
             {
-                oldopponent.Name = opponent.Name;
+                oldopponent.Name = opponent.Name;  // Updating the info from old to the new.
                 oldopponent.Level = opponent.Level;
                 oldopponent.Health = opponent.Health;
                 oldopponent.DamageDice = opponent.DamageDice;
@@ -111,7 +111,7 @@ namespace GladiatorProject.Controllers
             return PartialView("_OpponentDetails", Opponent);
         }
 
-        public ActionResult OpponentDelete(int id) //might not use this one
+        public ActionResult OpponentDelete(int id)
         {
             var Opponent = db.Opponents.SingleOrDefault(i => i.Id == id);
 
