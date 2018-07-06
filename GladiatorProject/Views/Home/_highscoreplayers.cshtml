@@ -17,18 +17,31 @@
     </tr>
     @foreach (var item in Model.OrderByDescending(i => i.AccountHighScore).Take(10)) // Order them by the highest score at top and 10 players.
     {
-       
-        <tr>
+        if (item.AccountHighScore >= 0) // Remove the admin from the list with -1 score.
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountHighScore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gladiators.Count)
+                </td>
+            </tr>
+        }
+        @*<tr>
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AccountHighScore) 
+                @Html.DisplayFor(modelItem => item.AccountHighScore)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Gladiators.Count)
             </td>
-        </tr>
+        </tr>*@
     }
 
 </table>

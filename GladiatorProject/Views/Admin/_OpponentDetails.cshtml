@@ -1,0 +1,31 @@
+﻿@model GladiatorProject.Models.Opponent
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Name)
+        </th>
+        <th>@Html.DisplayNameFor(Model => Model.Level)</th>
+        <th>@Html.DisplayNameFor(Model => Model.Health)</th>
+        <th>@Html.DisplayNameFor(Model => Model.Armor)</th>
+        <th>@Html.DisplayNameFor(Model => Model.DamageDice)</th>
+        <th>@Html.DisplayNameFor(Model => Model.Strenght)</th>
+        <th>@Html.DisplayNameFor(Model => Model.StrenghtModifyer)</th>
+        <th>@Html.DisplayNameFor(Model => Model.Constitution)</th>
+        <th>@Html.DisplayNameFor(Model => Model.ConstitutionModifyer)</th>  
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(Model => Model.Name)
+        </td>
+        <td>@Html.DisplayFor(Model => Model.Level)</td>
+        <td>@Html.DisplayFor(Model => Model.Health)</td>
+        <td>@Html.DisplayFor(Model => Model.Armor)</td>
+        <td>@Html.DisplayFor(Model => Model.DamageDice)</td>
+        <td>@Html.DisplayFor(Model => Model.Strenght)</td>
+        <td>@Html.DisplayFor(Model => Model.StrenghtModifyer)</td>
+        <td>@Html.DisplayFor(Model => Model.Constitution)</td>
+        <td>@Html.DisplayFor(Model => Model.ConstitutionModifyer)</td>  
+    </tr>
+</table>

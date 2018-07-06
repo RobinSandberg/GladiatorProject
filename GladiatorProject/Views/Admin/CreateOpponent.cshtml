@@ -1,0 +1,37 @@
+﻿@model GladiatorProject.Models.Opponent
+
+@{
+    ViewBag.Title = "CreateOpponent";
+}
+
+<h2>Create Opponent</h2>
+
+@using (Html.BeginForm("CreateOpponent", "Admin"))
+{
+ 
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Name)
+        <div>
+            @Html.EditorFor(Model => Model.Name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.DisplayName("Level 1 to 20")
+        <div>
+            @Html.EditorFor(Model => Model.Level)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add Opponent" class="btn btn-default" />
+        </div>
+    </div>
+
+    <div>
+        @Html.ActionLink("Back to Index", "Index")
+    </div>
+</div>
+}

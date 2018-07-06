@@ -24,6 +24,6 @@ Highscore lists			 <<< functional
 
 Sprint 5
 
-info & rule windows
-remove admin from highscore and stuff.
-functons for admin opponent view.
+info & rule windows			 <<< functional
+remove admin from highscore and stuff.			 <<< functional
+functons for admin opponent view.    <<<< base functinal. Later add search option if time.

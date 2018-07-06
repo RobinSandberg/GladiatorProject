@@ -17,21 +17,25 @@
     </tr>
     @foreach (var item in Model.OrderByDescending(i => i.AccountHighScore).Take(10))
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccountHighScore)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gladiators.Count)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "UserScoreEdit", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "UserScoreDelete", new { id = item.Id })
-        </td>
-    </tr>
+        if (item.Email != "Overlord@Admin.se")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountHighScore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gladiators.Count)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UserScoreEdit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "UserScoreDelete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
     }
 
 </table>

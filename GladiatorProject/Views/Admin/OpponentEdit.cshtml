@@ -1,0 +1,82 @@
+﻿@model GladiatorProject.Models.Opponent
+
+@{
+    ViewBag.Title = "OpponentEdit";
+}
+
+<h2>Opponent Editor</h2>
+
+@using (Html.BeginForm("OpponentSave", "Admin"))
+{
+    @Html.HiddenFor(Model => Model.Id)
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Name)
+        <div>
+            @Html.EditorFor(Model => Model.Name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Level)
+        <div>
+            @Html.EditorFor(Model => Model.Level)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Health)
+        <div>
+            @Html.EditorFor(Model => Model.Health)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.DamageDice)
+        <div>
+            @Html.EditorFor(Model => Model.DamageDice)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Armor)
+        <div>
+            @Html.EditorFor(Model => Model.Armor)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Strenght)
+        <div>
+            @Html.EditorFor(Model => Model.Strenght)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Constitution)
+        <div>
+            @Html.EditorFor(Model => Model.Constitution)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save changes" class="btn btn-default" />
+        </div>
+    </div>
+
+    <div>
+        @Html.ActionLink("Back to Index", "Index")
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+}

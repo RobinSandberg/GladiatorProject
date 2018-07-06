@@ -29,7 +29,7 @@ namespace GladiatorProject.Controllers
         {
             // Sending the list of users including their gladiators to the view.
 
-            // A tiny miss with the player highscore to look into later is if you swap gladiator mid win streak the player score will reset.
+           
             return PartialView("_highscorePlayers", db.Users.Include("Gladiators").ToList());
         }
 

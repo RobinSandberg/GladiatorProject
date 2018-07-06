@@ -44,7 +44,9 @@ namespace GladiatorProject.Migrations
                 ApplicationUser Overlord = new ApplicationUser()
                 {
                     Email = "Overlord@Admin.se",
-                    UserName = "Overlord"
+                    UserName = "Overlord",
+                    AccountHighScore = -1
+                    
                 };
                 userManager.Create(Overlord, "As!1234");
                 userManager.AddToRole(userManager.FindByEmail("Overlord@Admin.se").Id, "Overlord");  // Creating the admin name and password and adding him to the role.

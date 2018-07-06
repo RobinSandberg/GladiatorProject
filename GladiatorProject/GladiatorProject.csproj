@@ -308,6 +308,9 @@
     <Content Include="Views\Admin\_HighScore.cshtml" />
     <Content Include="Views\Admin\_highscoreplayers.cshtml" />
     <Content Include="Views\Admin\_highscoreGladiators.cshtml" />
+    <Content Include="Views\Admin\OpponentEdit.cshtml" />
+    <Content Include="Views\Admin\_OpponentDetails.cshtml" />
+    <Content Include="Views\Admin\CreateOpponent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

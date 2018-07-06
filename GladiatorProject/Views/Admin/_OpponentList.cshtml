@@ -6,6 +6,10 @@
     @Html.ActionLink("Create Opponent", "CreateOpponent")
 </button>
 
+<div id="DetailView">
+
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -16,7 +20,7 @@
         </th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.OrderBy(i => i.Level))
     {
     <tr>
         <td>
@@ -27,8 +31,12 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "OpponentEdit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "OpponentDetails", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "OpponentDelete", new { id = item.Id })
+            @Ajax.ActionLink("Details", "OpponentDetails", new { id = item.Id }, new AjaxOptions
+            {
+               UpdateTargetId = "DetailView",
+               InsertionMode = InsertionMode.Replace
+            }) |
+            @Html.ActionLink("Delete", "OpponentDelete", new { id = item.Id })  @*Might remove this option*@ 
         </td>
     </tr>
     }

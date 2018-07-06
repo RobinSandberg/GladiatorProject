@@ -13,7 +13,9 @@ namespace GladiatorProject.Models
     {
         [Key]
         public int Id { get; set; }
-        [MaxLength(50)]    
+
+        [Required]
+        [MaxLength(50)] 
         public string Name { get; set; }
 
         public int Health { get; set; }
@@ -34,6 +36,7 @@ namespace GladiatorProject.Models
 
         public int ConstitutionModifyer { get; set; }
 
+        [Required]
         public int Level { get; set; }
 
         public List<Opponent> Levels = new List<Opponent>();  // List of the opponents in range of gladiator level.

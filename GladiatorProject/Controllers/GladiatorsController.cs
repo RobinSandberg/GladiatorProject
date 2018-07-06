@@ -212,13 +212,17 @@ namespace GladiatorProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Name")]Gladiator gladiator) //Rework planned for this functiion disabled atm.
+        public ActionResult Edit(/*[Bind(Include = "Name")]*/Gladiator gladiator) 
         {
-            //var PlayerId = User.Identity.GetUserId();
-            //var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
+            var PlayerId = User.Identity.GetUserId();
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
+
+            Gladiator oldGladiator = PlayerUser.Gladiators.SingleOrDefault(i => i.Id == gladiator.Id);  //Saving in the old gladiator so i can save in the new name next.
+
             if (ModelState.IsValid)
-            { 
-                db.Entry(gladiator.Name).State = EntityState.Modified;
+            {
+                oldGladiator.Name = gladiator.Name;  // saving the new name over the old.
+                //db.Entry(gladiator.Name).State = EntityState.Modified;  // need to looking to what Entry is.
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
