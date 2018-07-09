@@ -311,6 +311,10 @@
     <Content Include="Views\Admin\OpponentEdit.cshtml" />
     <Content Include="Views\Admin\_OpponentDetails.cshtml" />
     <Content Include="Views\Admin\CreateOpponent.cshtml" />
+    <Content Include="Views\Admin\CreateUser.cshtml" />
+    <Content Include="Views\Admin\UserEdit.cshtml" />
+    <Content Include="Views\Admin\UserScoreEdit.cshtml" />
+    <Content Include="Views\Admin\GladiatorScoreEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

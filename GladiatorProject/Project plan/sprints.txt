@@ -27,3 +27,8 @@ Sprint 5
 info & rule windows			 <<< functional
 remove admin from highscore and stuff.			 <<< functional
 functons for admin opponent view.    <<<< base functinal. Later add search option if time.
+
+>>>function to add later if time>>>>
+Ability for admin to edit the users gladiators.
+Search functions for all of admins list views.
+Gear option of some type.
