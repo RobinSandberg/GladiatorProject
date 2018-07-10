@@ -315,6 +315,11 @@
     <Content Include="Views\Admin\UserEdit.cshtml" />
     <Content Include="Views\Admin\UserScoreEdit.cshtml" />
     <Content Include="Views\Admin\GladiatorScoreEdit.cshtml" />
+    <Content Include="Views\Admin\OpponentDelete.cshtml" />
+    <Content Include="Views\Admin\UserDelete.cshtml" />
+    <Content Include="Views\Admin\UserScoreBan.cshtml" />
+    <Content Include="Views\Admin\GladiatorScoreBan.cshtml" />
+    <Content Include="Views\Gladiators\NotEnoughSkillPoints.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

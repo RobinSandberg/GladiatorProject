@@ -31,7 +31,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "UserScoreEdit", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "UserScoreDelete", new { id = item.Id })
+                    @Html.ActionLink("Ban from highscore", "UserScoreBan", new { id = item.Id })
                 </td>
             </tr>
         }

@@ -1,0 +1,33 @@
+﻿@model GladiatorProject.Models.Opponent
+
+@{
+    ViewBag.Title = "OpponentDelete";
+}
+
+<h2>Opponent Delete</h2>
+
+<p>You sure you wanna delete ?</p>
+
+<dl>
+    <dt>Name</dt>
+    <dd>@Model.Name</dd>
+    <dt>Level</dt>
+    <dd>@Model.Level</dd>
+    <dt>Health</dt>
+    <dd>@Model.Health</dd>
+    <dt>Armor</dt>
+    <dd>@Model.Armor</dd>
+    <dt>Damage</dt>
+    <dd>@Model.DamageDice</dd>
+    <dt>Strenght</dt>
+    <dd>@Model.Strenght</dd>
+    <dt>Constitution</dt>
+    <dd>@Model.Constitution</dd>
+</dl>
+<div>
+    <button>@Html.ActionLink("Delete Confirm", "OpponentDeleteConfirm", new { id = Model.Id })</button>
+</div>
+<br />
+<div>
+   @Html.ActionLink("Back to Admin menu", "Index")
+</div>

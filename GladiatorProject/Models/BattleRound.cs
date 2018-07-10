@@ -180,14 +180,17 @@ namespace GladiatorProject.Models
                 fighter.Gladiator.Battles += 1;
                 fighter.Gladiator.BattlesWon += 1;
                 fighter.Gladiator.CurrentWinningStreak += 1; // adding a win streak to the gladiator.
-                fighter.Gladiator.BestWinningStreak = fighter.Gladiator.CurrentWinningStreak;
+                if(fighter.Gladiator.CurrentWinningStreak > fighter.Gladiator.BestWinningStreak)
+                {
+                    fighter.Gladiator.BestWinningStreak = fighter.Gladiator.CurrentWinningStreak;
+                }
                 int ExpGain = 0;  //variables for exp gold and score gain.
                 int GoldGain = 0;
                 int ScoreGain = 0;
                 if (fighter.Gladiator.Level == fighter.Opponent.Level)  // fighted same level opponent as gladiator level.
                 {
                     ExpGain = 10 + Dice.D20();  // gain 10 exp and random 1 to 20 added.
-                    GoldGain = 5 + Dice.D6() + Dice.D6(); // the gold earned 5 and then 2 random D6s to add 2 to 12 gold.
+                    GoldGain = 5 + (fighter.Gladiator.Level * 2) + Dice.D6() + Dice.D6(); // the gold earned 5 + double your level and then 2 random D6s to add 2 to 12 gold.
                     ScoreGain = 4 + Dice.D6();  // score 4 base with 1 to 6 added.
                     fighter.Gladiator.GladiatorScore += ScoreGain;
                     if(fighter.Gladiator.GladiatorScore > fighter.Gladiator.GladiatorHighScore)
@@ -200,7 +203,7 @@ namespace GladiatorProject.Models
                 if (fighter.Gladiator.Level < fighter.Opponent.Level)  // if the opponent higher lvl then gladiator a small increase in gain.
                 {
                     ExpGain = 15 + Dice.D20() + Dice.D10();
-                    GoldGain = 7 + Dice.D6() + Dice.D6() + Dice.D4();
+                    GoldGain = 7 + (fighter.Gladiator.Level * 2) + Dice.D6() + Dice.D6() + Dice.D4();
                     ScoreGain = 6 + Dice.D8();
                     fighter.Gladiator.GladiatorScore += ScoreGain;
                     if (fighter.Gladiator.GladiatorScore > fighter.Gladiator.GladiatorHighScore)
@@ -213,7 +216,7 @@ namespace GladiatorProject.Models
                 if (fighter.Gladiator.Level > fighter.Opponent.Level) // if the opponent lower lvl then gladiator a small decrease in gain.
                 {
                     ExpGain = 5 + Dice.D10();
-                    GoldGain = 3 + Dice.D6();
+                    GoldGain = 3 + (fighter.Gladiator.Level * 2) + Dice.D6();
                     ScoreGain = 2 + Dice.D4();
                     fighter.Gladiator.GladiatorScore += ScoreGain;
                     if (fighter.Gladiator.GladiatorScore > fighter.Gladiator.GladiatorHighScore)

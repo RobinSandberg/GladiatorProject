@@ -1,0 +1,24 @@
+﻿@model GladiatorProject.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "UserDelete";
+}
+
+<h2>User Delete</h2>
+
+<p>You sure you wanna delete ?</p>
+
+<dl>
+    <dt>Name</dt>
+    <dd>@Model.UserName</dd>
+    <dt>E-mail</dt>
+    <dd>@Model.Email</dd>
+</dl>
+
+<div>
+    <button>@Html.ActionLink("Delete Confirm", "UserDeleteConfirm", new { id = Model.Id })</button>
+</div>
+<br />
+<div>
+    @Html.ActionLink("Back to Admin menu", "Index")
+</div>

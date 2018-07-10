@@ -29,7 +29,7 @@
         <dd id="armor">
             @Model.Armor <br />@if (Model.SkillPoints >= 1)
             {
-                if (Model.Armor <= 18)
+                if (Model.Armor < 18)
                 {
                     <button>
                         @Ajax.ActionLink("Increase armor", "AddStats", new { id = Model.Id, stat = "Armor" },

@@ -1,0 +1,13 @@
+﻿@model GladiatorProject.Models.Gladiator
+@{
+    ViewBag.Title = "NotEnoughSkillPoints";
+}
+
+<h2>Not Enough Skill Points</h2>
+
+<p>You didn't have enough skill points for this action.</p>
+
+@Html.HiddenFor(Model => Model.Id)
+<div>
+    <button>@Html.ActionLink("Back to Gladiator menu", "SelectGladiator", new {id = Model.Id })</button>
+</div>

@@ -26,27 +26,6 @@ namespace GladiatorProject.Controllers
             return PartialView("_PlayerList", db.Users.Include("Gladiators").Include("Roles").ToList());
         }
 
-        [HttpGet]
-        public ActionResult PlayerCreate()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult PlayerCreate(ApplicationUser user)
-        {
-            return View();
-        }
-
-        public ActionResult PlayerEdit()
-        {
-            return View();
-        }
-
-        public ActionResult PlayerSave()
-        {
-            return View();
-        }
-
         public ActionResult OpponentList()
         {
             return PartialView("_OpponentList", db.Opponents.ToList());
@@ -133,11 +112,26 @@ namespace GladiatorProject.Controllers
             }
             else
             {
+                return View(user);
+            }
+          
+        }
+
+        public ActionResult UserDeleteConfirm(string id)
+        {
+            var user = db.Users.SingleOrDefault(i => i.Id == id);
+
+            if (user == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
                 db.Users.Remove(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-          
+
         }
 
         [HttpGet]
@@ -216,11 +210,27 @@ namespace GladiatorProject.Controllers
             }
             else
             {
+  
+                return View(Opponent);
+            }
+            
+        }
+
+        public ActionResult OpponentDeleteConfirm(int id)
+        {
+            var Opponent = db.Opponents.SingleOrDefault(i => i.Id == id);
+
+            if (Opponent == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
                 db.Opponents.Remove(Opponent);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            
+
         }
 
         public ActionResult HighscoreList()
@@ -262,13 +272,32 @@ namespace GladiatorProject.Controllers
             }
         }
 
-        public ActionResult UserScoreDelete(string id)
+        public ActionResult UserScoreBan(string id)  //Calling it Ban in lack of better idea right now.
         {
             var user = db.Users.SingleOrDefault(i => i.Id == id);
+            if(user == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                return View(user);
+            }
+        }
 
-            user.AccountHighScore = int.MinValue;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+        public ActionResult UserScoreBanConfirm(string id)  
+        {
+            var user = db.Users.SingleOrDefault(i => i.Id == id);
+            if (user == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                user.AccountHighScore = int.MinValue;  // putting the players highscore to a huge negative number so they will be no where near the top 10.
+                db.SaveChanges();
+                return View(user);
+            }   
         }
 
         public ActionResult GladiatorHighScore()
@@ -305,13 +334,42 @@ namespace GladiatorProject.Controllers
             }
         }
 
-        public ActionResult GladiatorScoreDelete(int id)
+        public ActionResult GladiatorScoreBan(int id)
+        {
+            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            if(gladiator == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                return View(gladiator);
+            }
+        }
+
+        public ActionResult GladiatorScoreBanConfirm(int id)
         {
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
 
-            gladiator.GladiatorHighScore = int.MinValue;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (gladiator == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                gladiator.GladiatorHighScore = int.MinValue;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
     }
