@@ -27,5 +27,11 @@
         <td>@Html.DisplayFor(Model => Model.StrenghtModifyer)</td>
         <td>@Html.DisplayFor(Model => Model.Constitution)</td>
         <td>@Html.DisplayFor(Model => Model.ConstitutionModifyer)</td>  
+        <td>@Ajax.ActionLink("Hide Details", "HideOpponent" ,
+           new AjaxOptions
+           {
+               UpdateTargetId = "DetailView",
+               InsertionMode = InsertionMode.Replace
+           })</td>
     </tr>
 </table>

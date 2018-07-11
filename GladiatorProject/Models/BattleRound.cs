@@ -20,6 +20,7 @@ namespace GladiatorProject.Models
         //{
         //    Rounds = new List<string>();
         //}
+        
         public void Round(BattleStart fighter)
         {
             Id = fighter.Id;   //Adding the same Id to battleround as the battleStart.
@@ -28,6 +29,7 @@ namespace GladiatorProject.Models
 
             while (GHealth > 0 && OHealth > 0)   // A loop for the battle while both fighters got over 0 health.
             {
+
                 int GladiatorStrike = Dice.D20();  //A role for gladiator from 1 to 20 to determine the base roll and if it strike crit.
                 int Gladiatorattack = GladiatorStrike + fighter.Gladiator.StrenghtModifyer;  // Taking the base role and adding the gladiators modifyer to determine the attack value.
                 int OpponentStrike = Dice.D20();
@@ -36,7 +38,7 @@ namespace GladiatorProject.Models
                 int OpponentDamage = fighter.Opponent.StrenghtModifyer + Gladiator.DamageRoll(); // using same damageroll as gladiator to save functions.
                 if (Gladiatorattack >= fighter.Opponent.Armor && Opponentattack >= fighter.Gladiator.Armor) // Both fighters hit eachothere.
                 {
-                    if(GladiatorStrike == 20 && OpponentStrike == 20) // Both fighters crit eachother.
+                    if (GladiatorStrike == 20 && OpponentStrike == 20) // Both fighters crit eachother.
                     {
                         var WorldEnd = ($"WORLD END STRIKE both {fighter.Gladiator.Name} and {fighter.Opponent.Name} both find a opening for a strike to the head." +
                             $" Making both fighters take double damage.");  // string saved on what type of strike and who hit who.
@@ -50,7 +52,7 @@ namespace GladiatorProject.Models
                         {
                             var Headless = ($"Both fighters died from double decapetation.");
                             Rounds.Add(Headless.ToString());
-                        } 
+                        }
                     }
                     else  // Hit without critical.
                     {
@@ -67,7 +69,7 @@ namespace GladiatorProject.Models
                 }
                 else if (Gladiatorattack >= fighter.Opponent.Armor && Opponentattack < fighter.Gladiator.Armor) // Gladiator hit and opponent miss
                 {
-                    if(GladiatorStrike == 20) // Gladiator critical hit
+                    if (GladiatorStrike == 20) // Gladiator critical hit
                     {
                         var GladiatorCrit = ($"CRITICAL HIT by {fighter.Gladiator.Name} was able to dodge  {fighter.Opponent.Name} strike and counter with a strike to the head.");
                         OHealth -= GladiatorDamage * 2;
@@ -78,7 +80,7 @@ namespace GladiatorProject.Models
                         {
                             var Headless = ($"{fighter.Opponent.Name} died from decapetation.");
                             Rounds.Add(Headless.ToString());
-                        }  
+                        }
                     }
                     else // Regular hit
                     {
@@ -88,11 +90,11 @@ namespace GladiatorProject.Models
                         Rounds.Add(GladiatorHit.ToString());
                         Rounds.Add(GladiatorDamageDealt.ToString());
                     }
-                    
+
                 }
                 else if (Opponentattack >= fighter.Gladiator.Armor && Gladiatorattack < fighter.Opponent.Armor) // Opponent hit and gladiator miss.
                 {
-                    if(OpponentStrike == 20) // opponent critical hit.
+                    if (OpponentStrike == 20) // opponent critical hit.
                     {
                         var OpponentCritHit = ($"CRITICAL HIT by {fighter.Opponent.Name} was able to dodge {fighter.Gladiator.Name} strike and counter with a strike to the head.");
                         GHealth -= OpponentDamage * 2;
@@ -113,20 +115,20 @@ namespace GladiatorProject.Models
                         Rounds.Add(OpponentHit.ToString());
                         Rounds.Add(OpponentDamageDealt.ToString());
                     }
-                   
+
                 }
-                else if(Gladiatorattack < fighter.Opponent.Armor && Opponentattack < fighter.Gladiator.Armor) //Both fighters miss eachothere.
+                else if (Gladiatorattack < fighter.Opponent.Armor && Opponentattack < fighter.Gladiator.Armor) //Both fighters miss eachothere.
                 {
                     var Regain = ($"{fighter.Gladiator.Name} and {fighter.Opponent.Name} both swing and miss recovering health in the short recovering period.");
-                    if(GHealth == fighter.Gladiator.FullHealth) // Checking if health is full
+                    if (GHealth == fighter.Gladiator.FullHealth) // Checking if health is full
                     {
 
                     }
-                    else if(GHealth < fighter.Gladiator.FullHealth) // Health not full you gain 5 health back
+                    else if (GHealth < fighter.Gladiator.FullHealth) // Health not full you gain 5 health back
                     {
                         GHealth += 5;
 
-                        if(GHealth > fighter.Gladiator.FullHealth)  // if the +5 health goes over full health the health is set to full.
+                        if (GHealth > fighter.Gladiator.FullHealth)  // if the +5 health goes over full health the health is set to full.
                         {
                             GHealth = fighter.Gladiator.FullHealth;
                         }
@@ -147,13 +149,14 @@ namespace GladiatorProject.Models
                     Rounds.Add(Regain.ToString());
 
                 }
-                if(OHealth >= 1 && GHealth >= 1) // As long as both fighter got 1 health or more the status string will be added.
+                if (OHealth >= 1 && GHealth >= 1) // As long as both fighter got 1 health or more the status string will be added.
                 {
                     var Status = ($"{fighter.Gladiator.Name} has {GHealth} health left. {fighter.Opponent.Name} has {OHealth} health left.");
                     Rounds.Add(Status.ToString());
                 }
 
             }
+           
             if (GHealth <= 0 && OHealth <= 0)   // Both players got 0 or less health making the fight draw.
             {
                 var Draw = ($"{fighter.Gladiator.Name} and {fighter.Opponent.Name} both succumbed to wounds making it a draw.");
@@ -177,6 +180,7 @@ namespace GladiatorProject.Models
             {
                 var Win = ($"{fighter.Gladiator.Name} won the battle over {fighter.Opponent.Name}.");
                 fighter.Gladiator.Health = GHealth; // setting the temporary health to the new health.
+                fighter.Opponent.Health = OHealth; // When player win save the health of the opponent so he save his 0 health. Next time he selected he roll new stats.
                 fighter.Gladiator.Battles += 1;
                 fighter.Gladiator.BattlesWon += 1;
                 fighter.Gladiator.CurrentWinningStreak += 1; // adding a win streak to the gladiator.
@@ -254,6 +258,5 @@ namespace GladiatorProject.Models
                 fighter.Gladiator.LastBattle = Lost.ToString();
             }
         }
-
     }
 }

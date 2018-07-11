@@ -1,11 +1,24 @@
 ﻿@using GladiatorProject.Models
 @model BattleRound
 
+
 <div>
     @foreach (var item in Model.Rounds)
-    { 
-        <div>@item.ToString()</div>
+    {
+        <div class="Battle" style="display:none;">@item.ToString()</div>
         <br />
     }
 </div>
 <button>@Html.ActionLink("Gladiator menu", "AfterBattle", new { id = Model.Id })</button>
+
+<script>  
+    var showData = $('.Battle');
+    var index = 1;
+
+    showData.forEach(function () { //showDate is not a function error.
+
+        delay(index * 1000).fadeIn('slow').appendTo(this);
+        index++;
+    });
+
+</script>

@@ -1,0 +1,107 @@
+﻿@model List<GladiatorProject.Models.ApplicationUser>
+
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        if (item.Email != "Overlord@Admin.se")
+        {
+            <tr>
+                <th>
+                    @Html.DisplayName("User Name")
+                </th>
+                <th>
+                    @Html.DisplayName("E-Mail")
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UserEdit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "UserDelete", new { id = item.Id })
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayName(item.UserName + " Gladiators")
+                </th>
+                <th>
+                    @Html.DisplayName("Level")
+                </th>
+                <th>
+                    @Html.DisplayName("Exp")
+                </th>
+                <th>
+                    @Html.DisplayName("Skill points")
+                </th>
+                <th>
+                    @Html.DisplayName("Health")
+                </th>
+                <th>
+                    @Html.DisplayName("Armor")
+                </th>
+                <th>
+                    @Html.DisplayName("Strenght")
+                </th>
+                <th>
+                    @Html.DisplayName("Constitution")
+                </th>
+                <th>
+                    @Html.DisplayName("Gold")
+                </th>
+            </tr>
+            foreach (var gladiator in item.Gladiators)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => gladiator.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => gladiator.Level)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => gladiator.Experiance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => gladiator.SkillPoints)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => gladiator.FullHealth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => gladiator.Armor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => gladiator.Strenght)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => gladiator.Constitution)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => gladiator.Gold)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "GladiatorEdit", new { id = gladiator.Id }) |
+                        @Ajax.ActionLink("Battle Log", "GladiatorDetails", new { id = gladiator.Id },
+                       new AjaxOptions
+                          {
+                                UpdateTargetId = "GladiatorLog",
+                                InsertionMode = InsertionMode.Replace
+
+                          }) |
+                        @Html.ActionLink("Delete", "GladiatorDelete", new { id = gladiator.Id, playerId = item.Id })
+                    </td>
+
+                </tr>
+            }
+
+
+        }
+    }
+</table>

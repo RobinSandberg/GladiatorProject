@@ -26,9 +26,52 @@ namespace GladiatorProject.Controllers
             return PartialView("_PlayerList", db.Users.Include("Gladiators").Include("Roles").ToList());
         }
 
+        public ActionResult SearchPlayer(string searchString)
+        {
+            var player_search = from p in db.Users.Include("Gladiators").Include("Roles") select p;  // making a variable to pick out the names from.
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                player_search = player_search.Where(i => i.UserName.ToLower().Contains(searchString)); // picking out the names based on the string.
+            }
+
+            return PartialView("_PlayerSearch", player_search.ToList());
+        }
+
         public ActionResult OpponentList()
         {
             return PartialView("_OpponentList", db.Opponents.ToList());
+        }
+
+        public ActionResult SearchOpponentName(string searchString)
+        {
+            var opponent_name = from o in db.Opponents select o; 
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                opponent_name = opponent_name.Where(i => i.Name.ToLower().Contains(searchString)); 
+            }
+
+            return PartialView("_OpponentSearch", opponent_name.ToList());
+        }
+
+        public ActionResult SearchOpponentLeveL(int? searchLevel) // checking so it contains a int.
+        {
+            var opponent_level = from o in db.Opponents select o;
+
+            if (searchLevel == null) // if it don't contain a int return the full list back.
+            {
+                return PartialView("_OpponentSearch", db.Opponents.ToList());
+            }
+            else if(searchLevel >= 1 && searchLevel <= 20) // return the selected level if the person search between lvl 1 and 20.
+            {
+                opponent_level = opponent_level.Where(i => i.Level == (searchLevel));
+                return PartialView("_OpponentSearch", opponent_level.ToList());
+            }
+            else   // if lower then level 1 or higher then level 20 return full list.
+            {
+                return PartialView("_OpponentSearch", db.Opponents.ToList());
+            }
         }
 
         [HttpGet]
@@ -75,8 +118,14 @@ namespace GladiatorProject.Controllers
         public ActionResult UserEdit(string id)
         {
             var User = db.Users.SingleOrDefault(i => i.Id == id);
-
-            return View(User);
+            if(User == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                return View(User);
+            }
         }
 
         public ActionResult UserSave(ApplicationUser user)
@@ -134,6 +183,110 @@ namespace GladiatorProject.Controllers
 
         }
 
+        public ActionResult GladiatorEdit(int id)
+        {
+            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            if(gladiator == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                return View(gladiator);
+            } 
+        }
+
+        public ActionResult GladiatorSave(Gladiator gladiator)
+        {
+            var oldGladiator = db.Gladiators.SingleOrDefault(i => i.Id == gladiator.Id);
+            if(oldGladiator == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    oldGladiator.Name = gladiator.Name;
+                    oldGladiator.Level = gladiator.Level;
+                    oldGladiator.Experiance = gladiator.Experiance;
+                    oldGladiator.FullHealth = gladiator.FullHealth;
+                    oldGladiator.Armor = gladiator.Armor;
+                    oldGladiator.DamageDice = gladiator.DamageDice;
+                    oldGladiator.Strenght = gladiator.Strenght;
+                    oldGladiator.StrenghtModifyer = gladiator.StrenghtModifyer;
+                    oldGladiator.Constitution = gladiator.Constitution;
+                    oldGladiator.ConstitutionModifyer = gladiator.ConstitutionModifyer;
+                    oldGladiator.Battles = gladiator.Battles;
+                    oldGladiator.BattlesWon = gladiator.BattlesWon;
+                    oldGladiator.BattlesDraw = gladiator.BattlesDraw;
+                    oldGladiator.BattlesLost = gladiator.BattlesLost;
+                    oldGladiator.Gold = gladiator.Gold;
+                    oldGladiator.MaxArmor = gladiator.MaxArmor;
+                    oldGladiator.SkillPoints = gladiator.SkillPoints;
+                    oldGladiator.CurrentWinningStreak = gladiator.CurrentWinningStreak;
+                    oldGladiator.BestWinningStreak = gladiator.BestWinningStreak;
+                    //oldGladiator.User.UserName = gladiator.User.UserName;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("GladiatorEdit", gladiator);
+                }
+            }
+        }
+
+        public ActionResult GladiatorDetails(int id)
+        {
+            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            if(gladiator == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                return PartialView("_GladiatorDetails", gladiator);
+            }
+         
+        }
+
+        public ActionResult GladiatorHide()
+        {
+            return Content("");
+        }
+
+        public ActionResult GladiatorDelete(int id , string playerId)
+        {
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == playerId);
+            Session["Player"] = PlayerUser;  // saving the user in session to move over the id to confirmation action.
+            var gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
+
+            if (gladiator == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            return View(gladiator); 
+        }
+
+        public ActionResult GladiatorDeleteConfirm(int id)
+        {
+            string PlayerId = (Session["Player"] as ApplicationUser).Id; // taking out the Id for the user from the session.
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == PlayerId);
+            var gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
+            if(gladiator == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                PlayerUser.Gladiators.Remove(gladiator);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+           
+        }
+
         [HttpGet]
         public ActionResult CreateOpponent()
         {
@@ -159,8 +312,14 @@ namespace GladiatorProject.Controllers
         public ActionResult OpponentEdit(int id)
         {
             var Opponent = db.Opponents.SingleOrDefault(i => i.Id == id);
-
-            return View(Opponent);
+            if(Opponent == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                return View(Opponent);
+            }
         }
 
        
@@ -196,8 +355,19 @@ namespace GladiatorProject.Controllers
         public ActionResult OpponentDetails(int id)
         {
             var Opponent = db.Opponents.SingleOrDefault(i => i.Id == id);
+            if(Opponent == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                return PartialView("_OpponentDetails", Opponent);
+            }
+        }
 
-            return PartialView("_OpponentDetails", Opponent);
+        public ActionResult HideOpponent()
+        {
+            return Content("");
         }
 
         public ActionResult OpponentDelete(int id)

@@ -138,8 +138,9 @@ namespace GladiatorProject.Controllers
             }
             else
             {
-                round.Round(Fighters);  // Running the Battle metod with the gladiator and opponent info.
+                round.Round(Fighters); // Running the Battle metod with the gladiator and opponent info.
                 db.SaveChanges();
+
                 return PartialView("_Battle", round);
             }
         }
