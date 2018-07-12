@@ -7,7 +7,7 @@
 <h2>User Score Ban</h2>
 
 <p>You sure you wanna ban ?</p>
-
+@Html.HiddenFor(Model => Model.Id)
 <dl>
     <dt>Name</dt>
     <dd>@Model.UserName</dd>
@@ -16,7 +16,7 @@
 </dl>
 
 <div>
-    <button>@Html.ActionLink("Ban Confirm", "UserBanConfirm", new { id = Model.Id })</button>
+    <button>@Html.ActionLink("Ban Confirm", "UserScoreBanConfirm", new { id = Model.Id })</button>
 </div>
 <br />
 <div>

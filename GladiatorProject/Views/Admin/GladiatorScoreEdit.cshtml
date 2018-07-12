@@ -9,23 +9,30 @@
 @using (Html.BeginForm("GladiatorScoreSave", "Admin"))
 {
     @Html.HiddenFor(Model => Model.Id)
-    <div class="form-horizontal">
+<div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(Model => Model.GladiatorHighScore)
-            <div>
-                @Html.EditorFor(Model => Model.GladiatorHighScore)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save changes" class="btn btn-default" />
-            </div>
-        </div>
-
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.GladiatorHighScore)
         <div>
-            @Html.ActionLink("Back to Admin Menu", "Index")
+            @Html.EditorFor(Model => Model.GladiatorHighScore)
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.GladiatorScore)
+        <div>
+            @Html.EditorFor(Model => Model.GladiatorScore)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save changes" class="btn btn-default" />
+        </div>
+    </div>
+
+    <div>
+        @Html.ActionLink("Back to Admin Menu", "Index")
+    </div>
+</div>
 }

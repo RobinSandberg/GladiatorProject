@@ -5,20 +5,28 @@
 <div>
     @foreach (var item in Model.Rounds)
     {
-        <div class="Battle" style="display:none;">@item.ToString()</div>
+        <div class="Battle" @*style="display:none;"*@>@item.ToString()</div>
         <br />
     }
 </div>
+<div class="Battle"></div>
 <button>@Html.ActionLink("Gladiator menu", "AfterBattle", new { id = Model.Id })</button>
 
-<script>  
-    var showData = $('.Battle');
+@*<script>  
+    var battlelog = [ @foreach (var item in Model.Rounds)
+    {
+        @("'" + item.ToString() + "',")
+    } ],
+    var items = "@Json.Encode(Model.Rounds)",
+    showData = $('.Battle');
     var index = 1;
 
-    showData.forEach(function () { //showDate is not a function error.
-
-        delay(index * 1000).fadeIn('slow').appendTo(this);
+    items.forEach(function (item , index) { 
+        $('<div />', {
+            text: item ,
+            css: { display: 'none' }
+        }).delay(index * 1000).fadeIn('slow').appendTo(showData);
         index++;
     });
 
-</script>
+</script>*@

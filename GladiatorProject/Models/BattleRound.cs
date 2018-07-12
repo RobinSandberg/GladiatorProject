@@ -164,6 +164,7 @@ namespace GladiatorProject.Models
                 fighter.Gladiator.Battles += 1;  // add 1 battle to the gladiator.
                 fighter.Gladiator.BattlesDraw += 1;// add 1 draw to the gladiator.
                 fighter.Gladiator.TempLost = 1;// add a temporary point to keep track of if you last fight was a draw or lost.
+                fighter.Gladiator.TempScore = 0;
                 if (fighter.Gladiator.CurrentWinningStreak > fighter.Gladiator.BestWinningStreak) // checking the win streak if the current is higher then the best it will be saved as the new best.
                 {                                                                                // before resting the streak to 0.
                     fighter.Gladiator.BestWinningStreak = fighter.Gladiator.CurrentWinningStreak;
@@ -194,25 +195,30 @@ namespace GladiatorProject.Models
                 if (fighter.Gladiator.Level == fighter.Opponent.Level)  // fighted same level opponent as gladiator level.
                 {
                     ExpGain = 10 + Dice.D20();  // gain 10 exp and random 1 to 20 added.
-                    GoldGain = 5 + (fighter.Gladiator.Level * 2) + Dice.D6() + Dice.D6(); // the gold earned 5 + double your level and then 2 random D6s to add 2 to 12 gold.
-                    ScoreGain = 4 + Dice.D6();  // score 4 base with 1 to 6 added.
+                    GoldGain = 20 + (fighter.Gladiator.Level * 2) + Dice.D6() + Dice.D6(); // the gold earned 5 + double your level and then 2 random D6s to add 2 to 12 gold.
+                    ScoreGain = 6 + (fighter.Opponent.Level) + Dice.D8();  // score 4 base with 1 to 6 added.
                     fighter.Gladiator.GladiatorScore += ScoreGain;
+                    
                     if(fighter.Gladiator.GladiatorScore > fighter.Gladiator.GladiatorHighScore)
                     {
                         fighter.Gladiator.GladiatorHighScore = fighter.Gladiator.GladiatorScore;
+                        fighter.Gladiator.TempScore = ScoreGain;
                     }
+
                     fighter.Gladiator.Experiance += ExpGain;
                     fighter.Gladiator.Gold += GoldGain;
                 }
                 if (fighter.Gladiator.Level < fighter.Opponent.Level)  // if the opponent higher lvl then gladiator a small increase in gain.
                 {
                     ExpGain = 15 + Dice.D20() + Dice.D10();
-                    GoldGain = 7 + (fighter.Gladiator.Level * 2) + Dice.D6() + Dice.D6() + Dice.D4();
-                    ScoreGain = 6 + Dice.D8();
+                    GoldGain = 25 + (fighter.Gladiator.Level * 2) + Dice.D6() + Dice.D6() + Dice.D4();
+                    ScoreGain = 10 + (fighter.Opponent.Level * 2) + Dice.D10();
                     fighter.Gladiator.GladiatorScore += ScoreGain;
+                    
                     if (fighter.Gladiator.GladiatorScore > fighter.Gladiator.GladiatorHighScore)
                     {
                         fighter.Gladiator.GladiatorHighScore = fighter.Gladiator.GladiatorScore;
+                        fighter.Gladiator.TempScore = ScoreGain;
                     }
                     fighter.Gladiator.Experiance += ExpGain;
                     fighter.Gladiator.Gold += GoldGain;
@@ -220,12 +226,14 @@ namespace GladiatorProject.Models
                 if (fighter.Gladiator.Level > fighter.Opponent.Level) // if the opponent lower lvl then gladiator a small decrease in gain.
                 {
                     ExpGain = 5 + Dice.D10();
-                    GoldGain = 3 + (fighter.Gladiator.Level * 2) + Dice.D6();
+                    GoldGain = 10 + (fighter.Gladiator.Level * 2) + Dice.D6();
                     ScoreGain = 2 + Dice.D4();
                     fighter.Gladiator.GladiatorScore += ScoreGain;
+                   
                     if (fighter.Gladiator.GladiatorScore > fighter.Gladiator.GladiatorHighScore)
                     {
                         fighter.Gladiator.GladiatorHighScore = fighter.Gladiator.GladiatorScore;
+                        fighter.Gladiator.TempScore = ScoreGain;
                     }
                     fighter.Gladiator.Experiance += ExpGain;
                     fighter.Gladiator.Gold += GoldGain;
@@ -244,6 +252,7 @@ namespace GladiatorProject.Models
                 fighter.Gladiator.Battles += 1;
                 fighter.Gladiator.BattlesLost += 1;
                 fighter.Gladiator.TempLost = 1;
+                fighter.Gladiator.TempScore = 0;
                 fighter.Gladiator.GladiatorScore = 0; // setting the score count to 0 again.  only reset on lost atm not draw.
                 if (fighter.Gladiator.CurrentWinningStreak > fighter.Gladiator.BestWinningStreak)  // checking the winstreak and save if needed then reset to 0 agian.
                 {

@@ -61,6 +61,8 @@ namespace GladiatorProject.Models
 
         public int GladiatorScore { get; set; }
 
+        public int TempScore { get; set; }
+
         public int GladiatorHighScore { get; set; }
 
         [ForeignKey("User")]

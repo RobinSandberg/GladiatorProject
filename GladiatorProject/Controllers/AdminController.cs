@@ -32,7 +32,7 @@ namespace GladiatorProject.Controllers
 
             if (!string.IsNullOrWhiteSpace(searchString))
             {
-                player_search = player_search.Where(i => i.UserName.ToLower().Contains(searchString)); // picking out the names based on the string.
+                player_search = player_search.Where(i => i.UserName.ToLower().Contains(searchString) || i.Email.ToLower().Contains(searchString)); // picking out the names based on the string.
             }
 
             return PartialView("_PlayerSearch", player_search.ToList());
@@ -183,9 +183,11 @@ namespace GladiatorProject.Controllers
 
         }
 
-        public ActionResult GladiatorEdit(int id)
+        public ActionResult GladiatorEdit(int id , string playerId)
         {
-            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == playerId);
+            Session["Player"] = PlayerUser;
+            var gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
             if(gladiator == null)
             {
                 return new HttpStatusCodeResult(400);
@@ -198,7 +200,9 @@ namespace GladiatorProject.Controllers
 
         public ActionResult GladiatorSave(Gladiator gladiator)
         {
-            var oldGladiator = db.Gladiators.SingleOrDefault(i => i.Id == gladiator.Id);
+            string PlayerId = (Session["Player"] as ApplicationUser).Id;
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == PlayerId);
+            var oldGladiator = PlayerUser.Gladiators.SingleOrDefault(i => i.Id == gladiator.Id);
             if(oldGladiator == null)
             {
                 return new HttpStatusCodeResult(400);
@@ -226,7 +230,6 @@ namespace GladiatorProject.Controllers
                     oldGladiator.SkillPoints = gladiator.SkillPoints;
                     oldGladiator.CurrentWinningStreak = gladiator.CurrentWinningStreak;
                     oldGladiator.BestWinningStreak = gladiator.BestWinningStreak;
-                    //oldGladiator.User.UserName = gladiator.User.UserName;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -237,9 +240,10 @@ namespace GladiatorProject.Controllers
             }
         }
 
-        public ActionResult GladiatorDetails(int id)
+        public ActionResult GladiatorDetails(int id , string playerId)
         {
-            var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
+            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == playerId);
+            var gladiator = PlayerUser.Gladiators.SingleOrDefault(i => i.Id == id);
             if(gladiator == null)
             {
                 return new HttpStatusCodeResult(400);
@@ -435,6 +439,7 @@ namespace GladiatorProject.Controllers
                 if (ModelState.IsValid)
                 {
                     oldUser.AccountHighScore = user.AccountHighScore;
+                    oldUser.AccountScore = user.AccountScore;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -465,8 +470,9 @@ namespace GladiatorProject.Controllers
             else
             {
                 user.AccountHighScore = int.MinValue;  // putting the players highscore to a huge negative number so they will be no where near the top 10.
+                user.AccountScore = int.MinValue;
                 db.SaveChanges();
-                return View(user);
+                return RedirectToAction("Index");
             }   
         }
 
@@ -494,14 +500,12 @@ namespace GladiatorProject.Controllers
             }
             else
             {
-                if (ModelState.IsValid)
-                {
-                    oldGladiator.GladiatorHighScore = gladiator.GladiatorHighScore;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                return View("GladiatorScoreEdit", gladiator);
+                oldGladiator.GladiatorHighScore = gladiator.GladiatorHighScore;
+                oldGladiator.GladiatorScore = gladiator.GladiatorScore;
+                db.SaveChanges();
+                return RedirectToAction("Index");  
             }
+           
         }
 
         public ActionResult GladiatorScoreBan(int id)
@@ -528,6 +532,7 @@ namespace GladiatorProject.Controllers
             else
             {
                 gladiator.GladiatorHighScore = int.MinValue;
+                gladiator.GladiatorScore = int.MinValue;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

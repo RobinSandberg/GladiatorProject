@@ -17,7 +17,7 @@
      ))
     {
 
-        @Html.DisplayName("Search by User Name: ")
+        @Html.DisplayName("Search by User Name or Email: ")
         @Html.TextBox("searchString")
         <input type="submit" value="Search" />
     }
@@ -129,14 +129,14 @@
                         @Html.DisplayFor(modelItem => gladiator.Gold)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "GladiatorEdit", new { id = gladiator.Id }) |
-                        @Ajax.ActionLink("Battle Log", "GladiatorDetails", new { id = gladiator.Id },
+                        @Html.ActionLink("Edit", "GladiatorEdit", new { id = gladiator.Id , playerId = item.Id }) |
+                        @Ajax.ActionLink("Battle Log", "GladiatorDetails", new { id = gladiator.Id , playerId = item.Id },
                        new AjaxOptions
-                          {
-                                UpdateTargetId = "GladiatorLog",
-                                InsertionMode = InsertionMode.Replace
+                       {
+                           UpdateTargetId = "GladiatorLog",
+                           InsertionMode = InsertionMode.Replace
 
-                          }) |
+                       }) |
                         @Html.ActionLink("Delete", "GladiatorDelete", new { id = gladiator.Id, playerId = item.Id })
                     </td>
 
