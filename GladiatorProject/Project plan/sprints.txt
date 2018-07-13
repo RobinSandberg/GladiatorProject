@@ -31,8 +31,8 @@ functons for admin opponent view.    <<<< functinal.
 
 sprint 6
 
-Fix Player highscore
-Battleview display fade in 
+Fix Player highscore    <<< 2 functional options
+Battleview display fade in   <<< semi working got it to fade in the whole list instead of line for line.
 Search function for email on admin player view  <<< functional
 
 

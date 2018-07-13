@@ -185,7 +185,8 @@ namespace GladiatorProject.Models
                 fighter.Gladiator.Battles += 1;
                 fighter.Gladiator.BattlesWon += 1;
                 fighter.Gladiator.CurrentWinningStreak += 1; // adding a win streak to the gladiator.
-                if(fighter.Gladiator.CurrentWinningStreak > fighter.Gladiator.BestWinningStreak)
+                fighter.Gladiator.TempLost = 0;
+                if (fighter.Gladiator.CurrentWinningStreak > fighter.Gladiator.BestWinningStreak)
                 {
                     fighter.Gladiator.BestWinningStreak = fighter.Gladiator.CurrentWinningStreak;
                 }

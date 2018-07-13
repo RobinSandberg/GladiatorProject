@@ -41,8 +41,8 @@ namespace GladiatorProject.Models
 
         public static void EnemyStats(Opponent enemy) // the stats added to opponents that got 0 health based on their level.
         {
-           
-            switch (enemy.Level)
+            // still need to find a nice blance here to make it "easier" on lower level and harder as you reach higher levels.
+            switch (enemy.Level)  
             {
                 case 1:
                     enemy.Armor = 8 + Dice.D6();

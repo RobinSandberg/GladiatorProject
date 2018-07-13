@@ -72,18 +72,18 @@ namespace GladiatorProject.Models
 
         public static void StartingGladiator(Gladiator start)  // the metod for adding stats for new made gladiators.
         {
-            start.Armor = Dice.D6() + Dice.D6() + Dice.D6();
+            start.Armor = 6 + Dice.D6() + Dice.D6();
             start.MaxArmor = 18;
-            start.Strenght = Dice.D6() + Dice.D6();
+            start.Strenght =  5 + Dice.D6() + Dice.D6();
             start.StrenghtModifyer = (start.Strenght - 10) / 2;
-            start.Constitution = Dice.D6() + Dice.D6();
+            start.Constitution = 5 + Dice.D6() + Dice.D6();
             start.ConstitutionModifyer = (start.Constitution - 10) / 2;
             start.FullHealth = 10 + (Dice.D10() + start.ConstitutionModifyer);
             start.Health = start.FullHealth;
             start.DamageDice = "2xD8";
             start.Experiance = 0;
             start.Level = 1;
-            start.SkillPoints = 10;
+            start.SkillPoints = 2;
             start.Gold = 20;
             start.Battles = 0;
             start.BattlesWon = 0;

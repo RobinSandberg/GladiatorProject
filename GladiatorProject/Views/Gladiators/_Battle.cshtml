@@ -9,24 +9,29 @@
         <br />
     }
 </div>
-<div class="Battle"></div>
+@*<div class="Battle"></div>*@
 <button>@Html.ActionLink("Gladiator menu", "AfterBattle", new { id = Model.Id })</button>
 
+@*A Script trying to get the foreach loop to fade in line for line instead of all at ones.*@
 @*<script>  
     var battlelog = [ @foreach (var item in Model.Rounds)
     {
-        @("'" + item.ToString() + "',")
+        @(item.ToString())
     } ],
+
     var items = "@Json.Encode(Model.Rounds)",
+
     showData = $('.Battle');
     var index = 1;
 
-    items.forEach(function (item , index) { 
+    battlelog.forEach(function ([] , index) { 
         $('<div />', {
-            text: item ,
+            text: [].toString() ,
             css: { display: 'none' }
         }).delay(index * 1000).fadeIn('slow').appendTo(showData);
         index++;
     });
 
+    var showData = $('.Battle');
+    showData.delay(1000).fadeIn('slow');
 </script>*@

@@ -158,22 +158,30 @@ namespace GladiatorProject.Controllers
             {
                 Gladiator.Leveling(AfterMath.Gladiator); // Checking the gladiators exp and level him up if he got enough.
 
-                if (AfterMath.Gladiator.TempLost == 0)  // A temporary stat that will check if you won the last fight or lost.
-                {
-                    
-                    PlayerUser.AccountScore += AfterMath.Gladiator.TempScore;  // Adding the score from the gladiator to player score.
+                // If i keep the harsh List I can remove player account score from database.
+                // Need to decide how harsh the player highscore gonna be. Count all gladiator highscores or just those that current got win streak.
 
-                    if (PlayerUser.AccountScore > PlayerUser.AccountHighScore)   // if the player score becomes bigger then the player highscore it saves as the new highscore.
-                    {
-                        PlayerUser.AccountHighScore = PlayerUser.AccountScore;
-                        
-                    }
-                }
-                else
-                {
-                    
-                    AfterMath.Gladiator.TempLost = 0;
-                }
+                List<Gladiator> Winners = (from a in PlayerUser.Gladiators where a.TempLost == 0 select a).ToList(); // Take out all the players winning gladiators.
+                List<int> Total = Winners.Select(i => i.GladiatorHighScore).ToList(); // adding the winning gladiators highscores to a list.
+
+                PlayerUser.AccountHighScore = Total.Sum(); // Adding the score from the total sum of all the winning gladiators.
+
+                //if (AfterMath.Gladiator.TempLost == 0)  // A temporary stat that will check if you won the last fight or lost.
+                //{
+                //    List<Gladiator> Winners = (from a in PlayerUser.Gladiators where a.TempLost == 0 select a).ToList(); // Take out all the players winning gladiators.
+                //    List<int> Total = Winners.Select(i => i.GladiatorHighScore).ToList(); // adding the winning gladiators highscores to a list.
+                   
+                //    PlayerUser.AccountScore = Total.Sum(); // Adding the score from the total sum of all the winning gladiators.
+
+                //    //if (PlayerUser.AccountScore > PlayerUser.AccountHighScore)   // if the player score becomes bigger then the player highscore it saves as the new highscore.
+                //    //{
+                //    //    PlayerUser.AccountHighScore = PlayerUser.AccountScore;
+                //    //}
+                //}
+                //else
+                //{
+                //    //AfterMath.Gladiator.TempLost = 0;
+                //}
                 db.SaveChanges();
 
                 return View("GladiatorMenu", AfterMath.Gladiator);
