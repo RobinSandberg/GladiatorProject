@@ -1,0 +1,292 @@
+.myrow {
+    width: 684px;
+}
+
+.box {
+    width: 36px;
+    height: 36px;
+    float: left;
+}
+
+#mapzone {
+    float: left;
+    background-image: url("/Content/images/grass.png");
+    position: relative;
+}
+
+#survivezone {
+    float: left;
+    background-image: url("/Content/images/volcano_floor.png");
+    position: relative;
+}
+
+.dropbtn {
+    color: black;
+    cursor: pointer;
+    margin: 20px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 127px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content button {
+    color: white;
+    padding: 10px 10px;
+    text-decoration: none;
+    display: block;
+    float: left;
+    background-color: black;
+}
+
+.dropdown-content button:hover {
+    background-color: purple;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: purple;
+}
+
+#prevMap {
+    text-align: center;
+    margin: 20px;
+    float: left;
+    cursor: pointer;
+}
+
+#nextMap {
+    text-align: center;
+    margin: 20px;
+    float: left;
+    cursor: pointer;
+}
+
+#resetMap {
+    text-align: center;
+    margin: 20px;
+    float: left;
+    cursor: pointer;
+}
+
+#nextMap:hover {
+    background-color: purple;
+}
+
+#prevMap:hover {
+    background-color: purple;
+}
+
+#resetMap:hover {
+    background-color: purple;
+}
+
+#screen {
+    text-align: center;
+    background-color: black;
+    color:white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#screen h3 {
+    padding: 25px;
+    border: 10px solid purple;
+    margin: 0px;
+}
+
+#count {
+    color: white;
+    background-color: purple;
+    width: 150px;
+    margin: 5px;
+    float: left;
+}
+
+#time {
+    color: white;
+    background-color: purple;
+    width: 120px;
+    margin: 5px;
+    float: left;
+}
+
+#credits {
+    margin: 20px;
+    text-align: center;
+    float: right;
+}
+
+.c {
+    background-image: url("/Content/images/chicken.png");
+}
+
+.o {
+    background-image: url("/Content/images/lava.png");
+}
+
+.x {
+    background-image: url("/Content/images/sidebridge.png");
+}
+
+.x.p3 {
+    background-image: url("/Content/images/sidebridgefoxleft.png");
+}
+
+.x.p4 {
+    background-image: url("/Content/images/sidebridgefoxright.png");
+}
+
+.x.hl {
+    background-image: url("/Content/images/sidebridgewolfleft.png");
+}
+
+.x.hr {
+    background-image: url("/Content/images/sidebridgewolfright.png");
+}
+
+.y {
+    background-image: url("/Content/images/upbridge.png");
+}
+
+.y.p {
+    background-image: url("/Content/images/upbridgefoxup.png");
+}
+
+.y.p2 {
+    background-image: url("/Content/images/upbridgefoxdown.png");
+}
+
+.y.hu {
+    background-image: url("/Content/images/upbridgewolfup.png");
+}
+
+.y.hd {
+    background-image: url("/Content/images/upbridgewolfdown.png");
+}
+
+.w {
+    background-image: url("/Content/images/tree1.png");
+}
+
+.b {
+    background-image: url("/Content/images/bush.png");
+}
+
+.b.c {
+    background-image: url("/Content/images/bushchicken.png");
+}
+
+.b.p {
+    background-image: url("/Content/images/bushfox.png");
+}
+
+.b.p2 {
+    background-image: url("/Content/images/bushfox.png");
+}
+
+.b.p3 {
+    background-image: url("/Content/images/bushfox.png");
+}
+
+.b.p4 {
+    background-image: url("/Content/images/bushfox.png");
+}
+
+.b.h {
+    background-image: url("/Content/images/bushwolf.png");
+}
+
+.b.hu {
+    background-image: url("/Content/images/bushwolf.png");
+}
+
+.b.hd {
+    background-image: url("/Content/images/bushwolf.png");
+}
+
+.b.hr {
+    background-image: url("/Content/images/bushwolf.png");
+}
+
+.b.hl {
+    background-image: url("/Content/images/bushwolf.png");
+}
+
+.g {
+    background-image: url("/Content/images/foxden.png");
+}
+
+.g.d {
+    background-image: url("/Content/images/foxdenfox.png");
+}
+
+.g.c {
+    background-image: url("/Content/images/foxdenchicken.png");
+}
+
+.g.hu {
+    background-image: url("/Content/images/foxdenwolfup2.png");
+}
+
+.g.hd {
+    background-image: url("/Content/images/foxdenwolfdown2.png");
+}
+
+.g.hr {
+    background-image: url("/Content/images/foxdenwolfright.png");
+}
+
+.g.hl {
+    background-image: url("/Content/images/foxdenwolfleft.png");
+}
+
+.p {
+    background-image: url("/Content/images/foxup2.png");
+}
+
+.p2 {
+    background-image: url("/Content/images/foxdown2.png");
+}
+
+.p3 {
+    background-image: url("/Content/images/foxleft.png");
+}
+
+.p4 {
+    background-image: url("/Content/images/foxright.png");
+}
+
+.h {
+    background-image: url("/Content/images/wolfup2.png");
+}
+
+.hu {
+    background-image: url("/Content/images/wolfup2.png");
+}
+
+.hd {
+    background-image: url("/Content/images/wolfdown2.png");
+}
+
+.hr {
+    background-image: url("/Content/images/wolfright.png");
+}
+
+.hl {
+    background-image: url("/Content/images/wolfleft.png");
+}

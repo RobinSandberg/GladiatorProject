@@ -224,6 +224,47 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fox-style.css" />
+    <Content Include="Content\images\bush.png" />
+    <Content Include="Content\images\bushchicken.png" />
+    <Content Include="Content\images\bushfox.png" />
+    <Content Include="Content\images\bushwolf.png" />
+    <Content Include="Content\images\chicken.png" />
+    <Content Include="Content\images\foxden.png" />
+    <Content Include="Content\images\foxdenchicken.png" />
+    <Content Include="Content\images\foxdenfox.png" />
+    <Content Include="Content\images\foxdenwolfdown.png" />
+    <Content Include="Content\images\foxdenwolfdown2.png" />
+    <Content Include="Content\images\foxdenwolfleft.png" />
+    <Content Include="Content\images\foxdenwolfright.png" />
+    <Content Include="Content\images\foxdenwolfup.png" />
+    <Content Include="Content\images\foxdenwolfup2.png" />
+    <Content Include="Content\images\foxdown.png" />
+    <Content Include="Content\images\foxdown2.png" />
+    <Content Include="Content\images\foxleft.png" />
+    <Content Include="Content\images\foxright.png" />
+    <Content Include="Content\images\foxup.png" />
+    <Content Include="Content\images\foxup2.png" />
+    <Content Include="Content\images\grass.png" />
+    <Content Include="Content\images\lava.png" />
+    <Content Include="Content\images\sidebridge.png" />
+    <Content Include="Content\images\sidebridgefoxleft.png" />
+    <Content Include="Content\images\sidebridgefoxright.png" />
+    <Content Include="Content\images\sidebridgewolfleft.png" />
+    <Content Include="Content\images\sidebridgewolfright.png" />
+    <Content Include="Content\images\tree1.png" />
+    <Content Include="Content\images\upbridge.png" />
+    <Content Include="Content\images\upbridgefoxdown.png" />
+    <Content Include="Content\images\upbridgefoxup.png" />
+    <Content Include="Content\images\upbridgewolfdown.png" />
+    <Content Include="Content\images\upbridgewolfup.png" />
+    <Content Include="Content\images\volcano_floor.png" />
+    <Content Include="Content\images\wolfdown.png" />
+    <Content Include="Content\images\wolfdown2.png" />
+    <Content Include="Content\images\wolfleft.png" />
+    <Content Include="Content\images\wolfright.png" />
+    <Content Include="Content\images\wolfup.png" />
+    <Content Include="Content\images\wolfup2.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -242,6 +283,10 @@
     </Content>
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\foxhunting-functions.js" />
+    <Content Include="Scripts\foxhunting-maps.js" />
+    <Content Include="Scripts\foxsurvival-functions.js" />
+    <Content Include="Scripts\foxsurvival-maps.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -325,6 +370,8 @@
     <Content Include="Views\Admin\GladiatorDelete.cshtml" />
     <Content Include="Views\Admin\_PlayerSearch.cshtml" />
     <Content Include="Views\Admin\_OpponentSearch.cshtml" />
+    <Content Include="Views\Home\Foxhunting.cshtml" />
+    <Content Include="Views\Home\Foxsurvival.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

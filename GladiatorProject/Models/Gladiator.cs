@@ -15,6 +15,7 @@ namespace GladiatorProject.Models
 
         [Required]
         [MaxLength(25)]
+        [RegularExpression(@"^[^<>.,?;:'()!~%\-_@#/*""\s]+$")]  // Stops the symbols from being used in the name.
         public string Name { get; set; }
 
         public int Health { get; set; }

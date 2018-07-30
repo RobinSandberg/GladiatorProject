@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Foxhunting";
+    <script src="~/Scripts/foxhunting-maps.js"></script>
+}
+
+<h2 style="text-align:center">Fox hunting</h2>
+
+<div id="game">
+    <div id="mapzone">
+        <div id="screen"></div>
+    </div>
+
+    <div id="credits">
+        <h3>The links will be added to the credits</h3>
+        <h2> Credits! </h2>
+        <h3> Graphics</h3>
+        <h4> Animals </h4>
+        <p><a href="#">whtdragon</a> </p>
+        <h4> Environmental </h4>
+        <p><a href="#">Jetrel</a></p>
+        <p><a href="#">Daniel Cook</a></p>
+        <p><a href="#">Bertram</a></p>
+        <p><a href="#">Zabin</a></p>
+        <h4>Changes</h4>
+        <P> Emolition</P>
+        <h3> Coding</h3>
+        <P> Emolition </P>
+        <h3> Map Desing</h3>
+        <P> Emolition </P>
+    </div>
+
+    <div class="dropdown">
+        <h5 class="dropbtn">Map Selection</h5>
+        <div class="dropdown-content" id="maps"></div>
+    </div>
+    <h5 id="prevMap">Previous</h5>
+    <h5 id="nextMap">Next</h5>
+    <h5 id="resetMap">Reset</h5>
+    <br />
+    <div id="count"></div>
+    <div id="time"></div>
+    <script src="~/Scripts/foxhunting-functions.js"></script>
+</div>

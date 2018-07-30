@@ -6,6 +6,7 @@ namespace GladiatorProject.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
+        [RegularExpression(@"^[^<>,?;:'()!~%\-_#/*""\s]+$")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -42,6 +43,7 @@ namespace GladiatorProject.Models
     public class ForgotViewModel
     {
         [Required]
+        [RegularExpression(@"^[^<>,?;:'()!~%\-_#/*""\s]+$")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -56,6 +58,7 @@ namespace GladiatorProject.Models
         [Required]  
         [Display(Name = "User Name")] // changed the login to username instead of emails.  Need to make a check so not 2 users will have same name.
         [MaxLength(25)]
+        [RegularExpression(@"^[^<>.,?;:'()!~%\-_@#/*""\s]+$")]  //stopping this symbols from being used when typing in your user name.
         public string UserName { get; set; }
 
         [Required]
@@ -71,11 +74,13 @@ namespace GladiatorProject.Models
     {
         [Required]
         [MaxLength(25)]
+        [RegularExpression(@"^[^<>.,?;:'()!~%\-_@#/*""\s]+$")]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
         [EmailAddress]
+        [RegularExpression(@"^[^<>,?;:'()!~%\-_#/*""\s]+$")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -95,6 +100,7 @@ namespace GladiatorProject.Models
     {
         [Required]
         [EmailAddress]
+        [RegularExpression(@"^[^<>,?;:'()!~%\-_#/*""\s]+$")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -116,6 +122,7 @@ namespace GladiatorProject.Models
     {
         [Required]
         [EmailAddress]
+        [RegularExpression(@"^[^<>,?;:'()!~%\-_#/*""\s]+$")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

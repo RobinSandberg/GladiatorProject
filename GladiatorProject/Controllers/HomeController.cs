@@ -39,5 +39,15 @@ namespace GladiatorProject.Controllers
             return PartialView("_highscoreGladiators", db.Gladiators.Include("User").ToList());
         }
 
+        public ActionResult Foxhunting()
+        {
+            return View();
+        }
+
+        public ActionResult Foxsurvival()
+        {
+            return View();
+        }
+
     }
 }
