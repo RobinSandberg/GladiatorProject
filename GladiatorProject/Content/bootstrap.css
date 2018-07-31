@@ -1085,7 +1085,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #333;
+  color: white;
   background-color: #fff;
 }
 input,
@@ -1183,10 +1183,10 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: inherit;
-  font-weight: 500;
-  line-height: 1.1;
-  color: inherit;
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: 500;
+    line-height: 1.1;
+    color: white;
 }
 h1 small,
 h2 small,
@@ -4272,11 +4272,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-width: 1px 0 0;
 }
 .navbar-brand {
-  float: left;
-  height: 50px;
-  padding: 15px 15px;
-  font-size: 18px;
-  line-height: 20px;
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 35px;
+    line-height: 20px;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -4593,11 +4593,11 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
-  color: #9d9d9d;
+  color: darkmagenta;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #fff;
+  color: mediumvioletred;
   background-color: transparent;
 }
 .navbar-inverse .navbar-text {

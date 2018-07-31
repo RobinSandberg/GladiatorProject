@@ -126,9 +126,10 @@
 }
 
 #credits {
+    color:white;
     margin: 20px;
     text-align: center;
-    float: right;
+    float: left;
 }
 
 .c {

@@ -41,38 +41,41 @@
     
  @foreach (var item in Model.OrderByDescending(u => u.GladiatorHighScore).Take(10)) //sort the so the highest scores comes at the top and only add 10 to the view.
  {
-     <tr>
-         <td>
-             @Html.DisplayFor(modelItem => item.Name)
-         </td>
-         <td>
-             @Html.DisplayFor(modelItem => item.GladiatorHighScore)
-         </td>
-         <td>
-             @Html.DisplayFor(modelItem => item.Health) / @Html.DisplayFor(ModelItem => item.FullHealth)
-         </td>
-         <td>
-             @Html.DisplayFor(modelItem => item.Armor)
-         </td>
-         <td>
-             @Html.DisplayFor(modelItem => item.Strenght)
-         </td>
-         <td>
-             @Html.DisplayFor(modelItem => item.Constitution)
-         </td>
-         <td>
-             @Html.DisplayFor(modelItem => item.Gold)
-         </td>
-         <td>
-             @Html.DisplayFor(modelItem => item.Level)
-         </td>
-         <td>
-             @Html.DisplayFor(modelItem => item.BestWinningStreak)
-         </td>
-         <td>
-             @Html.DisplayFor(modelItem => item.User.UserName)
-         </td>
-
-     </tr>
+     if (item.GladiatorHighScore >= 0 && item.User != null)
+     {
+         <tr>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Name)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.GladiatorHighScore)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Health) / @Html.DisplayFor(ModelItem => item.FullHealth)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Armor)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Strenght)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Constitution)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Gold)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Level)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.BestWinningStreak)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.User.UserName)
+             </td>
+         
+         </tr>
+     }
  }
 </table>

@@ -4,13 +4,13 @@
     ViewBag.Title = "FindOpponent";
 }
 
-<div class="row">
+<div class="row" style="padding-bottom:20px;">
 
     <div style="text-align:center">
         <h2>Prepair for gladiator battle</h2>
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-4" style="height:650px;overflow:auto ; text-align:center ; border:solid black">
+            <div class="col-md-4" style="height:650px;overflow:auto ; text-align:center ; border:solid purple; background-color:white; color:black;">
                 <h4>Player</h4>
 
                 <div class="row" id="stats">
@@ -100,7 +100,7 @@
             </div>
                 </div>   
 
-            <div class="col-md-4" style="height:650px;overflow:auto ; text-align:center ; border:solid black">
+            <div class="col-md-4" style="height:650px;overflow:auto ; text-align:center ; border:solid purple; background-color:white; color:black;">
                 <h4>Enemy</h4>
                 <div id="opponent">
                     @if (Model.Health >= 1)

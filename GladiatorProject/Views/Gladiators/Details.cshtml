@@ -5,12 +5,11 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 style="text-align:center;">Battle Log of gladiator</h2>
 
 <div>
-    <h4>Gladiator</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" style="background-color:white; border:solid purple; color:black;">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -78,6 +77,6 @@
     </dl>
 </div>
 
-<p>
+<p style="color:white;">
     @Html.ActionLink("Back to Gladiators", "Index")
 </p>

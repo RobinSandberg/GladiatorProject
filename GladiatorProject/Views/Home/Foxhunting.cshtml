@@ -1,15 +1,27 @@
 ﻿
 @{
     ViewBag.Title = "Foxhunting";
+    <link rel="stylesheet" href="~/Content/fox-style.css">
     <script src="~/Scripts/foxhunting-maps.js"></script>
 }
 
-<h2 style="text-align:center">Fox hunting</h2>
+<h2 style="text-align:center;">Fox hunting</h2>
 
-<div id="game">
+<div style="padding-bottom:20px;">
     <div id="mapzone">
         <div id="screen"></div>
     </div>
+
+    <div class="dropdown">
+        <h5 class="dropbtn" style="color:white;">Map Selection</h5>
+        <div class="dropdown-content" id="maps"></div>
+    </div>
+    <h5 id="prevMap">Previous</h5>
+    <h5 id="nextMap">Next</h5>
+    <h5 id="resetMap">Reset</h5>
+    <br />
+    <div id="count"></div>
+    <div id="time"></div>
 
     <div id="credits">
         <h3>The links will be added to the credits</h3>
@@ -30,15 +42,5 @@
         <P> Emolition </P>
     </div>
 
-    <div class="dropdown">
-        <h5 class="dropbtn">Map Selection</h5>
-        <div class="dropdown-content" id="maps"></div>
-    </div>
-    <h5 id="prevMap">Previous</h5>
-    <h5 id="nextMap">Next</h5>
-    <h5 id="resetMap">Reset</h5>
-    <br />
-    <div id="count"></div>
-    <div id="time"></div>
     <script src="~/Scripts/foxhunting-functions.js"></script>
 </div>
