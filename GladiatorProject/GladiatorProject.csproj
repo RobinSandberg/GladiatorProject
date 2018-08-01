@@ -372,6 +372,8 @@
     <Content Include="Views\Admin\_OpponentSearch.cshtml" />
     <Content Include="Views\Home\Foxhunting.cshtml" />
     <Content Include="Views\Home\Foxsurvival.cshtml" />
+    <Content Include="Views\Admin\_Gladiators.cshtml" />
+    <Content Include="Views\Admin\_GladiatorSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

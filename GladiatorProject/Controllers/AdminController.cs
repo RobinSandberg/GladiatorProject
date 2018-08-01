@@ -185,72 +185,170 @@ namespace GladiatorProject.Controllers
 
         public ActionResult GladiatorEdit(int id , string playerId)
         {
-            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == playerId);
-            Session["Player"] = PlayerUser;
-            var gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
-            if(gladiator == null)
+            if(playerId != null)
             {
-                return new HttpStatusCodeResult(400);
+                var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == playerId);
+                Session["Player"] = PlayerUser;
+                var gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
+                if (gladiator == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                else
+                {
+                    return View(gladiator);
+                }
             }
             else
             {
-                return View(gladiator);
-            } 
+                var gladiatortrash = db.Gladiators.SingleOrDefault(g => g.Id == id);
+                if(gladiatortrash == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                else
+                {
+                    return View(gladiatortrash);
+                }
+            }
         }
 
         public ActionResult GladiatorSave(Gladiator gladiator)
         {
-            string PlayerId = (Session["Player"] as ApplicationUser).Id;
-            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == PlayerId);
-            var oldGladiator = PlayerUser.Gladiators.SingleOrDefault(i => i.Id == gladiator.Id);
-            if(oldGladiator == null)
+            if(Session["Player"] != null)
             {
-                return new HttpStatusCodeResult(400);
+                string PlayerId = (Session["Player"] as ApplicationUser).Id;
+               
+                 var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == PlayerId);
+                 var oldGladiator = PlayerUser.Gladiators.SingleOrDefault(i => i.Id == gladiator.Id);
+                 if (oldGladiator == null)
+                 {
+                     return new HttpStatusCodeResult(400);
+                 }
+                 else
+                 {
+                     if (ModelState.IsValid)
+                     {
+                        oldGladiator.Name = gladiator.Name;
+                        oldGladiator.Level = gladiator.Level;
+                        oldGladiator.Experiance = gladiator.Experiance;
+                        oldGladiator.FullHealth = gladiator.FullHealth;
+                        oldGladiator.Armor = gladiator.Armor;
+                        oldGladiator.DamageDice = gladiator.DamageDice;
+                        oldGladiator.Strenght = gladiator.Strenght;
+                        oldGladiator.StrenghtModifyer = gladiator.StrenghtModifyer;
+                        oldGladiator.Constitution = gladiator.Constitution;
+                        oldGladiator.ConstitutionModifyer = gladiator.ConstitutionModifyer;
+                        oldGladiator.Battles = gladiator.Battles;
+                        oldGladiator.BattlesWon = gladiator.BattlesWon;
+                        oldGladiator.BattlesDraw = gladiator.BattlesDraw;
+                        oldGladiator.BattlesLost = gladiator.BattlesLost;
+                        oldGladiator.Gold = gladiator.Gold;
+                        oldGladiator.MaxArmor = gladiator.MaxArmor;
+                        oldGladiator.SkillPoints = gladiator.SkillPoints;
+                        oldGladiator.CurrentWinningStreak = gladiator.CurrentWinningStreak;
+                        oldGladiator.BestWinningStreak = gladiator.BestWinningStreak;
+                         db.SaveChanges();
+                         return RedirectToAction("Index");
+                     }
+                     else
+                     {
+                         return View("GladiatorEdit", gladiator);
+                     }
+                 }
             }
             else
             {
-                if (ModelState.IsValid)
+                var oldGladiatortrash = db.Gladiators.SingleOrDefault(g => g.Id == gladiator.Id);
+                if (oldGladiatortrash == null)
                 {
-                    oldGladiator.Name = gladiator.Name;
-                    oldGladiator.Level = gladiator.Level;
-                    oldGladiator.Experiance = gladiator.Experiance;
-                    oldGladiator.FullHealth = gladiator.FullHealth;
-                    oldGladiator.Armor = gladiator.Armor;
-                    oldGladiator.DamageDice = gladiator.DamageDice;
-                    oldGladiator.Strenght = gladiator.Strenght;
-                    oldGladiator.StrenghtModifyer = gladiator.StrenghtModifyer;
-                    oldGladiator.Constitution = gladiator.Constitution;
-                    oldGladiator.ConstitutionModifyer = gladiator.ConstitutionModifyer;
-                    oldGladiator.Battles = gladiator.Battles;
-                    oldGladiator.BattlesWon = gladiator.BattlesWon;
-                    oldGladiator.BattlesDraw = gladiator.BattlesDraw;
-                    oldGladiator.BattlesLost = gladiator.BattlesLost;
-                    oldGladiator.Gold = gladiator.Gold;
-                    oldGladiator.MaxArmor = gladiator.MaxArmor;
-                    oldGladiator.SkillPoints = gladiator.SkillPoints;
-                    oldGladiator.CurrentWinningStreak = gladiator.CurrentWinningStreak;
-                    oldGladiator.BestWinningStreak = gladiator.BestWinningStreak;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return new HttpStatusCodeResult(400);
                 }
                 else
                 {
-                    return View("GladiatorEdit", gladiator);
+                    if (ModelState.IsValid)
+                    {
+                        oldGladiatortrash.Name = gladiator.Name;
+                        oldGladiatortrash.Level = gladiator.Level;
+                        oldGladiatortrash.Experiance = gladiator.Experiance;
+                        oldGladiatortrash.FullHealth = gladiator.FullHealth;
+                        oldGladiatortrash.Armor = gladiator.Armor;
+                        oldGladiatortrash.DamageDice = gladiator.DamageDice;
+                        oldGladiatortrash.Strenght = gladiator.Strenght;
+                        oldGladiatortrash.StrenghtModifyer = gladiator.StrenghtModifyer;
+                        oldGladiatortrash.Constitution = gladiator.Constitution;
+                        oldGladiatortrash.ConstitutionModifyer = gladiator.ConstitutionModifyer;
+                        oldGladiatortrash.Battles = gladiator.Battles;
+                        oldGladiatortrash.BattlesWon = gladiator.BattlesWon;
+                        oldGladiatortrash.BattlesDraw = gladiator.BattlesDraw;
+                        oldGladiatortrash.BattlesLost = gladiator.BattlesLost;
+                        oldGladiatortrash.Gold = gladiator.Gold;
+                        oldGladiatortrash.MaxArmor = gladiator.MaxArmor;
+                        oldGladiatortrash.SkillPoints = gladiator.SkillPoints;
+                        oldGladiatortrash.CurrentWinningStreak = gladiator.CurrentWinningStreak;
+                        oldGladiatortrash.BestWinningStreak = gladiator.BestWinningStreak;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View("GladiatorEdit", gladiator);
+                    }
                 }
             }
         }
 
-        public ActionResult GladiatorDetails(int id , string playerId)
+        public ActionResult GladiatorRestore(int id)
         {
-            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == playerId);
-            var gladiator = PlayerUser.Gladiators.SingleOrDefault(i => i.Id == id);
+
+            var gladiator = db.Gladiators.SingleOrDefault(g => g.Id == id);
             if(gladiator == null)
             {
                 return new HttpStatusCodeResult(400);
             }
             else
             {
-                return PartialView("_GladiatorDetails", gladiator);
+                var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.UserName == gladiator.PreviousUser);
+                if(PlayerUser == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                else
+                {
+                    PlayerUser.Gladiators.Add(gladiator);
+                    gladiator.PreviousUser = null;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            } 
+        }
+
+        public ActionResult GladiatorDetails(int id , string playerId)
+        {
+            if(playerId != null)
+            {
+                var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == playerId);
+                var gladiator = PlayerUser.Gladiators.SingleOrDefault(i => i.Id == id);
+                if (gladiator == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                else
+                {
+                    return PartialView("_GladiatorDetails", gladiator);
+                }
+            }
+            else
+            {
+                var gladiatortrash = db.Gladiators.SingleOrDefault(g => g.Id == id);
+                if (gladiatortrash == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                else
+                {
+                    return PartialView("_GladiatorDetails", gladiatortrash);
+                }
             }
          
         }
@@ -262,32 +360,70 @@ namespace GladiatorProject.Controllers
 
         public ActionResult GladiatorDelete(int id , string playerId)
         {
-            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == playerId);
-            Session["Player"] = PlayerUser;  // saving the user in session to move over the id to confirmation action.
-            var gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
-
-            if (gladiator == null)
+            if(playerId != null)
             {
-                return new HttpStatusCodeResult(400);
+                var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == playerId);
+                Session["Player"] = PlayerUser;  // saving the user in session to move over the id to confirmation action.
+                var gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
+
+                if (gladiator == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                else
+                {
+                    return View(gladiator);
+                }
+                
             }
-            return View(gladiator); 
+            else
+            {
+                var gladiatortrash = db.Gladiators.SingleOrDefault(g => g.Id == id);
+                if(gladiatortrash == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                else
+                {
+                    return View(gladiatortrash);
+                }
+            }
         }
 
         public ActionResult GladiatorDeleteConfirm(int id)
         {
-            string PlayerId = (Session["Player"] as ApplicationUser).Id; // taking out the Id for the user from the session.
-            var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == PlayerId);
-            var gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
-            if(gladiator == null)
+            if(Session["Player"] != null)
             {
-                return new HttpStatusCodeResult(400);
+                string PlayerId = (Session["Player"] as ApplicationUser).Id; // taking out the Id for the user from the session.
+                var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(i => i.Id == PlayerId);
+                var gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
+                if (gladiator == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                else
+                {
+                    gladiator.PreviousUser = PlayerUser.UserName;
+                    PlayerUser.Gladiators.Remove(gladiator);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
-                PlayerUser.Gladiators.Remove(gladiator);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var gladiatortrash = db.Gladiators.SingleOrDefault(g => g.Id == id);
+                if(gladiatortrash == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                else
+                {
+                    db.Gladiators.Remove(gladiatortrash);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            
            
         }
 
@@ -415,8 +551,9 @@ namespace GladiatorProject.Controllers
 
         public ActionResult PlayerHighScore()
         {
-            
-            return PartialView("_highscorePlayers", db.Users.Include("Gladiators").ToList());
+            var Players = from p in db.Users.Include("Gladiators") where p.AccountHighScore >= 0 select p;
+
+            return PartialView("_highscorePlayers", Players.OrderByDescending(u => u.AccountHighScore).Take(10).ToList());
         }
 
         public ActionResult UserScoreEdit(string id)
@@ -478,8 +615,9 @@ namespace GladiatorProject.Controllers
 
         public ActionResult GladiatorHighScore()
         {
-            
-            return PartialView("_highscoreGladiators", db.Gladiators.Include("User").ToList());
+            var Gladiators = from p in db.Gladiators.Include("User") where p.GladiatorHighScore >= 0 && p.User != null select p;
+
+            return PartialView("_highscoreGladiators", Gladiators.OrderByDescending(u => u.GladiatorHighScore).Take(10).ToList());
         }
 
         public ActionResult GladiatorScoreEdit(int id)
@@ -536,6 +674,23 @@ namespace GladiatorProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+        }
+
+        public ActionResult Gladiators()
+        {
+            var gladiators = from p in db.Gladiators where p.User == null select p;
+            return PartialView("_Gladiators", gladiators.ToList());
+        }
+        public ActionResult SearchGladiator(string searchString)
+        {
+            var gladiator_search = from p in db.Gladiators select p;  // making a variable to pick out the names from.
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                gladiator_search = gladiator_search.Where(i => i.PreviousUser.ToLower().Contains(searchString)); // picking out the names based on the string.
+            }
+
+            return PartialView("_GladiatorSearch", gladiator_search.ToList());
         }
 
         protected override void Dispose(bool disposing)

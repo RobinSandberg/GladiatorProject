@@ -341,6 +341,7 @@ namespace GladiatorProject.Controllers
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
             Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
+            gladiator.PreviousUser = PlayerUser.UserName;
             PlayerUser.Gladiators.Remove(gladiator); // Remove the gladiator from the player gladiator list but saving it in gladiator database.
             db.SaveChanges();
             return RedirectToAction("Index");

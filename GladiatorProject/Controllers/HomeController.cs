@@ -28,15 +28,17 @@ namespace GladiatorProject.Controllers
         public ActionResult PlayerHighScore()
         {
             // Sending the list of users including their gladiators to the view.
+            var Players = from p in db.Users.Include("Gladiators") where p.AccountHighScore >= 0 select p;
 
-           
-            return PartialView("_highscorePlayers", db.Users.Include("Gladiators").ToList());
+            return PartialView("_highscorePlayers", Players.OrderByDescending(i => i.AccountHighScore).Take(10).ToList());  // Order them by the highest score at top and 10 players.
         }
 
         public ActionResult GladiatorHighScore()
         {
             //sending the gladiators including what user they belong to the view.
-            return PartialView("_highscoreGladiators", db.Gladiators.Include("User").ToList());
+            var Gladiators = from p in db.Gladiators.Include("User") where p.GladiatorHighScore >= 0 && p.User != null select p;
+
+            return PartialView("_highscoreGladiators", Gladiators.OrderByDescending(u => u.GladiatorHighScore).Take(10).ToList()); //sort the so the highest scores comes at the top and only add 10 to the view.
         }
 
         public ActionResult Foxhunting()
