@@ -1,0 +1,71 @@
+﻿@model List<GladiatorProject.Models.SupportRequests>
+
+<h2 style="text-align:center">Support requests</h2>
+
+<div id="DetailView">
+
+</div>
+
+<div id="Search">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("User")
+            </th>
+            <th>
+                @Html.DisplayName("Email")
+            </th>
+            <th>
+                @Html.DisplayName("Gladiator")
+            </th>
+            <th>
+                @Html.DisplayName("Request")
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>
+                @Html.DisplayName("Solved")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gladiator)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Request)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Solved)
+                </td>
+                <td>
+                    @if (item.Solved == "No")
+                    {
+                        @Html.ActionLink("Solved", "SupportSolved", new {@class = "Styling", id = item.Id })
+                    }
+                    |
+                    @Ajax.ActionLink("Details", "SupportDetails", new { @class = "Styling", id = item.Id }, new AjaxOptions
+                     {
+                       UpdateTargetId = "DetailView",
+                       InsertionMode = InsertionMode.Replace
+                     })
+                    |
+                    @Html.ActionLink("Delete", "SupportDelete", new { @class = "Styling", id = item.Id })
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -7,6 +7,8 @@ using GladiatorProject.Models;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Net.Mail;
+using System.Net;
 
 namespace GladiatorProject.Controllers
 {
@@ -403,6 +405,7 @@ namespace GladiatorProject.Controllers
                 }
                 else
                 {
+                    gladiator.DateOfDelete = DateTime.Today;
                     gladiator.PreviousUser = PlayerUser.UserName;
                     PlayerUser.Gladiators.Remove(gladiator);
                     db.SaveChanges();
@@ -691,6 +694,86 @@ namespace GladiatorProject.Controllers
             }
 
             return PartialView("_GladiatorSearch", gladiator_search.ToList());
+        }
+
+        public ActionResult Support()
+        {
+            return PartialView("_Support" , db.Support.ToList());
+        }
+
+        public ActionResult SupportDetails(int id)
+        {
+            var Details = db.Support.SingleOrDefault(i => i.Id == id);
+            if (Details == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                return PartialView("_SupportDetails", Details);
+            }
+        }
+
+        public ActionResult SupportSolved(int id)
+        {
+            var Support = db.Support.SingleOrDefault(i => i.Id == id);
+
+            if (Support == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                SmtpClient client = new SmtpClient("smtp.live.com");
+                client.Port = 587;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("Overlord@Admin.se", "As!1234"); // fill in proper email and password if going live.
+                client.EnableSsl = true;
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("Overlord@Admin.se"); // change email if going live.
+                mailMessage.To.Add(Support.Email);
+                mailMessage.Subject = "Support ticket " + Support.Request;
+                mailMessage.Body = "The issue should now be solved. If not contact Support again.";
+
+                client.Send(mailMessage);
+
+                Support.Solved = "Yes";
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult SupportDelete(int id)
+        {
+            var Support = db.Support.SingleOrDefault(i => i.Id == id);
+
+            if (Support == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+
+                return View(Support);
+            }
+        }
+
+        public ActionResult SupportDeleteConfirm(int id)
+        {
+            var Support = db.Support.SingleOrDefault(i => i.Id == id);
+
+            if (Support == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                db.Support.Remove(Support);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
         }
 
         protected override void Dispose(bool disposing)

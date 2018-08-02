@@ -52,6 +52,7 @@ namespace GladiatorProject.Controllers
             var gladiator = db.Gladiators.SingleOrDefault(i => i.Id == id);
             // Making a temporary list of opponent based on gladiator level 1 lvl lower to 1 lvl higher.
             var Enemies = opponent.Levels;
+            Random rnd = new Random();
             if(gladiator == null)
             {
                 return new HttpStatusCodeResult(400);
@@ -63,14 +64,15 @@ namespace GladiatorProject.Controllers
                     Enemies = (from a in db.Opponents
                                where a.Level == gladiator.Level - 1
                                select a).ToList();
-
-                    opponent.Levels.AddRange(Enemies);  // AddRange to add multible objects to list instead of Add that just add one item.
+                   
+                    Enemies = Enemies.OrderBy(item => rnd.Next()).ToList(); //Odering the list in random order to then take out 1 opponent so it becomes random.
+                    opponent.Levels.AddRange(Enemies.Take(1));  // AddRange to add multible objects to list instead of Add that just add one item.
                 }
                 Enemies = (from a in db.Opponents
                            where a.Level == gladiator.Level
                            select a).ToList();
-
-                opponent.Levels.AddRange(Enemies);
+                Enemies = Enemies.OrderBy(item => rnd.Next()).ToList();
+                opponent.Levels.AddRange(Enemies.Take(1));
 
                 if (gladiator.Level <= 19)  // Making sure gladiator is lvl 19 or lower before adding a higher lvl opponent.
                 {
@@ -78,7 +80,8 @@ namespace GladiatorProject.Controllers
                                where a.Level == gladiator.Level + 1
                                select a).ToList();
 
-                    opponent.Levels.AddRange(Enemies);
+                    Enemies = Enemies.OrderBy(item => rnd.Next()).ToList();
+                    opponent.Levels.AddRange(Enemies.Take(1));
                 }
 
                 return PartialView("_Enemies", opponent);
@@ -342,6 +345,7 @@ namespace GladiatorProject.Controllers
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
             Gladiator gladiator = PlayerUser.Gladiators.SingleOrDefault(u => u.Id == id);
             gladiator.PreviousUser = PlayerUser.UserName;
+            gladiator.DateOfDelete = DateTime.Today;
             PlayerUser.Gladiators.Remove(gladiator); // Remove the gladiator from the player gladiator list but saving it in gladiator database.
             db.SaveChanges();
             return RedirectToAction("Index");

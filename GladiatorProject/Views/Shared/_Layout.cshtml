@@ -26,7 +26,11 @@
                     <li>@Html.ActionLink("Gladiator game", "Index", "Gladiators")</li>
                     <li>@Html.ActionLink("Fox hunting", "Foxhunting", "Home")</li>
                     <li>@Html.ActionLink("Fox survival", "Foxsurvival", "Home")</li>
-                    @if (User.IsInRole("Overlord")) // checking to make sure user logged in as admin to view the admin tab.
+                    @if (User.IsInRole("Player")) // Checking so only logged in players can access support.
+                    {
+                        <li>@Html.ActionLink("Support", "Index", "Support")</li>
+                    }
+                    @if (User.IsInRole("Overlord")) // Checking to make sure user logged in as admin to view the admin tab.
                     {
                         <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
                     }

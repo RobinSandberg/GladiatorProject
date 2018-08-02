@@ -73,6 +73,8 @@ namespace GladiatorProject.Models
 
         public string PreviousUser { get; set; }
 
+        public DateTime DateOfDelete { get; set; }
+
         public static void StartingGladiator(Gladiator start)  // the metod for adding stats for new made gladiators.
         {
             start.Armor = 6 + Dice.D6() + Dice.D6();

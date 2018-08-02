@@ -63,7 +63,7 @@
                 @Html.DisplayName("Previous Owner")
             </th>
             <th>
-                @Html.DisplayName("Owner")
+                @Html.DisplayName("Delete Date")
             </th>
         </tr>
 
@@ -111,7 +111,7 @@
                     @Html.DisplayFor(modelItem => item.PreviousUser)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.User)
+                    @Html.DisplayFor(modelItem => item.DateOfDelete)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "GladiatorEdit", new { id = item.Id }) |

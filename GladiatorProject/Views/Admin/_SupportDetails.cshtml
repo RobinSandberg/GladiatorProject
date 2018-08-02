@@ -1,0 +1,23 @@
+﻿@model GladiatorProject.Models.SupportRequests
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Details)
+        </th>   
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(Model => Model.Details)
+        </td>
+        <td>
+            @Ajax.ActionLink("Hide Details", "HideOpponent" ,
+       new AjaxOptions
+       {
+           UpdateTargetId = "DetailView",
+           InsertionMode = InsertionMode.Replace
+       })
+    </td>
+</tr>
+</table>
