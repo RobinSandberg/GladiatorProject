@@ -32,13 +32,17 @@ functons for admin opponent view.    <<<< functinal.
 sprint 6
 
 Fix Player highscore    <<< 2 functional options
-Battleview display fade in   <<< semi working got it to fade in the whole list instead of line for line. Not in plans for now.
+Battleview display fade in   <<< semi working got it to fade in the whole list instead of line for line. Not in plans for now might have to redo alot of code.
 Search function for email on admin player view  <<< functional
 
 
 >>>function to add later if time>>>>
 Ability for admin to edit the users gladiators.   <<<< functional
 Search functions for all of admins list views.   <<< functional
+
 Gear option of some type.
 
-Contact page to admin for restoring gladiators or othere stuff.
+Contact page to admin for restoring gladiators or othere stuff.  <<< functinal
+
+Email validation or a way to check if domain is real.
+

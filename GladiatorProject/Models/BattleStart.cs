@@ -17,5 +17,6 @@ namespace GladiatorProject.Models
 
         public Opponent Opponent { get; set; }
 
+        public DateTime BattleDate { get; set; }
     }
 }

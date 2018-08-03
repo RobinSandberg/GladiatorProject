@@ -124,6 +124,7 @@ namespace GladiatorProject.Controllers
                 BattleStart battleStart = new BattleStart();   // Setting up a new battle 
                 battleStart.Gladiator = gladiator;   // Saving the gladiator into the BattleStart class.
                 battleStart.Opponent = opponent;
+                battleStart.BattleDate = DateTime.Today;
                 db.Battles.Add(battleStart);
                 db.SaveChanges();
 
@@ -153,7 +154,8 @@ namespace GladiatorProject.Controllers
             var AfterMath = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
-            if(AfterMath == null || PlayerUser == null)
+            AfterMath.BattleDate = DateTime.Today;
+            if (AfterMath == null || PlayerUser == null)
             {
                 return new HttpStatusCodeResult(400);
             }

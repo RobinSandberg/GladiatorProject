@@ -13,6 +13,8 @@ namespace GladiatorProject.Models
         // Adding  need to be added in all locations it used.
         public List<Gladiator> Gladiators { get; set; }
 
+        public List<SupportRequests> Supports { get; set; }
+
         public int AccountScore { get; set; } // will become the score for the account and the high score for players.
 
         public int AccountHighScore { get; set; }
@@ -44,7 +46,7 @@ namespace GladiatorProject.Models
 
         public DbSet<BattleStart> Battles { get; set; } // database for each battle.
 
-        public DbSet<SupportRequests> Support { get; set; } 
+        public DbSet<SupportRequests> Supports { get; set; } 
         
 
     }

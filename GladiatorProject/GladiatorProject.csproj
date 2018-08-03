@@ -380,6 +380,14 @@
     <Content Include="Views\Admin\_Support.cshtml" />
     <Content Include="Views\Admin\_SupportDetails.cshtml" />
     <Content Include="Views\Admin\SupportDelete.cshtml" />
+    <Content Include="Views\Admin\SupportSolved.cshtml" />
+    <Content Include="Views\Admin\_SupportSearch.cshtml" />
+    <Content Include="Views\Admin\_BattleList.cshtml" />
+    <Content Include="Views\Support\CreateRequest.cshtml" />
+    <Content Include="Views\Support\MyRequests.cshtml" />
+    <Content Include="Views\Support\_SupportDetails.cshtml" />
+    <Content Include="Views\Support\SupportDelete.cshtml" />
+    <Content Include="Views\Support\SupportSolved.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

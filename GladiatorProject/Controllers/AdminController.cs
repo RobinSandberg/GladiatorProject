@@ -76,6 +76,11 @@ namespace GladiatorProject.Controllers
             }
         }
 
+        public ActionResult BattleList()
+        {
+            return PartialView("_BattleList", db.Battles.Include("Gladiator").Include("Opponent").ToList());
+        }
+
         [HttpGet]
         public ActionResult CreateUser()
         {
@@ -443,9 +448,13 @@ namespace GladiatorProject.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Opponents.Add(opponent);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    List<Opponent> Names = db.Opponents.ToList();
+                    if (!Names.Contains(opponent))  // Checking so the name is not allready in use.
+                    {
+                        db.Opponents.Add(opponent);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    } 
                 }
             }
             return View(opponent);
@@ -698,12 +707,26 @@ namespace GladiatorProject.Controllers
 
         public ActionResult Support()
         {
-            return PartialView("_Support" , db.Support.ToList());
+            var support = db.Supports.OrderBy(i => i.Solved);   // Sorting the support requests by what ones are solved and not.
+            support.OrderBy(u => u.Date);  // Sorting the requests after date they recived.
+            return PartialView("_Support" , support.ToList());
+        }
+
+        public ActionResult SupportSearch(string searchString)
+        {
+            var Support_search = from p in db.Supports select p;
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                Support_search = Support_search.Where(i => i.User.ToLower().Contains(searchString) || i.Request.ToLower().Contains(searchString));
+            }
+
+            return PartialView("_SupportSearch", Support_search.ToList());
         }
 
         public ActionResult SupportDetails(int id)
         {
-            var Details = db.Support.SingleOrDefault(i => i.Id == id);
+            var Details = db.Supports.SingleOrDefault(i => i.Id == id);
             if (Details == null)
             {
                 return new HttpStatusCodeResult(400);
@@ -716,7 +739,7 @@ namespace GladiatorProject.Controllers
 
         public ActionResult SupportSolved(int id)
         {
-            var Support = db.Support.SingleOrDefault(i => i.Id == id);
+            var Support = db.Supports.SingleOrDefault(i => i.Id == id);
 
             if (Support == null)
             {
@@ -724,29 +747,37 @@ namespace GladiatorProject.Controllers
             }
             else
             {
-                SmtpClient client = new SmtpClient("smtp.live.com");
-                client.Port = 587;
-                client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential("Overlord@Admin.se", "As!1234"); // fill in proper email and password if going live.
-                client.EnableSsl = true;
+                if(Support.Solved == "No")
+                {
+                    // Uncomment this section when email validation is set and working.
+                    //SmtpClient client = new SmtpClient("smtp.live.com");
+                    //client.Port = 587;
+                    //client.UseDefaultCredentials = false;
+                    //client.Credentials = new NetworkCredential("Overlord@Admin.se", "As!1234"); // fill in proper email and password if going live.
+                    //client.EnableSsl = true;
 
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("Overlord@Admin.se"); // change email if going live.
-                mailMessage.To.Add(Support.Email);
-                mailMessage.Subject = "Support ticket " + Support.Request;
-                mailMessage.Body = "The issue should now be solved. If not contact Support again.";
+                    //MailMessage mailMessage = new MailMessage();
+                    //mailMessage.From = new MailAddress("Overlord@Admin.se"); // change email if going live.
+                    //mailMessage.To.Add(Support.Email);
+                    //mailMessage.Subject = "Support ticket " + Support.Request;
+                    //mailMessage.Body = "The issue should now be solved. If not contact Support again.";
 
-                client.Send(mailMessage);
+                    //client.Send(mailMessage);
 
-                Support.Solved = "Yes";
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    Support.Solved = "Yes";
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("SupportSolved");
+                }  
             }
         }
 
         public ActionResult SupportDelete(int id)
         {
-            var Support = db.Support.SingleOrDefault(i => i.Id == id);
+            var Support = db.Supports.SingleOrDefault(i => i.Id == id);
 
             if (Support == null)
             {
@@ -761,7 +792,7 @@ namespace GladiatorProject.Controllers
 
         public ActionResult SupportDeleteConfirm(int id)
         {
-            var Support = db.Support.SingleOrDefault(i => i.Id == id);
+            var Support = db.Supports.SingleOrDefault(i => i.Id == id);
 
             if (Support == null)
             {
@@ -769,7 +800,7 @@ namespace GladiatorProject.Controllers
             }
             else
             {
-                db.Support.Remove(Support);
+                db.Supports.Remove(Support);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

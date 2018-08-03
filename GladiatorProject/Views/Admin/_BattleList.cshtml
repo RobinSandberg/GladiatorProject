@@ -1,0 +1,61 @@
+﻿@model List<GladiatorProject.Models.BattleStart>
+
+<h2 style="text-align:center">List of the Battles</h2>
+
+<div>
+    @using (Ajax.BeginForm("SearchBattle",
+             new AjaxOptions
+             {
+                 UpdateTargetId = "Search",
+                 InsertionMode = InsertionMode.Replace
+
+             }
+     ))
+    {
+
+        @Html.DisplayName("Search by Gladiator Name")
+        @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    }
+</div>
+
+<div id="Search">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Gladiator")
+            </th>
+            <th>
+                @Html.DisplayName("Opponent")
+            </th>
+            <th>
+                @Html.DisplayName("Result")
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gladiator.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opponent.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gladiator.LastBattle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BattleDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "BattleEdit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "BattleDelete", new { id = item.Id })
+            </td>
+        </tr>
+        }
+    </table>
+</div>

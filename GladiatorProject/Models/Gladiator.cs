@@ -15,7 +15,7 @@ namespace GladiatorProject.Models
 
         [Required]
         [MaxLength(25)]
-        [RegularExpression(@"^[^<>.,?;:'()!~%\-_@#/*""\s]+$")]  // Stops the symbols from being used in the name.
+        [RegularExpression(@"^[^<>.,?;:'()!~%\-_@#/*""]+$")]  // Stops the symbols from being used in the name.
         public string Name { get; set; }
 
         public int Health { get; set; }
@@ -97,6 +97,7 @@ namespace GladiatorProject.Models
             start.CurrentWinningStreak = 0;
             start.BestWinningStreak = 0;
             start.LastBattle = "";
+            start.DateOfDelete = DateTime.Today;
         }
 
         public static void Leveling(Gladiator RankUp)  // function for when you level up.

@@ -1,0 +1,28 @@
+﻿@model GladiatorProject.Models.SupportRequests
+
+@{
+    ViewBag.Title = "SupportDelete";
+}
+
+<h2>Support Delete</h2>
+
+<p>You sure you wanna delete ?</p>
+
+<dl>
+    <dt>Gladiator</dt>
+    <dd>@Model.Gladiator</dd>
+    <dt>Request</dt>
+    <dd>@Model.Request</dd>
+    <dt>Details</dt>
+    <dd>@Model.Details</dd>
+    <dt>Solved</dt>
+    <dd>@Model.Solved</dd>
+</dl>
+
+<div>
+    <button>@Html.ActionLink("Delete Confirm", "SupportDeleteConfirm", new { id = Model.Id })</button>
+</div>
+<br />
+<div>
+    @Html.ActionLink("Back to Support menu", "Index")
+</div>

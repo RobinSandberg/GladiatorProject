@@ -13,14 +13,8 @@ namespace GladiatorProject.Models
         [Key]
         public int Id { get; set; }
 
-        //public List<string> Rounds { get; set; }
         public List<string> Rounds = new List<string>();  // List of the strings printed out for the player to see how the battle went.
 
-        //public BattleRound()
-        //{
-        //    Rounds = new List<string>();
-        //}
-        
         public void Round(BattleStart fighter)
         {
             Id = fighter.Id;   //Adding the same Id to battleround as the battleStart.

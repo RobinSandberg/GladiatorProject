@@ -15,7 +15,8 @@ namespace GladiatorProject.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(50)] 
+        [MaxLength(50)]
+        [RegularExpression(@"^[^<>.,?;:'()!~%\-_@#/*""]+$")]
         public string Name { get; set; }
 
         public int Health { get; set; }

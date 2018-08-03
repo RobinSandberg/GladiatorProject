@@ -16,7 +16,7 @@ namespace GladiatorProject.Models
         public string Email { get; set; }
 
         [MaxLength(25)]
-        [RegularExpression(@"^[^<>.,?;:'()!~%\-_@#/*""\s]+$")]
+        [RegularExpression(@"^[^<>.,?;:'()!~%\-_@#/*""]+$")]
         public string Gladiator { get; set; }
 
         [Required]
