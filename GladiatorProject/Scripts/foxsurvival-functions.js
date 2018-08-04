@@ -36,28 +36,28 @@
 					{   
 						boxDiv.classList.add("c");
 					}
-					else if(mapsArray[myArrayNum].mapGrid[y][x] == 'o')
+					else if(mapsArray[myArrayNum].mapGrid[y][x] == 'o')  // Lava (Walls)
 					{
 						boxDiv.classList.add("o");
 					}	
-					else if(mapsArray[myArrayNum].mapGrid[y][x] == 'x')
+					else if(mapsArray[myArrayNum].mapGrid[y][x] == 'x')  // Horizontal bridges
 					{
 						boxDiv.classList.add("x");
 					}			
-					else if(mapsArray[myArrayNum].mapGrid[y][x] == 'y')
+					else if(mapsArray[myArrayNum].mapGrid[y][x] == 'y')  // Vertical bridges
 					{
 						boxDiv.classList.add("y");
 					}	
-					else if(mapsArray[myArrayNum].mapGrid[y][x] == 'p')
+					else if(mapsArray[myArrayNum].mapGrid[y][x] == 'p')  // Player
 					{
 						boxDiv.classList.add("p");
 						player = boxDiv;
 						playerPosY = y;
 						playerPosX = x;
 					}	
-					else if(mapsArray[myArrayNum].mapGrid[y][x] == 'h')
+					else if(mapsArray[myArrayNum].mapGrid[y][x] == 'r')  // Wolves
 					{
-						boxDiv.classList.add("h");
+						boxDiv.classList.add("r");
 						var wolf = boxDiv;
 						var wolfPosY = y;
 						var wolfPosX = x;
@@ -131,7 +131,7 @@
 	
 	function DeathByPlayer()  // If player walks into a wolf.
 	{
-		document.getElementById("screen").innerHTML = "<h3>You walked into your death</h3>"+ "Total score: "+score;
+		document.getElementById("screen").innerHTML = "<h3>You walked into death</h3>"+ "Total score: "+score;
 	    player.classList.remove("p");
 	    player.classList.remove("p2");
 		player.classList.remove("p3");
@@ -146,7 +146,7 @@
 	
 	function DeathByWolf()    // If a wolf walk into the player.
 	{
-		document.getElementById("screen").innerHTML = "<h3>Wolf killed you</h3>"+ "Total score: "+score;
+		document.getElementById("screen").innerHTML = "<h3>Death catched you</h3>"+ "Total score: "+score;
 		nextWolf.classList.remove("p");
 		nextWolf.classList.remove("p2");
 		nextWolf.classList.remove("p3");
@@ -169,11 +169,11 @@
 	
 	function RemoveWolf()	 // Function for removing the wolf classes.
 	{
-		wolf.classList.remove("h");
-		wolf.classList.remove("hu");
-		wolf.classList.remove("hd");
-		wolf.classList.remove("hr");
-		wolf.classList.remove("hl");
+		wolf.classList.remove("r");
+		wolf.classList.remove("ru");
+		wolf.classList.remove("rd");
+		wolf.classList.remove("rr");
+		wolf.classList.remove("rl");
 	}
 	
 	function UpdatePosition()  // Function to update what direction the player moved.
@@ -220,7 +220,7 @@
 	{  
 		if(!nextSpot){}  // Checking so player don't go out of the map.
 		else if(nextSpot.classList.contains("o")){}
-		else if(nextSpot.classList.contains("h") || nextSpot.classList.contains("hu") || nextSpot.classList.contains("hd") || nextSpot.classList.contains("hr") || nextSpot.classList.contains("hl"))
+		else if(nextSpot.classList.contains("r") || nextSpot.classList.contains("ru") || nextSpot.classList.contains("rd") || nextSpot.classList.contains("rr") || nextSpot.classList.contains("rl"))
 		{
 			DeathByPlayer();
 		}
@@ -381,19 +381,19 @@
 	{
 		if(roll == 1)
 		{
-			nextWolf.classList.add("hu");
+			nextWolf.classList.add("ru");
 		}
 		else if(roll == 2)
 		{
-			nextWolf.classList.add("hl");
+			nextWolf.classList.add("rl");
 		}
 		else if(roll == 3)
 		{
-			nextWolf.classList.add("hd");
+			nextWolf.classList.add("rd");
 		}	
 		else if(roll == 4)
 		{
-			nextWolf.classList.add("hr");
+			nextWolf.classList.add("rr");
 		}
 	}
 	
@@ -435,7 +435,7 @@
 	{
 		if (!nextWolf){}
 		else if(nextWolf.classList.contains("o")){}
-		else if(nextWolf.classList.contains("hu") || nextWolf.classList.contains("hd") || nextWolf.classList.contains("hr") || nextWolf.classList.contains("hl")){}
+		else if(nextWolf.classList.contains("ru") || nextWolf.classList.contains("rd") || nextWolf.classList.contains("rr") || nextWolf.classList.contains("rl")){}
 		else if(nextWolf.classList.contains("p") || nextWolf.classList.contains("p2") || nextWolf.classList.contains("p3") || nextWolf.classList.contains("p4"))
 		{
 			DeathByWolf();
@@ -447,6 +447,6 @@
 			WolfPositionUpdate(i);
 		}	
 	}
-		
+	
 	MapButtons();  // Call the creation of the map buttons when loading the page.
 	Reset();   // Call the reset button when the full script is loaded.

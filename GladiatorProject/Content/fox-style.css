@@ -291,3 +291,38 @@
 .hl {
     background-image: url("/Content/images/wolfleft.png");
 }
+.r {
+    background-image: url("/Content/images/deathup.png");
+}
+
+.ru {
+    background-image: url("/Content/images/deathup.png");
+}
+
+.rd {
+    background-image: url("/Content/images/deathdown.png");
+}
+
+.rr {
+    background-image: url("/Content/images/deathright.png");
+}
+
+.rl {
+    background-image: url("/Content/images/deathleft.png");
+}
+
+.y.ru {
+    background-image: url("/Content/images/upbridgedeathup.png");
+}
+
+.y.rd {
+    background-image: url("/Content/images/upbridgedeathdown.png");
+}
+
+.x.rl {
+    background-image: url("/Content/images/sidebridgedeathleft.png");
+}
+
+.x.rr {
+    background-image: url("/Content/images/sidebridgedeathright.png");
+}
