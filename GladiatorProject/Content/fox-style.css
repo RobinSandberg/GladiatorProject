@@ -229,32 +229,32 @@
 }
 
 .g {
-    background-image: url("/Content/images/foxden.png");
+    background-image: url("/Content/images/hole.png");
 }
 
-.g.d {
-    background-image: url("/Content/images/foxdenfox.png");
-}
+    .g.d {
+        background-image: url("/Content/images/holefox.png");
+    }
 
-.g.c {
-    background-image: url("/Content/images/foxdenchicken.png");
-}
+    .g.c {
+        background-image: url("/Content/images/holechicken.png");
+    }
 
-.g.hu {
-    background-image: url("/Content/images/foxdenwolfup2.png");
-}
+    .g.hu {
+        background-image: url("/Content/images/holewolfup2.png");
+    }
 
-.g.hd {
-    background-image: url("/Content/images/foxdenwolfdown2.png");
-}
+    .g.hd {
+        background-image: url("/Content/images/holewolfdown2.png");
+    }
 
-.g.hr {
-    background-image: url("/Content/images/foxdenwolfright.png");
-}
+    .g.hr {
+        background-image: url("/Content/images/holewolfright.png");
+    }
 
-.g.hl {
-    background-image: url("/Content/images/foxdenwolfleft.png");
-}
+    .g.hl {
+        background-image: url("/Content/images/holewolfleft.png");
+    }
 
 .p {
     background-image: url("/Content/images/foxup2.png");
