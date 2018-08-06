@@ -26,7 +26,7 @@ Sprint 5
 
 info & rule windows			 <<< functional
 remove admin from highscore and stuff.			 <<< functional
-functons for admin opponent view.    <<<< functinal.
+functons for admin opponent view.    <<<< functional.
 
 
 sprint 6
@@ -42,7 +42,10 @@ Search functions for all of admins list views.   <<< functional
 
 Gear option of some type.
 
-Contact page to admin for restoring gladiators or othere stuff.  <<< functinal
+Contact page to admin for restoring gladiators or othere stuff.  <<< functional
 
 Email validation or a way to check if domain is real.
+Messages between admin and player for support updates.
+Graphics for the gladiator fight.   <<< functional
 
+session checks.

@@ -3,30 +3,35 @@
 
 
 <div>
-    @foreach (var item in Model.Rounds)
+    @for (int i = 0; i < Model.Rounds.Count; i++)  // A for loop to take 1 string and 1 image at the time.
     {
-        <div class="Battle" @*style="display:none;"*@>@item.ToString()</div>
-        <br />
+        <div>@Model.Rounds[i]</div> // Putting in the string text above the image.
+        <div> <img src=@Model.Images[i] style="width:100%; height:100%; border:2px solid black" /></div>  // Taking in the image path from the string in Images list.
+        <br />    
     }
+    @*<div class="Battle"></div>*@
 </div>
-@*<div class="Battle"></div>*@
+
 <button>@Html.ActionLink("Gladiator menu", "AfterBattle", new { id = Model.Id })</button>
 
-@*A Script trying to get the foreach loop to fade in line for line instead of all at ones.*@
-@*<script>  
-    var battlelog = [ @foreach (var item in Model.Rounds)
+@*A Script trying to get the the loop to fade in line for line instead of all at ones.*@
+@*<script>
+
+    var battlelog = @for (int i = 0; i < @Model.Rounds.Count; i++)
     {
-        @(item.ToString())
-    } ],
+        @Model.Rounds[i]
+        <img src=@Model.Images[i] />
+        <br /> 
+    },
 
     var items = "@Json.Encode(Model.Rounds)",
 
     showData = $('.Battle');
     var index = 1;
-
-    battlelog.forEach(function ([] , index) { 
+    battlelog.delay(index * 100).fadeIn('slow').appendTo(showData)
+    battlelog.forEach(function (item , index) {
         $('<div />', {
-            text: [].toString() ,
+            text: item.toString() ,
             css: { display: 'none' }
         }).delay(index * 1000).fadeIn('slow').appendTo(showData);
         index++;
