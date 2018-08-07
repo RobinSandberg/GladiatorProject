@@ -41,8 +41,20 @@ namespace GladiatorProject.Controllers
             }
             else
             {
+                var Battlelist = from p in db.Battles.Include("Gladiator").Include("Opponent") where p.Gladiator.Id == gladiator.Id select p; //picking out the battles linked to your gladiator id.
+                var UnfinishedBattle = Battlelist.SingleOrDefault(u => u.Finished == "No"); // picking out the 1 battle you haven't finished.
+                
                 Session["gladiator"] = gladiator; // saving the gladiator info into a session.
-                return View("GladiatorMenu", gladiator); // This view should be renamed GladiatorMenu.
+                if (UnfinishedBattle != null )
+                {
+                    Session["Battle"] = UnfinishedBattle; //saving the battle in a session.
+                    return RedirectToAction("UnfinishedFight");
+                }
+                else
+                { 
+                    return View("GladiatorMenu", gladiator); // This view should be renamed GladiatorMenu.
+                }
+                
             }
            
         }
@@ -110,29 +122,61 @@ namespace GladiatorProject.Controllers
         }
 
         public ActionResult PreBattle()
+        { 
+           if (Session["gladiator"] == null) // If the gladiator session expired or for some reason null it send player back to index.
+           {
+               return RedirectToAction("Index");
+           }
+           else
+           {
+               int gId = (Session["gladiator"] as Gladiator).Id;  // taking out the gladiator id from the session.
+               Gladiator gladiator = db.Gladiators.SingleOrDefault(i => i.Id == gId); // picking up the gladiator based on the Id.
+
+               if (Session["enemy"] == null)   // If the session for opponent expired or for some reason null send player to gladiator menu.
+               {
+                   return View("GladiatorMenu", gladiator);
+               }
+               else
+               {
+                   int oId = (Session["enemy"] as Opponent).Id;
+                   Opponent opponent = db.Opponents.SingleOrDefault(i => i.Id == oId);
+
+                   if (gladiator == null || opponent == null)
+                   {
+                       return new HttpStatusCodeResult(400);
+                   }
+                   else
+                   {
+                       BattleStart battleStart = new BattleStart();   // Setting up a new battle 
+                       battleStart.Gladiator = gladiator;   // Saving the gladiator into the BattleStart class.
+                       battleStart.Opponent = opponent;
+                       battleStart.BattleDate = DateTime.Today;
+                       battleStart.Finished = "No";
+                       db.Battles.Add(battleStart);
+                       db.SaveChanges();
+
+                       return View("BattleView", battleStart);
+                   }
+               }
+           }
+        }
+
+        public ActionResult UnfinishedFight()
         {
-            int gId = (Session["gladiator"] as Gladiator).Id;  // taking out the gladiator id from the session.
-            int oId = (Session["enemy"] as Opponent).Id;
-            Gladiator gladiator = db.Gladiators.SingleOrDefault(i => i.Id == gId); // picking up the gladiator based on the Id.
-            Opponent opponent = db.Opponents.SingleOrDefault(i => i.Id == oId);
-            if(gladiator == null || opponent == null)
+            if (Session["Battle"] == null) 
             {
-                return new HttpStatusCodeResult(400);
+                return RedirectToAction("Index");
             }
             else
             {
-                BattleStart battleStart = new BattleStart();   // Setting up a new battle 
-                battleStart.Gladiator = gladiator;   // Saving the gladiator into the BattleStart class.
-                battleStart.Opponent = opponent;
-                battleStart.BattleDate = DateTime.Today;
-                db.Battles.Add(battleStart);
-                db.SaveChanges();
-
-                return View("BattleView", battleStart);
+                var bID = (Session["Battle"] as BattleStart).Id;
+                var Fighters = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == bID);
+                return View("BattleView", Fighters);
             }
+            
         }
 
-        public ActionResult BattleStart(int id)
+        public ActionResult BattleStart(int? id)
         {
             BattleRound round = new BattleRound(); // Starting a Battle round
             var Fighters = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
@@ -153,7 +197,6 @@ namespace GladiatorProject.Controllers
             var AfterMath = db.Battles.Include("Gladiator").Include("Opponent").SingleOrDefault(i => i.Id == id);
             var PlayerId = User.Identity.GetUserId();
             var PlayerUser = db.Users.Include("Gladiators").SingleOrDefault(u => u.Id == PlayerId);
-            AfterMath.BattleDate = DateTime.Today;
             if (AfterMath == null || PlayerUser == null)
             {
                 return new HttpStatusCodeResult(400);
@@ -161,7 +204,8 @@ namespace GladiatorProject.Controllers
             else
             {
                 Gladiator.Leveling(AfterMath.Gladiator); // Checking the gladiators exp and level him up if he got enough.
-
+                AfterMath.BattleDate = DateTime.Today;
+                AfterMath.Finished = "Yes";
                 // If i keep the harsh List I can remove player account score from database.
                 // Need to decide how harsh the player highscore gonna be. Count all gladiator highscores or just those that current got win streak.
 

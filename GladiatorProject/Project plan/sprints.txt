@@ -47,5 +47,3 @@ Contact page to admin for restoring gladiators or othere stuff.  <<< functional
 Email validation or a way to check if domain is real.
 Messages between admin and player for support updates.
 Graphics for the gladiator fight.   <<< functional
-
-session checks.

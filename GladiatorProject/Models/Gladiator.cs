@@ -89,7 +89,7 @@ namespace GladiatorProject.Models
             start.Experiance = 0;
             start.Level = 1;
             start.SkillPoints = 2;
-            start.Gold = 20;
+            start.Gold = 50;
             start.Battles = 0;
             start.BattlesWon = 0;
             start.BattlesDraw = 0;

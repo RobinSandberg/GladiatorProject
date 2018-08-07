@@ -17,6 +17,8 @@ namespace GladiatorProject.Models
 
         public Opponent Opponent { get; set; }
 
+        public string Finished { get; set; }
+
         public DateTime BattleDate { get; set; }
     }
 }

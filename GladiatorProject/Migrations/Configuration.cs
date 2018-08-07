@@ -74,7 +74,9 @@ namespace GladiatorProject.Migrations
             InfoGenerator names = new InfoGenerator(DateTime.Now.Millisecond);
             Gender gender = Gender.Any;
             // Adding a list of 100 opponents from lvl 1 to 20 with random names to database.
-            context.Opponents.AddOrUpdate(
+            if(context.Opponents.Count() < 100)
+            {
+                context.Opponents.AddOrUpdate(
                 i => i.Name,
                 new Opponent { Name = names.NextFullName(gender), Level = 1 },
                 new Opponent { Name = names.NextFullName(gender), Level = 1 },
@@ -197,7 +199,9 @@ namespace GladiatorProject.Migrations
                 new Opponent { Name = names.NextFullName(gender), Level = 20 }
                 );
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            
            
         }
     }
