@@ -43,16 +43,16 @@ namespace GladiatorProject.Controllers
             {
                 var Battlelist = from p in db.Battles.Include("Gladiator").Include("Opponent") where p.Gladiator.Id == gladiator.Id select p; //picking out the battles linked to your gladiator id.
                 var UnfinishedBattle = Battlelist.SingleOrDefault(u => u.Finished == "No"); // picking out the 1 battle you haven't finished.
-                
-                Session["gladiator"] = gladiator; // saving the gladiator info into a session.
+
                 if (UnfinishedBattle != null )
                 {
                     Session["Battle"] = UnfinishedBattle; //saving the battle in a session.
                     return RedirectToAction("UnfinishedFight");
                 }
                 else
-                { 
-                    return View("GladiatorMenu", gladiator); // This view should be renamed GladiatorMenu.
+                {
+                    Session["gladiator"] = gladiator; // saving the gladiator info into a session.
+                    return View("GladiatorMenu", gladiator);
                 }
                 
             }
@@ -161,7 +161,7 @@ namespace GladiatorProject.Controllers
            }
         }
 
-        public ActionResult UnfinishedFight()
+        public ActionResult UnfinishedFight()  //where you taken when you have a unfinished fight on the gladiator.
         {
             if (Session["Battle"] == null) 
             {

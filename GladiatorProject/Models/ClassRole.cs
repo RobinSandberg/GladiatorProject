@@ -7,7 +7,7 @@ namespace GladiatorProject.Models
 {
     public class ClassRole
     {
-
+        // Is not in use yet.
         public int Id { get; set; }
 
         public string Name { get; set; }
