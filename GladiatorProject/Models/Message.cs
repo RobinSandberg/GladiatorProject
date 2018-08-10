@@ -14,6 +14,7 @@ namespace GladiatorProject.Models
 
         [Required]
         [RegularExpression(@"^[^<>;:'()!~%\-_@#/*""]+$")]
+        [MaxLength(500)]
         public string Body { get; set; }
 
         public string From { get; set; }
