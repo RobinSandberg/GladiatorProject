@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -20,12 +21,14 @@ namespace GladiatorProject.Models
         public string Gladiator { get; set; }
 
         [Required]
-        [RegularExpression(@"^[^<>?;:'()!~%\-_@#/*""]+$")]
+        [RegularExpression(@"^[^<>;:'()!~%\-_@#/*""]+$")]
         public string Request { get; set; }
 
         [Required]
-        [RegularExpression(@"^[^<>?;:'()!~%\-_@#/*""]+$")]
+        [RegularExpression(@"^[^<>;:'()!~%\-_@#/*""]+$")]
         public string Details { get; set; }
+
+        public List<Message> Messages { get; set; }
 
         public string Solved { get; set; }
 

@@ -73,12 +73,12 @@
                         @Html.ActionLink("Solved", "SupportSolved", new { id = item.Id })
                     }
                     |
-                    @Ajax.ActionLink("Details", "SupportDetails", new { id = item.Id }, new AjaxOptions
+                    @Ajax.ActionLink("Details/Messages", "SupportDetails", new { id = item.Id }, new AjaxOptions
                      {
                        UpdateTargetId = "DetailView",
                        InsertionMode = InsertionMode.Replace
                      })
-                    |
+                    |  
                     @Html.ActionLink("Delete", "SupportDelete", new { id = item.Id })
 
                 </td>

@@ -205,7 +205,7 @@ namespace GladiatorProject.Controllers
             {
                 Gladiator.Leveling(AfterMath.Gladiator); // Checking the gladiators exp and level him up if he got enough.
                 AfterMath.BattleDate = DateTime.Today;
-                AfterMath.Finished = "Yes";
+                AfterMath.Finished = "Yes"; 
                 // If i keep the harsh List I can remove player account score from database.
                 // Need to decide how harsh the player highscore gonna be. Count all gladiator highscores or just those that current got win streak.
 

@@ -385,7 +385,7 @@ namespace GladiatorProject.Controllers
             }
             else
             {
-                var gladiatortrash = db.Gladiators.SingleOrDefault(g => g.Id == id);
+                var gladiatortrash = db.Gladiators.Include("Fights").SingleOrDefault(g => g.Id == id);
                 if(gladiatortrash == null)
                 {
                     return new HttpStatusCodeResult(400);
@@ -419,7 +419,7 @@ namespace GladiatorProject.Controllers
             }
             else
             {
-                var gladiatortrash = db.Gladiators.SingleOrDefault(g => g.Id == id);
+                var gladiatortrash = db.Gladiators.Include("Fights").SingleOrDefault(g => g.Id == id);
                 if(gladiatortrash == null)
                 {
                     return new HttpStatusCodeResult(400);
@@ -726,7 +726,7 @@ namespace GladiatorProject.Controllers
 
         public ActionResult SupportDetails(int id)
         {
-            var Details = db.Supports.SingleOrDefault(i => i.Id == id);
+            var Details = db.Supports.Include("Messages").SingleOrDefault(i => i.Id == id);
             if (Details == null)
             {
                 return new HttpStatusCodeResult(400);
@@ -734,6 +734,59 @@ namespace GladiatorProject.Controllers
             else
             {
                 return PartialView("_SupportDetails", Details);
+            }
+        }
+        [HttpGet]
+        public ActionResult AddMessage(int id)
+        {
+            var message = db.Supports.Include("Messages").SingleOrDefault(i => i.Id == id);
+
+            if (message == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+            else
+            {
+                Session["Messages"] = message;
+                return View();
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult AddMessage(Message Response)
+        {
+            if(Session["Messages"] == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var mID = (Session["Messages"] as SupportRequests).Id;
+                var message = db.Supports.Include("Messages").SingleOrDefault(i => i.Id == mID);
+                var PlayerId = User.Identity.GetUserId();
+                var PlayerUser = db.Users.SingleOrDefault(u => u.Id == PlayerId);
+                if (message == null || PlayerUser == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                        Message themessage = new Message();
+                        themessage.From = PlayerUser.UserName;
+                        themessage.Body = Response.Body;
+                        themessage.Sent = DateTime.Now;
+                        message.Messages.Add(themessage);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(Response);
+                    }
+                }
             }
         }
 
@@ -777,7 +830,7 @@ namespace GladiatorProject.Controllers
 
         public ActionResult SupportDelete(int id)
         {
-            var Support = db.Supports.SingleOrDefault(i => i.Id == id);
+            var Support = db.Supports.Include("Messages").SingleOrDefault(i => i.Id == id);
 
             if (Support == null)
             {
@@ -792,7 +845,7 @@ namespace GladiatorProject.Controllers
 
         public ActionResult SupportDeleteConfirm(int id)
         {
-            var Support = db.Supports.SingleOrDefault(i => i.Id == id);
+            var Support = db.Supports.Include("Messages").SingleOrDefault(i => i.Id == id);
 
             if (Support == null)
             {

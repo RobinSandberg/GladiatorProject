@@ -47,6 +47,8 @@ namespace GladiatorProject.Models
         public DbSet<BattleStart> Battles { get; set; } // database for each battle.
 
         public DbSet<SupportRequests> Supports { get; set; } 
+
+        public DbSet<Message> Messages { get; set; }
         
 
     }

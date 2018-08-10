@@ -46,6 +46,8 @@ namespace GladiatorProject.Models
 
         public int Battles { get; set; }
 
+        public List<BattleStart> Fights { get; set; }
+
         public int BattlesWon { get; set; }
 
         public int BattlesLost { get; set; }
@@ -64,7 +66,7 @@ namespace GladiatorProject.Models
 
         public int TempScore { get; set; }
 
-        public int GladiatorHighScore { get; set; }
+        public int GladiatorHighScore { get; set; } 
 
         [ForeignKey("User")]
         public string ApllicationUser_ID { get; set; }

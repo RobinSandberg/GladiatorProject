@@ -21,3 +21,45 @@
         </td>
     </tr>
 </table>
+
+<button style="margin-left:45%; margin-bottom:20px ">
+    @Html.ActionLink("Respond", "AddMessage", new { id = Model.Id })
+</button>
+
+<table class="table">
+
+    <tr>
+        <th>
+        @Html.DisplayName("From")
+        </th>
+        <th>
+            @Html.DisplayName("Message")
+        </th>
+        <th>
+        @Html.DisplayName("Sent")
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Messages)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(Model => item.From)
+        </td>
+        <td>
+            @Html.DisplayFor(Model => item.Body)
+        </td>
+        <td>
+            @Html.DisplayFor(Model => item.Sent)
+        </td>
+        @*<td>
+             @Ajax.ActionLink("Edit", "EditMessage" ,
+        new AjaxOptions
+        {
+            UpdateTargetId = "DetailView",
+            InsertionMode = InsertionMode.Replace
+        })
+         </td>*@
+    </tr>
+    }
+</table>
