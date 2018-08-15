@@ -31,6 +31,11 @@ namespace GladiatorProject.Migrations
                 roleManager.Create(new IdentityRole("Overlord")); //Creating the admin role if it don't exist.
             }
 
+            if (!roleManager.RoleExists("Support"))
+            {
+                roleManager.Create(new IdentityRole("Support"));  // Creating the player role if it don't exist.
+            }
+
             if (!roleManager.RoleExists("Player"))
             {
                 roleManager.Create(new IdentityRole("Player"));  // Creating the player role if it don't exist.

@@ -407,6 +407,7 @@
     <Content Include="Views\Support\SupportSolved.cshtml" />
     <Content Include="Views\Admin\AddMessage.cshtml" />
     <Content Include="Views\Support\AddMessage.cshtml" />
+    <Content Include="Views\Admin\_Employees.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,52 @@
+﻿@model List<GladiatorProject.Models.ApplicationUser>
+
+<h2 style="text-align:center">Employees</h2>
+
+<div>
+    @using (Ajax.BeginForm("SearchPlayer",
+             new AjaxOptions
+             {
+                 UpdateTargetId = "Search",
+                 InsertionMode = InsertionMode.Replace
+
+             }
+     ))
+    {
+
+        @Html.DisplayName("Search by User Name or Email: ")
+        @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    }
+</div>
+
+<div id="Search">
+    <table class="table">
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayName("User Name")
+                </th>
+                <th>
+                    @Html.DisplayName("E-Mail")
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Roles)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UserEdit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "UserDelete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

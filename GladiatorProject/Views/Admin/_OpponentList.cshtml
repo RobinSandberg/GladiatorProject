@@ -2,9 +2,12 @@
 
 <h2 style="text-align:center">Opponents</h2>
 
-<button style="margin-left:45%; margin-bottom:20px ">
-    @Html.ActionLink("Create Opponent", "CreateOpponent")
-</button>
+@if (User.IsInRole("Overlord"))
+{
+    <button style="margin-left:45%; margin-bottom:20px ">
+        @Html.ActionLink("Create Opponent", "CreateOpponent")
+    </button>
+}
 
 <div>
     @using (Ajax.BeginForm("SearchOpponentName",
@@ -24,7 +27,7 @@
 </div>
 <br />
 <div>
-    @using (Ajax.BeginForm("SearchOpponentLevel","admin",null,
+    @using (Ajax.BeginForm("SearchOpponentLevel", "admin", null,
              new AjaxOptions
              {
                  UpdateTargetId = "Search",

@@ -39,6 +39,18 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(m => m.Role)
+        <div>
+            @Html.DropDownListFor(m => m.Role, Model.Roles.Select(role => new SelectListItem()
+       {
+           Text = role,
+           Value = role,
+           Selected  = role == Model.Role
+       } ))
+        </div>
+    </div>
+
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Add User" class="btn btn-default" />
         </div>

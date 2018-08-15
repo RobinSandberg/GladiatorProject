@@ -12,11 +12,11 @@ using System.Net;
 
 namespace GladiatorProject.Controllers
 {
-    [Authorize(Roles = "Overlord")]
+    [Authorize(Roles = "Overlord , Support")]
     public class AdminController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-       
+
         // GET: Admin
         public ActionResult Index()
         {
@@ -25,12 +25,14 @@ namespace GladiatorProject.Controllers
 
         public ActionResult PlayerList()
         {
-            return PartialView("_PlayerList", db.Users.Include("Gladiators").Include("Roles").ToList());
+            var Players = from p in db.Users.Include("Gladiators") where p.AccountHighScore != -1 select p;
+            //db.Users.Include("Gladiators").Include("Roles").ToList()
+            return PartialView("_PlayerList", Players.ToList());
         }
 
         public ActionResult SearchPlayer(string searchString)
         {
-            var player_search = from p in db.Users.Include("Gladiators").Include("Roles") select p;  // making a variable to pick out the names from.
+            var player_search = from p in db.Users.Include("Gladiators")/*.Include("Roles")*/ select p;  // making a variable to pick out the names from.
 
             if (!string.IsNullOrWhiteSpace(searchString))
             {
@@ -82,16 +84,19 @@ namespace GladiatorProject.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Overlord")]
         public ActionResult CreateUser()
         {
-            return View();
+            RegisterViewModel register = new RegisterViewModel();
+           
+            return View(register);
         }
 
         [HttpPost]
+        [Authorize(Roles = "Overlord")]
         [ValidateAntiForgeryToken]
         public ActionResult CreateUser(RegisterViewModel register) // pulling in the info from the register form
         {
-            
              if (ModelState.IsValid)
              {
                 var user = new ApplicationUser(); //Making a new user
@@ -108,9 +113,28 @@ namespace GladiatorProject.Controllers
                 var result = userManager.Create(user, register.Password); // taking the user and hashing his password and adding security stamp and adding him to db users.
                 if (result.Succeeded)   // if everything works it will add a role to the user.
                 {
-                    userManager.AddToRole(user.Id, "Player");  //adding a role to the user
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    // Later when email stuff added send a email to the user with the account info.
+                    if(register.Role == "Player")
+                    {
+                        userManager.AddToRole(user.Id, "Player");  //adding a role to the user
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else if (register.Role == "Admin")
+                    {
+                        userManager.AddToRole(user.Id, "Overlord");
+                        user.AccountHighScore = -1;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else if (register.Role == "Support")
+                    {
+                        userManager.AddToRole(user.Id, "Support");
+                        user.AccountHighScore = -1;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
                 }
                 else
                 {
@@ -119,7 +143,6 @@ namespace GladiatorProject.Controllers
              }
             
             return View(register);
-
         }
 
         public ActionResult UserEdit(string id)
@@ -154,8 +177,7 @@ namespace GladiatorProject.Controllers
                     
                 }
             }
-            return View("UserEdit", user);
-           
+            return View("UserEdit", user);     
         }
 
         public ActionResult UserDelete(string id)
@@ -170,7 +192,6 @@ namespace GladiatorProject.Controllers
             {
                 return View(user);
             }
-          
         }
 
         public ActionResult UserDeleteConfirm(string id)
@@ -187,7 +208,6 @@ namespace GladiatorProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
         }
 
         public ActionResult GladiatorEdit(int id , string playerId)
@@ -357,7 +377,6 @@ namespace GladiatorProject.Controllers
                     return PartialView("_GladiatorDetails", gladiatortrash);
                 }
             }
-         
         }
 
         public ActionResult GladiatorHide()
@@ -431,17 +450,17 @@ namespace GladiatorProject.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            
-           
         }
 
         [HttpGet]
+        [Authorize(Roles = "Overlord")]
         public ActionResult CreateOpponent()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Overlord")]
         public ActionResult CreateOpponent(Opponent opponent)
         {
             if (opponent.Level >= 1 && opponent.Level <= 20)
@@ -457,8 +476,7 @@ namespace GladiatorProject.Controllers
                     } 
                 }
             }
-            return View(opponent);
-           
+            return View(opponent);  
         }
 
         public ActionResult OpponentEdit(int id)
@@ -500,8 +518,7 @@ namespace GladiatorProject.Controllers
                     return RedirectToAction("Index");
                 }
                 return View("OpponentEdit", opponent);
-            }
-           
+            }   
         }
 
         public ActionResult OpponentDetails(int id)
@@ -534,8 +551,7 @@ namespace GladiatorProject.Controllers
             {
   
                 return View(Opponent);
-            }
-            
+            }    
         }
 
         public ActionResult OpponentDeleteConfirm(int id)
@@ -552,12 +568,10 @@ namespace GladiatorProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
         }
 
         public ActionResult HighscoreList()
         {
-
             return PartialView("_HighScore");
         }
 
@@ -641,7 +655,6 @@ namespace GladiatorProject.Controllers
 
         public ActionResult GladiatorScoreSave(Gladiator gladiator)
         {
-
             var oldGladiator = db.Gladiators.SingleOrDefault(i => i.Id == gladiator.Id);
 
             if(oldGladiator == null)
@@ -654,8 +667,7 @@ namespace GladiatorProject.Controllers
                 oldGladiator.GladiatorScore = gladiator.GladiatorScore;
                 db.SaveChanges();
                 return RedirectToAction("Index");  
-            }
-           
+            } 
         }
 
         public ActionResult GladiatorScoreBan(int id)
@@ -750,7 +762,6 @@ namespace GladiatorProject.Controllers
                 Session["Messages"] = message;
                 return View();
             }
-
         }
 
         [HttpPost]
@@ -857,7 +868,14 @@ namespace GladiatorProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+        }
 
+        [Authorize(Roles = "Overlord")]
+        public ActionResult Employees()
+        {
+            var employees = from p in db.Users.Include("Roles") where p.AccountHighScore == -1 select p;
+
+            return PartialView("_Employees" , employees.ToList());
         }
 
         protected override void Dispose(bool disposing)
@@ -868,6 +886,5 @@ namespace GladiatorProject.Controllers
             }
             base.Dispose(disposing);
         }
-
     }
 }

@@ -3,7 +3,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Admin Menus</h2>
+@if (User.IsInRole("OverLord"))
+{
+    <h2>Admin Menus</h2>
+}
+else if (User.IsInRole("Support"))
+{
+    <h2>Support Menus</h2>
+}
 
 <button>
     @Ajax.ActionLink("Players", "PlayerList", new AjaxOptions
@@ -58,6 +65,24 @@ InsertionMode = InsertionMode.Replace
 
 } )
 </button>
+
+@if (User.IsInRole("Overlord"))
+{
+    <button>
+        @Html.ActionLink("Create User", "CreateUser")
+    </button>
+
+    <button>
+        @Ajax.ActionLink("Employees List", "Employees", new AjaxOptions
+    {
+    UpdateTargetId = "View",
+    InsertionMode = InsertionMode.Replace
+
+    } )
+    </button>
+
+}
+
 
 <div id="View">
 

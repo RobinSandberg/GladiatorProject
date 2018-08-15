@@ -49,7 +49,6 @@ namespace GladiatorProject.Models
         public DbSet<SupportRequests> Supports { get; set; } 
 
         public DbSet<Message> Messages { get; set; }
-        
 
     }
 }

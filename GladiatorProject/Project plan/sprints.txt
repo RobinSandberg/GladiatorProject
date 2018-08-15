@@ -45,5 +45,7 @@ Gear option of some type.
 Contact page to admin for restoring gladiators or othere stuff.  <<< functional
 
 Email validation or a way to check if domain is real.
-Messages between admin and player for support updates.
+Messages between admin and player for support updates.   <<< functional
 Graphics for the gladiator fight.   <<< functional
+
+admin create admins/support accounts.

@@ -1,7 +1,15 @@
-﻿@using GladiatorProject.Models
-@model List<ClassRole>
+﻿@*@using GladiatorProject.Models
+    @model List<ClassRole>
+
+    @foreach (var item in Model)
+        {
+            <option value="@item.Id">@item.Name</option>    // this view is not used right now.
+        }*@
+
+@using GladiatorProject.Models
+@model List<ApplicationUser>
 
 @foreach (var item in Model)
-    {
-        <option value="@item.Id">@item.Name</option>    // this view is not used right now.
-    }
+{
+    <option value="@item.Id">@item.Roles</option>// this view is not used right now.
+}

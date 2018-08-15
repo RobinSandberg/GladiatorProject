@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace GladiatorProject.Models
 {
     public class ExternalLoginConfirmationViewModel
@@ -94,7 +95,20 @@ namespace GladiatorProject.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string Role { get; set; }
+
+        public List<string> Roles { get; set; }
+
+        public RegisterViewModel()
+        {
+            Roles = new List<string>();
+            Roles.Add("Admin");
+            Roles.Add("Support");
+            Roles.Add("Player");
+        }
     }
+    
 
     public class ResetPasswordViewModel
     {
