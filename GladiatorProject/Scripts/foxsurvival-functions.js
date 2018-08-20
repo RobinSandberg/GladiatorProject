@@ -225,7 +225,8 @@
 			DeathByPlayer();
 		}
 		else
-		{
+        {
+            score += 3;   // Adds 3 points every time you move.
 			RemovePlayer();
 			DirectionAnimation();
 			UpdatePosition();
@@ -263,7 +264,6 @@
 			nextNextSpot = document.getElementById("y" + playerPosY + "x" + (playerPosX+2));
 			Move();
 		}
-		score += 3;   // Adds 3 points every time you move.
 	}
 	
 	function TimeCount()  // Count the seconds while playing.
@@ -429,13 +429,40 @@
 				wolfMove(i);
 			}
 		}
-	}	
+}
+
+function wolfRedirection(i)   // Make adjustment to the wolf direction if he can't move.
+{
+    roll = Math.floor(Math.random() * 4 + 1);
+
+    if (roll == 1) {
+        wolf = document.getElementById("y" + (wolves[i].y) + "x" + wolves[i].x);
+        nextWolf = document.getElementById("y" + (wolves[i].y - 1) + "x" + wolves[i].x);
+        wolfMove(i);
+    }
+    else if (roll == 2) {
+        wolf = document.getElementById("y" + (wolves[i].y) + "x" + wolves[i].x);
+        nextWolf = document.getElementById("y" + wolves[i].y + "x" + (wolves[i].x - 1));
+        wolfMove(i);
+    }
+    else if (roll == 3) {
+        wolf = document.getElementById("y" + (wolves[i].y) + "x" + wolves[i].x);
+        nextWolf = document.getElementById("y" + (wolves[i].y + 1) + "x" + wolves[i].x);
+        wolfMove(i);
+    }
+    else if (roll == 4) {
+        wolf = document.getElementById("y" + (wolves[i].y) + "x" + wolves[i].x);
+        nextWolf = document.getElementById("y" + wolves[i].y + "x" + (wolves[i].x + 1));
+        wolfMove(i);
+    }
+
+}	
 	
 	function wolfMove(i)    // Moves the wolf based on its index (i).
 	{
-		if (!nextWolf){}
-		else if(nextWolf.classList.contains("o")){}
-		else if(nextWolf.classList.contains("ru") || nextWolf.classList.contains("rd") || nextWolf.classList.contains("rr") || nextWolf.classList.contains("rl")){}
+        if (!nextWolf) { wolfRedirection(i)}
+        else if (nextWolf.classList.contains("o")) { wolfRedirection(i)}
+        else if (nextWolf.classList.contains("ru") || nextWolf.classList.contains("rd") || nextWolf.classList.contains("rr") || nextWolf.classList.contains("rl")) { wolfRedirection(i)}
 		else if(nextWolf.classList.contains("p") || nextWolf.classList.contains("p2") || nextWolf.classList.contains("p3") || nextWolf.classList.contains("p4"))
 		{
 			DeathByWolf();
