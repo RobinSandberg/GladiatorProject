@@ -10,7 +10,8 @@
 	var timeTick;		// The variable for the Timer count.
 	var moveCount = 0;
 	var Timer = 0;
-	
+    var stackCount = 0;
+
 	function Map()    // Prints the map.
 	{
 		
@@ -452,15 +453,34 @@ function wolfRedirection(i)   // Make adjustment to the wolf direction if he can
         nextWolf = document.getElementById("y" + wolves[i].y + "x" + (wolves[i].x + 1));
         wolfMove(i);
     }
-
 }	
 	
 	function wolfMove(i)    // Moves the wolf based on its index (i).
 	{
-        if (!nextWolf) { wolfRedirection(i)}
-        else if (nextWolf.classList.contains("w")) { wolfRedirection(i)}
-        else if (nextWolf.classList.contains("c")) { wolfRedirection(i)}
-        else if (nextWolf.classList.contains("hu") || nextWolf.classList.contains("hd") || nextWolf.classList.contains("hr") || nextWolf.classList.contains("hl")) { wolfRedirection(i)}
+        if (!nextWolf) {
+            if (wolves[i].stackCount > 4) { }
+            else {
+                wolves[i].stackCount++;
+                wolfRedirection(i)
+            }}
+        else if (nextWolf.classList.contains("w")) {
+            if (wolves[i].stackCount > 4) { }
+            else {
+                wolves[i].stackCount++;
+                wolfRedirection(i)
+            }}
+        else if (nextWolf.classList.contains("c")) {
+            if (wolves[i].stackCount > 4) { }
+            else {
+                wolves[i].stackCount++;
+                wolfRedirection(i)
+            }}
+        else if (nextWolf.classList.contains("hu") || nextWolf.classList.contains("hd") || nextWolf.classList.contains("hr") || nextWolf.classList.contains("hl")) {
+            if (wolves[i].stackCount > 4) { }
+            else {
+                wolves[i].stackCount++;
+                wolfRedirection(i)
+            }}
 		else if(nextWolf.classList.contains("p") || nextWolf.classList.contains("p2") || nextWolf.classList.contains("p3") || nextWolf.classList.contains("p4"))
 		{
 			DeathByWolf();
@@ -469,7 +489,8 @@ function wolfRedirection(i)   // Make adjustment to the wolf direction if he can
 		{
 			RemoveWolf();
 			WolfAnimation(i);
-			WolfPositionUpdate(i);
+            WolfPositionUpdate(i);
+            wolves[i].stackCount = 0;
 		}	
 	}
 	
