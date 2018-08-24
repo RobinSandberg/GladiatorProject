@@ -50,7 +50,8 @@ namespace GladiatorProject.Migrations
                 {
                     Email = "Overlord@Admin.se",
                     UserName = "Overlord",
-                    AccountHighScore = -1
+                    AccountHighScore = -1,
+                    Employment = "Admin"
                     
                 };
                 userManager.Create(Overlord, "As!1234");

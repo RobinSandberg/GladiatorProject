@@ -24,14 +24,17 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <th>
-                    @Html.DisplayName("User Name")
-                </th>
-                <th>
-                    @Html.DisplayName("E-Mail")
-                </th>
-            </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("User Name")
+            </th>
+            <th>
+                @Html.DisplayName("E-Mail")
+            </th>
+            <th>
+                @Html.DisplayName("Employment")
+            </th>
+        </tr>
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.UserName)
@@ -40,7 +43,7 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Roles)
+                    @Html.DisplayFor(modelItem => item.Employment)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "UserEdit", new { id = item.Id }) |

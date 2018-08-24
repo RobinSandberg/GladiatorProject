@@ -25,7 +25,7 @@ namespace GladiatorProject.Controllers
 
         public ActionResult PlayerList()
         {
-            var Players = from p in db.Users.Include("Gladiators") where p.AccountHighScore != -1 select p;
+            var Players = from p in db.Users.Include("Gladiators") where p.Employment == null select p;
             //db.Users.Include("Gladiators").Include("Roles").ToList()
             return PartialView("_PlayerList", Players.ToList());
         }
@@ -88,7 +88,7 @@ namespace GladiatorProject.Controllers
         public ActionResult CreateUser()
         {
             RegisterViewModel register = new RegisterViewModel();
-           
+          
             return View(register);
         }
 
@@ -102,7 +102,7 @@ namespace GladiatorProject.Controllers
                 var user = new ApplicationUser(); //Making a new user
                 user.Email = register.Email;   // plant the registration info into the user
                 user.UserName = register.UserName;
-
+                
                 //some code that no longer needed but saved for exemple.
                 //var hasher = new PasswordHasher();  // making a variable to hash the password
                 //user.PasswordHash = hasher.HashPassword(register.Password.ToString());  // convert the password into passwordhash
@@ -124,6 +124,7 @@ namespace GladiatorProject.Controllers
                     {
                         userManager.AddToRole(user.Id, "Overlord");
                         user.AccountHighScore = -1;
+                        user.Employment = "Admin";
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -131,10 +132,10 @@ namespace GladiatorProject.Controllers
                     {
                         userManager.AddToRole(user.Id, "Support");
                         user.AccountHighScore = -1;
+                        user.Employment = "Support";
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
-
                 }
                 else
                 {
@@ -578,7 +579,6 @@ namespace GladiatorProject.Controllers
         public ActionResult PlayerHighScore()
         {
             var Players = from p in db.Users.Include("Gladiators") where p.AccountHighScore >= 0 select p;
-
             return PartialView("_highscorePlayers", Players.OrderByDescending(u => u.AccountHighScore).Take(10).ToList());
         }
 
@@ -873,8 +873,7 @@ namespace GladiatorProject.Controllers
         [Authorize(Roles = "Overlord")]
         public ActionResult Employees()
         {
-            var employees = from p in db.Users.Include("Roles") where p.AccountHighScore == -1 select p;
-
+            var employees = from p in db.Users.Include("Roles") where p.Employment != null select p;
             return PartialView("_Employees" , employees.ToList());
         }
 

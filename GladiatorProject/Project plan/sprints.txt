@@ -48,4 +48,4 @@ Email validation or a way to check if domain is real.
 Messages between admin and player for support updates.   <<< functional
 Graphics for the gladiator fight.   <<< functional
 
-admin create admins/support accounts.
+admin create admins/support accounts.   <<< functional

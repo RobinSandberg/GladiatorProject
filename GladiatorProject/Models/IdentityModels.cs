@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace GladiatorProject.Models
         public int AccountScore { get; set; } // will become the score for the account and the high score for players.
 
         public int AccountHighScore { get; set; }
+
+        public string Employment { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
