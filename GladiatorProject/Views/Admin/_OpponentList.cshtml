@@ -1,6 +1,6 @@
 ﻿@model List<GladiatorProject.Models.Opponent>
 
-<h2 style="text-align:center">Opponents</h2>
+<h2 class="Mystyle" style="text-align:center">Opponents</h2>
 
 @if (User.IsInRole("Overlord"))
 {
@@ -9,7 +9,7 @@
     </button>
 }
 
-<div>
+<div class="Search">
     @using (Ajax.BeginForm("SearchOpponentName",
              new AjaxOptions
              {
@@ -29,8 +29,9 @@
 <div>
     @using (Ajax.BeginForm("SearchOpponentLevel", "admin", null,
              new AjaxOptions
+<a href= "~/Views/Admin/_OpponentList.cshtml" > ~/ Views / Admin / _OpponentList.cshtml </ a >
              {
-                 UpdateTargetId = "Search",
+        UpdateTargetId = "Search",
                  InsertionMode = InsertionMode.Replace
 
              }

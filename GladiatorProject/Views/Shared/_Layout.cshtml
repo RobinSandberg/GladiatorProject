@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
 </head>
 <body style="background-color:black;">
@@ -54,7 +53,7 @@
             <div class="container body-content">
                 @RenderBody()
                
-                <footer class="footer navbar-fixed-bottom" style="text-align:center;">
+                <footer class="footer navbar-fixed-bottom" style="text-align:center; color:white">
                     <p>&copy; @DateTime.Now.Year -Robin Sandberg</p>
                 </footer>
             </div>

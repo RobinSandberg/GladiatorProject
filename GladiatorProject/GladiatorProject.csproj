@@ -225,7 +225,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fox-style.css" />
     <Content Include="Content\ImagesGladiator\doublebodyhit.png" />
@@ -301,6 +303,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\angular.min.js.map" />
+    <None Include="Properties\PublishProfiles\EmolitionGames - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\foxhunting-functions.js" />
     <Content Include="Scripts\foxhunting-maps.js" />
@@ -318,6 +321,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Web.config" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -327,7 +331,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -408,6 +411,7 @@
     <Content Include="Views\Admin\AddMessage.cshtml" />
     <Content Include="Views\Support\AddMessage.cshtml" />
     <Content Include="Views\Admin\_Employees.cshtml" />
+    <Content Include="ConnectionString.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

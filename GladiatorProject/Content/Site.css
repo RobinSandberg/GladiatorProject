@@ -55,3 +55,33 @@ textarea {
 #GladiatorList {
     padding: 25px;
 }
+
+.Mystyle {
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: 500;
+    line-height: 1.1;
+    color: white;
+}
+
+.navbar-inverse .navbar-brand {
+    color: darkmagenta;
+    font-size:30px;
+}
+
+    .navbar-inverse .navbar-brand:hover,
+    .navbar-inverse .navbar-brand:focus {
+        color: mediumvioletred;
+        background-color: transparent;
+    }
+
+    .table{
+        color:white;
+    }
+
+.form-group{
+    color:white;
+}
+
+.Search {
+    color: white;
+}
