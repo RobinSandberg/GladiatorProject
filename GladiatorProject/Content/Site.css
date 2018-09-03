@@ -74,12 +74,18 @@ textarea {
         background-color: transparent;
     }
 
-    .table{
-        color:white;
-    }
+.table{
+    color:white;
+}
 
 .form-group{
     color:white;
+}
+
+textarea {
+    margin: 0;
+    font: inherit;
+    color: black;
 }
 
 .Search {
